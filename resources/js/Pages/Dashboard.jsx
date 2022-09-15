@@ -1,23 +1,61 @@
-import React from 'react';
-import Authenticated from '@/Layouts/Authenticated';
-import { Head } from '@inertiajs/inertia-react';
+import React from "react";
+import { Head } from "@inertiajs/inertia-react";
+import Swal from "sweetalert2";
+import Main from "@/Layouts/Main";
+import Card from "@/Components/Card";
+import {
+    faComputerMouse,
+    faCopyright,
+    faLayerGroup,
+    faPeopleGroup,
+    faReceipt,
+} from "@fortawesome/free-solid-svg-icons";
 
 export default function Dashboard(props) {
+
+    const roleName = props.role.name.replace('_', ' ').toUpperCase();
+
     return (
-        <Authenticated
-            auth={props.auth}
-            errors={props.errors}
-            header={<h2 className="font-semibold text-xl text-gray-800 leading-tight">Dashboard</h2>}
-        >
+        <Main auth={props.auth} errors={props.errors}>
             <Head title="Dashboard" />
 
-            <div className="py-12">
-                <div className="max-w-7xl mx-auto sm:px-6 lg:px-8">
-                    <div className="bg-white overflow-hidden shadow-sm sm:rounded-lg">
-                        <div className="p-6 bg-white border-b border-gray-200">You're logged in!</div>
+            <div className="p-4 flex flex-col gap-4">
+                <div className="bg-white rounded p-4 shadow">
+                    <div className="md:text-4xl text-2xl">
+                        Welcome Back,{" "}
+                        <span className="text-indigo-700 font-bold">{props.user.name}</span>
+                    </div>
+                    <div className="w-fit px-4 my-2 rounded-3xl font-semibold text-white py-2 bg-gradient-to-r from-green-500 to-teal-600">
+                        {roleName}
                     </div>
                 </div>
+                <div className="grid xl:grid-cols-2 sm:grid-cols-2 grid-cols-1 auto-rows-auto gap-2">
+                    <Card
+                        icon={faPeopleGroup}
+                        label={"Users"}
+                        data={props.users_count}
+                        color={"bg-gradient-to-r from-violet-500 to-indigo-700"}
+                    />
+                    <Card
+                        icon={faComputerMouse}
+                        label={"Categories"}
+                        data={props.categories_count}
+                        color={"bg-gradient-to-r from-red-500 to-orange-700"}
+                    />
+                    <Card
+                        icon={faCopyright}
+                        label={"Brands"}
+                        data={props.brands_count}
+                        color={"bg-gradient-to-r from-blue-500 to-sky-700"}
+                    />
+                    <Card
+                        icon={faLayerGroup}
+                        label={"Models"}
+                        data={props.models_count}
+                        color={"bg-gradient-to-r from-rose-500 to-pink-700"}
+                    />
+                </div>
             </div>
-        </Authenticated>
+        </Main>
     );
 }
