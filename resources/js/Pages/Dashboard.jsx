@@ -4,6 +4,7 @@ import Swal from "sweetalert2";
 import Main from "@/Layouts/Main";
 import Card from "@/Components/Card";
 import {
+    faBoxArchive,
     faComputerMouse,
     faCopyright,
     faLayerGroup,
@@ -12,8 +13,7 @@ import {
 } from "@fortawesome/free-solid-svg-icons";
 
 export default function Dashboard(props) {
-
-    const roleName = props.role.name.replace('_', ' ').toUpperCase();
+    const roleName = props.role.name.replace("_", " ").toUpperCase();
 
     return (
         <Main auth={props.auth} errors={props.errors}>
@@ -23,7 +23,9 @@ export default function Dashboard(props) {
                 <div className="bg-white rounded p-4 shadow">
                     <div className="md:text-4xl text-2xl">
                         Welcome Back,{" "}
-                        <span className="text-indigo-700 font-bold">{props.user.name}</span>
+                        <span className="text-indigo-700 font-bold">
+                            {props.user.name}
+                        </span>
                     </div>
                     <div className="w-fit px-4 my-2 rounded-3xl font-semibold text-white py-2 bg-gradient-to-r from-green-500 to-teal-600">
                         {roleName}
@@ -35,6 +37,12 @@ export default function Dashboard(props) {
                         label={"Users"}
                         data={props.users_count}
                         color={"bg-gradient-to-r from-violet-500 to-indigo-700"}
+                    />
+                    <Card
+                        icon={faBoxArchive}
+                        label={"Items"}
+                        data={props.items_count}
+                        color={"bg-gradient-to-r from-green-500 to-green-700"}
                     />
                     <Card
                         icon={faComputerMouse}

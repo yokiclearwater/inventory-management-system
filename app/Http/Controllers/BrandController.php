@@ -18,9 +18,11 @@ class BrandController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index(Request $request)
     {
-        $brands = Brand::paginate()->toArray();
+        $brands = Brand::when($request->search, function ($query, $search) {
+            $query->where('name', 'LIKE', "%$search%");
+       })->paginate(10)->withQueryString()->toArray();
 
         return Inertia::render('Brand/Index', [
             'brands' => $brands,

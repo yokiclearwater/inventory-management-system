@@ -1,7 +1,9 @@
 <?php
 
+use App\Http\Controllers\AuditLogController;
 use App\Http\Controllers\BrandController;
 use App\Http\Controllers\CategoryController;
+use App\Http\Controllers\ItemController;
 use App\Http\Controllers\ItemModelController;
 use Illuminate\Foundation\Application;
 use Illuminate\Support\Facades\Auth;
@@ -45,6 +47,7 @@ Route::get('/dashboard', function () {
     $role = $user->role()->first()->toArray();
     $brands_count = App\Models\Brand::count();
     $models_count = App\Models\ItemModel::count();
+    $items_count = App\Models\Item::count();
 
     return Inertia::render('Dashboard', [
         'user' => $user,
@@ -53,6 +56,7 @@ Route::get('/dashboard', function () {
         'categories_count' => $categories_count,
         'models_count' => $models_count,
         'brands_count' => $brands_count,
+        'items_count' => $items_count,
         'ip' => Request::ip(),
     ]);
 })->middleware(['auth', 'verified', 'role:user,admin,super_admin'])->name('dashboard');
@@ -73,6 +77,24 @@ Route::name('brands.')->middleware(['auth', 'verified', 'role:user,admin,super_a
 });
 Route::resource('brands', BrandController::class)->middleware(['auth', 'verified', 'role:admin,super_admin']);
 
+Route::name('models.')->middleware(['auth', 'verified', 'role:user,admin,super_admin'])->prefix('models')->group(function () {
+    Route::get('/export-pdf', [ItemModelController::class, 'export_pdf'])->name('export-pdf');
+    Route::get('/show-pdf', [ItemModelController::class, 'show_pdf'])->name('show-pdf');
+    Route::get('/export/{method?}', [ItemModelController::class, 'export'])->name('export');
+});
 Route::resource('models', ItemModelController::class)->middleware(['auth', 'verified', 'role:user,admin,super_admin']);
+
+Route::name('logs.')->middleware(['auth', 'verified', 'role:user,admin,super_admin'])->prefix('logs')->group(function () {
+    Route::get('/', [AuditLogController::class, 'index'])->name('index');
+    Route::get('/{audit}', [AuditLogController::class, 'show'])->name('show');
+});
+
+
+Route::name('items.')->middleware(['auth', 'verified', 'role:user,admin,super_admin'])->prefix('items')->group(function () {
+    Route::get('/show-pdf', [ItemController::class, 'show_pdf'])->name('show-pdf');
+    Route::get('/export-pdf', [ItemController::class, 'export_pdf'])->name('export-pdf');
+    Route::get('/export/{method?}', [ItemController::class, 'export'])->name('export');
+});
+Route::resource('items', ItemController::class)->middleware(['auth', 'verified', 'role:admin,super_admin']);
 
 require __DIR__ . '/auth.php';

@@ -27,7 +27,7 @@ class BrandRequest extends FormRequest
         $id = $this->route('brand');
 
         return [
-            'name' => ['required', 'max:100',  Rule::unique('categories', 'name')->ignore($id, 'id')],
+            'name' => ['required', 'max:100',  Rule::unique('brands', 'name')->ignore($id, 'id')],
             'description' => ['required'],
         ];
     }

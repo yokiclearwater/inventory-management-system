@@ -22,7 +22,7 @@ class CategoryController extends Controller
     {
         $categories = Category::when($request->search, function ($query, $search) {
             $query->where('name', 'LIKE', "%$search%");
-       })->paginate()->toArray();
+       })->paginate(10)->withQueryString();
 
 
         return Inertia::render('Category/Index', [

@@ -8,13 +8,13 @@ import Button from "@/Components/Button";
 import Table from "@/Components/Table";
 
 const Index = (props) => {
-    const [brands, setBrands] = React.useState(props.brands);
+    const [items, setItems] = React.useState(props.items);
     const form = useForm();
     const [exportActive, setExportActive] = React.useState(false);
     const routeList = {
-        "show": "brands.show",
-        "edit": "brands.edit",
-        "delete": "brands.delete",
+        "show": "items.show",
+        "edit": "items.edit",
+        "delete": "items.delete",
     }
 
     const handleDelete = (id) => {
@@ -26,11 +26,11 @@ const Index = (props) => {
             confirmButtonColor: "#D22B2B",
         }).then((result) => {
             if (result.isConfirmed) {
-                form.delete(route("brands.destroy", id), {
+                form.delete(route("items.destroy", id), {
                     onSuccess: () => {
-                        setBrands({
-                            ...brands,
-                            data: brands.data.filter((c) => c.id !== id),
+                        setItems({
+                            ...items,
+                            data: items.data.filter((c) => c.id !== id),
                         });
                         Swal.fire("Deleted Successfully", "", "success");
                     },
@@ -41,8 +41,8 @@ const Index = (props) => {
     };
 
     return (
-        <Main auth={props.auth} errors={props.errors} title="Brands">
-            <Head title="Brands" />
+        <Main auth={props.auth} errors={props.errors} title="Items">
+            <Head title="Items" />
             <div className="flex justify-end my-4 w-full h-full">
                 <form  className="inline-flex items-center space-x-2 max-w-full">
                     <Input
@@ -58,24 +58,24 @@ const Index = (props) => {
             </div>
             <div className="bg-white rounded-xl shadow">
                 <div className="p-4 text-2xl font-semibold flex w-full justify-between flex-wrap gap-4">
-                    <span>Brands</span>
+                    <span>Items</span>
                     <a
-                        href={route("brands.create")}
+                        href={route("items.create")}
                         className="bg-indigo-600 text-xl hover:bg-indigo-700 text-white p-2 rounded-md shadow cursor-pointer"
                     >
-                        Add New Brands
+                        Add New Items
                     </a>
                 </div>
-                {brands.data.length > 0 ? (
+                {items.data.length > 0 ? (
                     <>
                         <div className="max-w-full mx-auto">
                             <div className="relative overflow-x-auto">
-                                <Table tables={props.brands} handleDelete={handleDelete} routeList={routeList} />
+                                <Table tables={props.items} handleDelete={handleDelete} routeList={routeList} />
                             </div>
                         </div>
                         <div className="w-full p-4 flex flex-col">
                             <Pagination
-                                tables={brands}
+                                tables={items}
                                 className="p-4 self-center"
                             />
                             <div className="flex flex-col self-end items-end">
@@ -111,7 +111,8 @@ const Index = (props) => {
                                             <li>
                                                 <a
                                                     href={route(
-                                                        "brands.export"
+                                                        "items.export",
+                                                        "xlsx"
                                                     )}
                                                     className="block py-2 px-4 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white"
                                                 >
@@ -121,7 +122,7 @@ const Index = (props) => {
                                             <li>
                                                 <a
                                                     href={route(
-                                                        "brands.export",
+                                                        "items.export",
                                                         "csv"
                                                     )}
                                                     className="block py-2 px-4 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white"
@@ -132,7 +133,7 @@ const Index = (props) => {
                                             <li>
                                                 <a
                                                     href={route(
-                                                        "brands.export-pdf"
+                                                        "items.export-pdf"
                                                     )}
                                                     className="block py-2 px-4 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white"
                                                 >
@@ -149,7 +150,7 @@ const Index = (props) => {
                     <>
                         <div className="max-w-full mx-auto flex items-center justify-center p-4">
                             <div className="p-4 my-8 text-4xl text-red-500 font-semibold ">
-                                No Brands Found!!
+                                No Items Found!!
                             </div>
                         </div>
                     </>

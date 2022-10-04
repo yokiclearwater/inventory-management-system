@@ -8,6 +8,8 @@ import {
     faUser,
     faCopyright,
     faLayerGroup,
+    faBook,
+    faBox,
 } from "@fortawesome/free-solid-svg-icons";
 import Dropdown from "@/Components/Dropdown";
 import SideNav from "@/Components/SideNav";
@@ -22,6 +24,13 @@ const Main = ({ auth, children, title="Dashboard" }) => {
             color: "text-green-500",
             route: "dashboard",
             activeRoute: "dashboard",
+        },
+        {
+            icon: faBox,
+            label: "Items",
+            color: "text-purple-500",
+            route: "items.index",
+            activeRoute: "items.*",
         },
         {
             icon: faTable,
@@ -43,6 +52,13 @@ const Main = ({ auth, children, title="Dashboard" }) => {
             color: "text-pink-500",
             route: "models.index",
             activeRoute: "models.*",
+        },
+        {
+            icon: faBook,
+            label: "Audit Logs",
+            color: "text-lime-600",
+            route: "logs.index",
+            activeRoute: "logs.*",
         },
     ];
 

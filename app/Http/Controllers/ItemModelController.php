@@ -2,11 +2,15 @@
 
 namespace App\Http\Controllers;
 
+use App\Exports\ItemModelsExport;
 use App\Models\ItemModel;
 use App\Http\Requests\ItemModelRequest;
+use Barryvdh\DomPDF\Facade\Pdf;
+use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Redirect;
 use Inertia\Inertia;
-use OwenIt\Auditing\Audit as Audit;
+use Maatwebsite\Excel\Facades\Excel;
+use OwenIt\Auditing\Models\Audit as Audit;
 
 class ItemModelController extends Controller
 {
@@ -15,15 +19,11 @@ class ItemModelController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index(Request $request)
     {
-        $models = ItemModel::paginate()->toArray();
-
-        // $all_models = ItemModel::all();
-        // $all = array();
-        // foreach($all_models as $model) {
-        //     array_push($all, $model->audits->toArray());
-        // }
+        $models = ItemModel::when($request->search, function ($query, $search) {
+            $query->where('name', 'LIKE', "%$search%");
+       })->paginate(10)->withQueryString()->toArray();
 
         return Inertia::render('Model/Index', [
             'models' => $models,
@@ -65,7 +65,7 @@ class ItemModelController extends Controller
      */
     public function show($id)
     {
-        $model = ItemModel::find($id);
+        $model = ItemModel::findOrFail($id);
 
         return Inertia::render('Model/View')->with('model', $model);
     }
@@ -115,5 +115,28 @@ class ItemModelController extends Controller
         $model->delete();
 
         return Redirect::route('models.index');
+    }
+
+    public function export($method = 'xlsx') {
+        if ($method === "csv") {
+            return Excel::download(new ItemModelsExport, 'models.csv');
+        }
+
+        return Excel::download(new ItemModelsExport, 'models.xlsx');
+    }
+
+    public function show_pdf()
+    {
+        $models = ItemModel::all();
+        return view('models', [
+            'models' => $models,
+        ]);
+    }
+
+    public function export_pdf() {
+        $models = ItemModel::all();
+        view()->share('models', $models);
+        $pdf = Pdf::loadView('models')->setPaper('a4', 'landscape');
+        return $pdf->download('models.pdf');
     }
 }
