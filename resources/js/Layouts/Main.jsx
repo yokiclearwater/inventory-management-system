@@ -9,7 +9,7 @@ import {
     faCopyright,
     faLayerGroup,
     faBook,
-    faBox,
+    faBox, faClock,
 } from "@fortawesome/free-solid-svg-icons";
 import Dropdown from "@/Components/Dropdown";
 import SideNav from "@/Components/SideNav";
@@ -26,11 +26,18 @@ const Main = ({ auth, children, title="Dashboard" }) => {
             activeRoute: "dashboard",
         },
         {
-            icon: faBox,
+            icon: faClock,
             label: "Items",
-            color: "text-purple-500",
+            color: "text-red-500",
             route: "items.index",
             activeRoute: "items.*",
+        },
+        {
+            icon: faBox,
+            label: "Products",
+            color: "text-purple-500",
+            route: "products.index",
+            activeRoute: "products.*",
         },
         {
             icon: faTable,

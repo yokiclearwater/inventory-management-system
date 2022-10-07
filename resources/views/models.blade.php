@@ -10,32 +10,39 @@
     <style>
         * {
             box-sizing: border-box;
-            font-size: 18px;
+            font-size: 20px;
             text-align: left !important;
-            font-family: 'Arial', 'Roboto', 'Helvetica Neue', sans-serif;
+            font-family: 'Rubik', 'Arial', 'Roboto', 'Helvetica Neue', sans-serif;
         }
 
         table {
-            text-align: left;
-            width: 100%;
             border-collapse: collapse;
-            border: 1px solid gray;
+            font-family: sans-serif;
+            min-width: 100%;
+            box-shadow: 0 0 20px rgba(0, 0, 0, 0.15);
         }
 
-        thead {
-            background: rgb(255, 75, 156);
-            color: white;
+        thead tr {
+            background-color: #fc49af;
+            color: #ffffff;
+            text-align: left;
         }
 
         th,
         td {
-            padding: 10px 20px;
-            border-bottom: 1px solid gray;
-            border-right: 1px solid gray;
+            padding: 12px 15px;
         }
 
-        tbody {
-            background: white;
+        tbody tr {
+            border-bottom: 1px solid #dddddd;
+        }
+
+        tbody tr:nth-of-type(even) {
+            background-color: #f3f3f3;
+        }
+
+        tbody tr:last-of-type {
+            border-bottom: 2px solid #fc49af;
         }
     </style>
 </head>

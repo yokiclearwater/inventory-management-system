@@ -2,17 +2,14 @@
 
 namespace App\Http\Controllers;
 
-use App\Exports\ItemsExport;
 use App\Http\Requests\ItemRequest;
-use App\Models\Brand;
-use App\Models\Category;
 use App\Models\Item;
-use App\Models\ItemModel;
-use Barryvdh\DomPDF\Facade\Pdf;
+use App\Models\ItemStatus;
+use App\Models\Product;
+use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Redirect;
 use Inertia\Inertia;
-use Maatwebsite\Excel\Facades\Excel;
 
 class ItemController extends Controller
 {
@@ -24,11 +21,14 @@ class ItemController extends Controller
     public function index(Request $request)
     {
         $items = Item::when($request->search, function ($query, $search) {
-            $query->where('name', 'LIKE', "%$search%");
-        })->paginate(10)->withQueryString()->toArray();
+            $query->where('serial_no', 'LIKE', "%$search%")->orWhereHas('product', function ($q) use ($search) {
+                $q->where('name', 'LIKE', "%$search%");
+            });
+        })->with('product')->with('status')->paginate(10)->withQueryString();
+//        $items = Item::with('product')->with('status')->paginate();
 
         return Inertia::render('Item/Index', [
-            'items' => $items,
+            'items' => $items->toArray(),
         ]);
     }
 
@@ -39,98 +39,71 @@ class ItemController extends Controller
      */
     public function create()
     {
-        $categories = Category::all();
-        $brands = Brand::all();
-        $models = ItemModel::all();
+        $products = Product::all();
+        $statuses = ItemStatus::all();
 
         return Inertia::render('Item/Create', [
-            'categories' => $categories,
-            'brands' => $brands,
-            'models' => $models,
+            'products' => $products,
+            'statuses' => $statuses,
         ]);
     }
 
     /**
      * Store a newly created resource in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
+     * @param \Illuminate\Http\Request $request
      * @return \Illuminate\Http\Response
      */
     public function store(ItemRequest $request)
     {
         $request->validated();
-        $item = new Item();
-        $item->name = $request->name;
-        $item->serial_no = $request->serial_no;
-        $item->description = $request->description;
-        $item->category_id = $request->category_id;
-        $item->brand_id = $request->brand_id;
-        $item->model_id = $request->model_id;
-        $item->save();
+        Item::create($request->all());
 
-        return Redirect::route('items.index');
+//        return Redirect::route('items.index');
     }
 
     /**
      * Display the specified resource.
      *
-     * @param  int  $id
+     * @param int $id
      * @return \Illuminate\Http\Response
      */
     public function show($id)
     {
-        $item = Item::findOrFail($id);
-        $category = $item->category;
-        $brand = $item->brand;
-        $model = $item->model;
+        $item = Item::with('product')->with('status')->find($id);
 
-        return Inertia::render('Item/View', [
-            'item' => $item,
-            'category' => $category,
-            'brand' => $brand,
-            'model' => $model,
-        ]);
+        return Inertia::render('Item/View', ['item' => $item]);
     }
 
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  int  $id
+     * @param int $id
      * @return \Illuminate\Http\Response
      */
     public function edit($id)
     {
         $item = Item::find($id);
-        $categories = Category::all();
-        $brands = Brand::all();
-        $models = ItemModel::all();
-
+        $products = Product::all();
+        $statuses = ItemStatus::all();
         return Inertia::render('Item/Edit', [
+            'statuses' => $statuses,
             'item' => $item,
-            'categories' => $categories,
-            'brands' => $brands,
-            'models' => $models,
+            'products' => $products,
         ]);
     }
 
     /**
      * Update the specified resource in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
+     * @param \Illuminate\Http\Request $request
+     * @param int $id
+     * @return \Illuminate\Http\RedirectResponse
      */
     public function update(ItemRequest $request, $id)
     {
         $request->validated();
-        $item = Item::find($id);
-        $item->name = $request->name;
-        $item->serial_no = $request->serial_no;
-        $item->description = $request->description;
-        $item->category_id = $request->category_id;
-        $item->brand_id = $request->brand_id;
-        $item->model_id = $request->model_id;
-        $item->save();
+        Item::find($id)->update($request->all());
 
         return Redirect::route('items.index');
     }
@@ -138,41 +111,13 @@ class ItemController extends Controller
     /**
      * Remove the specified resource from storage.
      *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
+     * @param int $id
+     * @return \Illuminate\Http\RedirectResponse
      */
     public function destroy($id)
     {
-        $item = Item::find($id);
-        $item->delete();
+        Item::destroy($id);
 
         return Redirect::route('items.index');
-    }
-
-    public function export($method = "xlsx") {
-
-
-        if ($method === "csv") {
-            return Excel::download(new ItemsExport, 'items.csv');
-        } else {
-            return Excel::download(new ItemsExport, 'items.xlsx');
-        }
-
-        return Excel::download(new ItemsExport, 'items.xlsx');
-    }
-
-    public function show_pdf()
-    {
-        $items = Item::all();
-        return view('items', [
-            'items' => $items,
-        ]);
-    }
-
-    public function export_pdf() {
-        $items = Item::all();
-        view()->share('items', $items);
-        $pdf = Pdf::loadView('items')->setPaper('a4', 'landscape');
-        return $pdf->download('items.pdf');
     }
 }

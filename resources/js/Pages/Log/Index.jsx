@@ -34,6 +34,7 @@ const Log = (props) => {
                             value={form.data.type}
                             handleChange={onHandleChange}
                             name={"type"}
+                            className="capitalize"
                         >
                             <option disabled value={""}>
                                 Select a model type
@@ -48,6 +49,7 @@ const Log = (props) => {
                             value={form.data.event}
                             handleChange={onHandleChange}
                             name={"event"}
+                            className="capitalize"
                         >
                             <option disabled value={""}>
                                 Select a model event
@@ -70,7 +72,7 @@ const Log = (props) => {
                     </form>
                 </Modal>
             )}
-            <Main auth={props.auth} errors={props.errors} title="Brands">
+            <Main auth={props.auth} errors={props.errors} title="Audit Logs">
                 <Head title="Logs" />
                 <div className="flex justify-end my-4 w-full h-full">
                     <Button
@@ -101,8 +103,8 @@ const Log = (props) => {
                                     </tr>
                                 </thead>
                                 <tbody>
-                                    {props.audits.data.map((audit) => (
-                                        <tr key={audit.id}>
+                                    {props.audits.data.map((audit, index) => (
+                                        <tr key={audit.id} className={`${(index % 2 ? "bg-indigo-100" : "bg-indigo-200")} hover:bg-indigo-300`}>
                                             <td className="py-3 px-4">
                                                 {audit.id}
                                             </td>

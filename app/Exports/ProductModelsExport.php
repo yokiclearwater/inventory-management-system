@@ -3,6 +3,7 @@
 namespace App\Exports;
 
 use App\Models\Brand;
+use App\Models\ProductModel;
 use Illuminate\Contracts\View\View;
 use Maatwebsite\Excel\Concerns\FromCollection;
 use Maatwebsite\Excel\Concerns\FromView;
@@ -13,14 +14,13 @@ use Maatwebsite\Excel\Concerns\WithHeadings;
 use PhpOffice\PhpSpreadsheet\Style\Alignment;
 use PhpOffice\PhpSpreadsheet\Style\Style;
 
-class BrandsExport implements FromView, WithColumnWidths, ShouldAutoSize, WithDefaultStyles
+class ProductModelsExport implements FromView, ShouldAutoSize, WithColumnWidths, WithDefaultStyles
 {
-
     public function view(): View
     {
         // TODO: Implement view() method.
-        return view('brands', [
-            'brands' => Brand::all(),
+        return view('models', [
+            'models' => ProductModel::all(),
         ]);
     }
 

@@ -5,7 +5,7 @@ namespace App\Http\Requests;
 use Illuminate\Foundation\Http\FormRequest;
 use Illuminate\Validation\Rule;
 
-class ItemModelRequest extends FormRequest
+class ProductModelRequest extends FormRequest
 {
     /**
      * Determine if the user is authorized to make this request.
@@ -27,7 +27,7 @@ class ItemModelRequest extends FormRequest
         $id = $this->route('model');
 
         return [
-            'name' => ['required', 'max:100', Rule::unique('models', 'name')->ignore($id, 'id')],
+            'name' => ['required', 'max:100', Rule::unique('product_models', 'name')->ignore($id, 'id')],
             'description' => ['required'],
         ];
     }

@@ -4,23 +4,31 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
-use OwenIt\Auditing\Auditable as AuditingAuditable;
 use OwenIt\Auditing\Contracts\Auditable;
 
 class Item extends Model implements Auditable
 {
-    use AuditingAuditable;
+    use \OwenIt\Auditing\Auditable;
     use HasFactory;
 
-    public function category() {
-        return $this->belongsTo(Category::class);
+    protected $fillable = [
+        'product_id',
+        'serial_no',
+        'received_by',
+        'issued_by',
+        'installed_date',
+        'location',
+        'product_location',
+        'in_stock_date',
+        'out_of_stock_date',
+        'status_id',
+    ];
+
+    public function product() {
+        return $this->belongsTo(Product::class, 'product_id', 'id');
     }
 
-    public function brand() {
-        return $this->belongsTo(Brand::class);
-    }
-
-    public function model() {
-        return $this->belongsTo(ItemModel::class, 'model_id', 'id', 'item_models');
+    public function status() {
+        return $this->hasOne(ItemStatus::class, 'id', 'status_id');
     }
 }

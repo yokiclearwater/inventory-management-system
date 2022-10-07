@@ -2,17 +2,16 @@
 
 namespace App\Http\Controllers;
 
-use App\Exports\ItemModelsExport;
-use App\Models\ItemModel;
-use App\Http\Requests\ItemModelRequest;
+use App\Exports\ProductModelsExport;
+use App\Models\ProductModel;
+use App\Http\Requests\ProductModelRequest;
 use Barryvdh\DomPDF\Facade\Pdf;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Redirect;
 use Inertia\Inertia;
 use Maatwebsite\Excel\Facades\Excel;
-use OwenIt\Auditing\Models\Audit as Audit;
 
-class ItemModelController extends Controller
+class ProductModelController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -21,9 +20,10 @@ class ItemModelController extends Controller
      */
     public function index(Request $request)
     {
-        $models = ItemModel::when($request->search, function ($query, $search) {
+
+        $models = ProductModel::when($request->search, function ($query, $search) {
             $query->where('name', 'LIKE', "%$search%");
-       })->paginate(10)->withQueryString()->toArray();
+        })->paginate(10)->withQueryString()->toArray();
 
         return Inertia::render('Model/Index', [
             'models' => $models,
@@ -37,19 +37,21 @@ class ItemModelController extends Controller
      */
     public function create()
     {
+        // dd("Kosal");
+
         return Inertia::render('Model/Create');
     }
 
     /**
      * Store a newly created resource in storage.
      *
-     * @param  \App\Http\Requests\ItemModelRequest  $request
+     * @param \App\Http\Requests\ProductModelRequest $request
      * @return \Illuminate\Http\Response
      */
-    public function store(ItemModelRequest $request)
+    public function store(ProductModelRequest $request)
     {
         $request->validated();
-        $model = new ItemModel();
+        $model = new ProductModel();
         $model->name = $request->name;
         $model->description = $request->description;
         $model->save();
@@ -60,12 +62,12 @@ class ItemModelController extends Controller
     /**
      * Display the specified resource.
      *
-     * @param  \App\Models\ItemModel  $itemModel
+     * @param \App\Models\ProductModel $itemModel
      * @return \Illuminate\Http\Response
      */
     public function show($id)
     {
-        $model = ItemModel::findOrFail($id);
+        $model = ProductModel::findOrFail($id);
 
         return Inertia::render('Model/View')->with('model', $model);
     }
@@ -73,12 +75,12 @@ class ItemModelController extends Controller
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  \App\Models\ItemModel  $itemModel
+     * @param \App\Models\ProductModel $itemModel
      * @return \Illuminate\Http\Response
      */
     public function edit($id)
     {
-        $model = ItemModel::find($id);
+        $model = ProductModel::find($id);
 
         return Inertia::render('Model/Edit', [
             'model' => $model,
@@ -88,14 +90,14 @@ class ItemModelController extends Controller
     /**
      * Update the specified resource in storage.
      *
-     * @param  \App\Http\Requests\ItemModelRequest  $request
-     * @param  \App\Models\ItemModel  $itemModel
+     * @param \App\Http\Requests\ProductModelRequest $request
+     * @param \App\Models\ProductModel $itemModel
      * @return \Illuminate\Http\Response
      */
-    public function update(ItemModelRequest $request, $id)
+    public function update(ProductModelRequest $request, $id)
     {
         $request->validated();
-        $model = ItemModel::find($id);
+        $model = ProductModel::find($id);
         $model->name = $request->name;
         $model->description = $request->description;
         $model->save();
@@ -106,35 +108,37 @@ class ItemModelController extends Controller
     /**
      * Remove the specified resource from storage.
      *
-     * @param  \App\Models\ItemModel  $itemModel
+     * @param \App\Models\ProductModel $itemModel
      * @return \Illuminate\Http\Response
      */
     public function destroy($id)
     {
-        $model = ItemModel::find($id);
+        $model = ProductModel::find($id);
         $model->delete();
 
         return Redirect::route('models.index');
     }
 
-    public function export($method = 'xlsx') {
+    public function export($method = 'xlsx')
+    {
         if ($method === "csv") {
-            return Excel::download(new ItemModelsExport, 'models.csv');
+            return Excel::download(new ProductModelsExport, 'models.csv');
         }
 
-        return Excel::download(new ItemModelsExport, 'models.xlsx');
+        return Excel::download(new ProductModelsExport, 'models.xlsx');
     }
 
     public function show_pdf()
     {
-        $models = ItemModel::all();
+        $models = ProductModel::all();
         return view('models', [
             'models' => $models,
         ]);
     }
 
-    public function export_pdf() {
-        $models = ItemModel::all();
+    public function export_pdf()
+    {
+        $models = ProductModel::all();
         view()->share('models', $models);
         $pdf = Pdf::loadView('models')->setPaper('a4', 'landscape');
         return $pdf->download('models.pdf');

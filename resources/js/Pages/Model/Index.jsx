@@ -42,7 +42,7 @@ const Index = (props) => {
 
     return (
         <Main auth={props.auth} errors={props.errors} title="Models">
-            <Head title="Category" />
+            <Head title="Model" />
             <div className="flex justify-end my-4 w-full h-full">
                 <form className="inline-flex items-center space-x-2 max-w-full">
                     <Input

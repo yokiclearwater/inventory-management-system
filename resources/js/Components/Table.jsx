@@ -18,21 +18,20 @@ function Table({ tables, handleDelete, routeList }) {
                     </tr>
                 </thead>
                 <tbody>
-                    {tables.data.map((category, index) => {
-                        const bgColor =
-                            index % 2 === 0 ? "bg-indigo-200" : "bg-indigo-100";
+                    {tables.data.map((table, index) => {
+
 
                         return (
                             <tr
-                                className={`${bgColor} hover:bg-indigo-300`}
+                                className={`even:bg-indigo-200 odd:bg-indigo-100 hover:bg-indigo-300`}
                                 itemScope={"row"}
                                 key={index}
                             >
                                 <th className="py-2 px-4" scope="col">
-                                    {category.id}
+                                    {table.id}
                                 </th>
                                 <td className="py-2 px-4" scope="col">
-                                    {category.name}
+                                    {table.name}
                                 </td>
                                 <td
                                     className="py-2 px-4 inline-flex space-x-2 items-center justify-start"
@@ -41,7 +40,7 @@ function Table({ tables, handleDelete, routeList }) {
                                     <a
                                         className="hover:underline cursor-pointer text-green-700 font-semibold"
                                         href={route(routeList.show, {
-                                            id: category.id,
+                                            id: table.id,
                                         })}
                                     >
                                         View
@@ -49,7 +48,7 @@ function Table({ tables, handleDelete, routeList }) {
                                     <a
                                         className="hover:underline cursor-pointer text-indigo-600 font-semibold"
                                         href={route(routeList.edit, {
-                                            id: category.id,
+                                            id: table.id,
                                         })}
                                     >
                                         Edit
@@ -57,7 +56,7 @@ function Table({ tables, handleDelete, routeList }) {
                                     <a
                                         className="hover:underline cursor-pointer text-red-600 font-semibold"
                                         onClick={() =>
-                                            handleDelete(category.id)
+                                            handleDelete(table.id)
                                         }
                                     >
                                         Delete

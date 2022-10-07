@@ -127,7 +127,6 @@ class CategoryController extends Controller
             return Excel::download(new CategoriesExport, 'categories.csv');
         }
 
-
         return Excel::download(new CategoriesExport, 'categories.xlsx');
     }
 

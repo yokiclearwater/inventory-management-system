@@ -31,8 +31,12 @@ const View = (props) => {
                     </div>
                     <div className="bg-white shadow-sm sm:rounded-lg p-4">
                         <div className="flex flex-col gap-4 p-4">
-                            <div className="flex flex-row gap-2 flex-wrap justify-between items-center">
-                                <h2 className="font-bold md:text-3xl text-2xl">
+                            <div className="flex flex-row flex-wrap justify-between text-indigo-800 font-semibold text-3xl md:text-4xl border-b-2 py-4 border-gray-400">
+                                <div>Log Detail</div>
+                                <span className="bg-indigo-500 text-white p-2 font-semibold capitalize rounded shadow text-2xl">{audit.event} Event</span>
+                            </div>
+                            <div className="flex flex-col gap-2 flex-wrap">
+                                <h2 className="md:text-2xl text-xl border-b-2 border-r-2 border-indigo-600 py-4 text-indigo-600">
                                     ID :{" "}
                                     {
                                         <span className="font-normal">
@@ -40,10 +44,9 @@ const View = (props) => {
                                         </span>
                                     }
                                 </h2>
-                                <span className="bg-indigo-500 text-white p-2 font-semibold capitalize rounded shadow text-2xl">{audit.event} Event</span>
                             </div>
                             <div className="flex flex-col gap-2 flex-wrap">
-                                <h2 className="font-bold md:text-3xl text-2xl">
+                                <h2 className="md:text-2xl text-xl border-b-2 border-r-2 border-indigo-600 py-4 text-indigo-600">
                                     Username :{" "}
                                     {
                                         <span className="font-normal">
@@ -53,7 +56,7 @@ const View = (props) => {
                                 </h2>
                             </div>
                             <div className="flex flex-col gap-2 flex-wrap">
-                                <h2 className="font-bold md:text-3xl text-2xl">
+                                <h2 className="md:text-2xl text-xl border-b-2 border-r-2 border-indigo-600 py-4 text-indigo-600">
                                     Model ID :{" "}
                                     {
                                         <span className="font-normal">
@@ -63,7 +66,7 @@ const View = (props) => {
                                 </h2>
                             </div>
                             <div className="flex flex-col gap-2 flex-wrap">
-                                <h2 className="font-bold md:text-3xl text-2xl">
+                                <h2 className="md:text-2xl text-xl border-b-2 border-r-2 border-indigo-600 py-4 text-indigo-600">
                                     Model Type :{" "}
                                     {
                                         <span className="font-normal">
@@ -73,17 +76,17 @@ const View = (props) => {
                                 </h2>
                             </div>
                             <div className="flex flex-col gap-2 flex-wrap">
-                                <h2 className="font-bold md:text-3xl text-2xl">
+                                <h2 className="md:text-2xl text-xl border-b-2 border-r-2 border-indigo-600 py-4 text-indigo-600">
                                     View URL :{" "}
                                     {
-                                        <a href={audit.url} className="font-normal text-indigo-500 hover:underline hover:text-indigo-700 cursor-pointer md:text-3xl text-lg">
+                                        <a href={audit.url} className="font-normal text-indigo-500 hover:underline hover:text-indigo-700 cursor-pointer md:text-2xl text-3xl">
                                             {audit.url}
                                         </a>
                                     }
                                 </h2>
                             </div>
                             <div className="flex flex-col gap-2 flex-wrap">
-                                <h2 className="font-bold md:text-3xl text-2xl">
+                                <h2 className="md:text-2xl text-xl border-b-2 border-r-2 border-indigo-600 py-4 text-indigo-600">
                                     Old Values :
                                 </h2>
                                 <pre className="bg-indigo-800 text-white shadow rounded p-4 text-xl md:text-2xl">
@@ -91,7 +94,7 @@ const View = (props) => {
                                 </pre>
                             </div>
                             <div className="flex flex-col gap-2 flex-wrap">
-                                <h2 className="font-bold md:text-3xl text-2xl">
+                                <h2 className="md:text-2xl text-xl border-b-2 border-r-2 border-indigo-600 py-4 text-indigo-600">
                                     New Values :
                                 </h2>
                                 <pre className="bg-indigo-800 text-white shadow rounded p-4 text-xl md:text-2xl">

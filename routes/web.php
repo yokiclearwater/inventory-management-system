@@ -4,7 +4,14 @@ use App\Http\Controllers\AuditLogController;
 use App\Http\Controllers\BrandController;
 use App\Http\Controllers\CategoryController;
 use App\Http\Controllers\ItemController;
-use App\Http\Controllers\ItemModelController;
+use App\Http\Controllers\ProductController;
+use App\Http\Controllers\ProductModelController;
+use App\Models\Brand;
+use App\Models\Category;
+use App\Models\Item;
+use App\Models\Product;
+use App\Models\ProductModel;
+use App\Models\User;
 use Illuminate\Foundation\Application;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
@@ -41,22 +48,20 @@ Route::get('/main', function () {
 
 Route::get('/dashboard', function () {
     $id = Auth::user()->id;
-    $user = App\Models\User::find($id);
-    $users_count = App\Models\User::count();
-    $categories_count = \App\Models\Category::count();
+    $user = User::find($id);
+//    $user = Auth::user();
+    $users_count = User::count();
     $role = $user->role()->first()->toArray();
-    $brands_count = App\Models\Brand::count();
-    $models_count = App\Models\ItemModel::count();
-    $items_count = App\Models\Item::count();
 
     return Inertia::render('Dashboard', [
         'user' => $user,
         'users_count' => $users_count,
         'role' => $role,
-        'categories_count' => $categories_count,
-        'models_count' => $models_count,
-        'brands_count' => $brands_count,
-        'items_count' => $items_count,
+        'categories_count' => Category::count(),
+        'models_count' => ProductModel::count(),
+        'brands_count' => Brand::count(),
+        'products_count' => Product::count(),
+        'items_count' => Item::count(),
         'ip' => Request::ip(),
     ]);
 })->middleware(['auth', 'verified', 'role:user,admin,super_admin'])->name('dashboard');
@@ -78,11 +83,11 @@ Route::name('brands.')->middleware(['auth', 'verified', 'role:user,admin,super_a
 Route::resource('brands', BrandController::class)->middleware(['auth', 'verified', 'role:admin,super_admin']);
 
 Route::name('models.')->middleware(['auth', 'verified', 'role:user,admin,super_admin'])->prefix('models')->group(function () {
-    Route::get('/export-pdf', [ItemModelController::class, 'export_pdf'])->name('export-pdf');
-    Route::get('/show-pdf', [ItemModelController::class, 'show_pdf'])->name('show-pdf');
-    Route::get('/export/{method?}', [ItemModelController::class, 'export'])->name('export');
+    Route::get('/export-pdf', [ProductModelController::class, 'export_pdf'])->name('export-pdf');
+    Route::get('/show-pdf', [ProductModelController::class, 'show_pdf'])->name('show-pdf');
+    Route::get('/export/{method?}', [ProductModelController::class, 'export'])->name('export');
 });
-Route::resource('models', ItemModelController::class)->middleware(['auth', 'verified', 'role:user,admin,super_admin']);
+Route::resource('models', ProductModelController::class)->middleware(['auth', 'verified', 'role:user,admin,super_admin']);
 
 Route::name('logs.')->middleware(['auth', 'verified', 'role:user,admin,super_admin'])->prefix('logs')->group(function () {
     Route::get('/', [AuditLogController::class, 'index'])->name('index');
@@ -90,11 +95,18 @@ Route::name('logs.')->middleware(['auth', 'verified', 'role:user,admin,super_adm
 });
 
 
-Route::name('items.')->middleware(['auth', 'verified', 'role:user,admin,super_admin'])->prefix('items')->group(function () {
-    Route::get('/show-pdf', [ItemController::class, 'show_pdf'])->name('show-pdf');
-    Route::get('/export-pdf', [ItemController::class, 'export_pdf'])->name('export-pdf');
-    Route::get('/export/{method?}', [ItemController::class, 'export'])->name('export');
+Route::name('products.')->middleware(['auth', 'verified', 'role:user,admin,super_admin'])->prefix('products')->group(function () {
+    Route::get('/show-pdf', [ProductController::class, 'show_pdf'])->name('show-pdf');
+    Route::get('/export-pdf', [ProductController::class, 'export_pdf'])->name('export-pdf');
+    Route::get('/export/{method?}', [ProductController::class, 'export'])->name('export');
 });
+Route::resource('products', ProductController::class)->middleware(['auth', 'verified', 'role:admin,super_admin']);
+
+//Route::name('items.')->middleware(['auth', 'verified', 'role:user,admin,super_admin'])->prefix('items')->group(function () {
+//    Route::get('/show-pdf', [ItemController::class, 'show_pdf'])->name('show-pdf');
+//    Route::get('/export-pdf', [ItemController::class, 'export_pdf'])->name('export-pdf');
+//    Route::get('/export/{method?}', [ItemController::class, 'export'])->name('export');
+//});
 Route::resource('items', ItemController::class)->middleware(['auth', 'verified', 'role:admin,super_admin']);
 
 require __DIR__ . '/auth.php';

@@ -12,13 +12,9 @@ const View = (props) => {
         <Main
             auth={props.auth}
             errors={props.errors}
-            header={
-                <h2 className="font-semibold text-xl text-gray-800 leading-tight">
-                    View Category
-                </h2>
-            }
+            title={"Models"}
         >
-            <Head title="View Category" />
+            <Head title="View Model" />
 
             <div className="py-12">
                 <div className="max-w-full mx-auto sm:px-6 lg:px-8">
@@ -32,17 +28,22 @@ const View = (props) => {
                     </div>
                     <div className="bg-white shadow-sm sm:rounded-lg p-4">
                         <div className="flex flex-col gap-4 p-4">
-                            <div className="font-bold text-3xl">
-                                ID: {model.id}
-                            </div>
-                            <div className="font-bold text-3xl">
-                                Name: {model.name}
-                            </div>
-                            <div className="font-bold text-3xl">
-                                Description:
-                                <p className="border-2 rounded my-4 text-xl font-normal p-4">
-                                    {model.description}
-                                </p>
+                            <div className="flex flex-col gap-4 p-4">
+                                <div className={"flex flex-row flex-wrap justify-between text-indigo-800 font-semibold text-3xl md:text-4xl border-b-2 py-4 border-gray-400"}>
+                                    <div>Model Detail</div>
+                                </div>
+                                <div className="md:text-2xl text-xl border-b-2 border-r-2 border-indigo-600 py-4 text-indigo-600">
+                                    ID: {model.id}
+                                </div>
+                                <div className="md:text-2xl text-xl border-b-2 border-r-2 border-indigo-600 py-4 text-indigo-600">
+                                    Name: {model.name}
+                                </div>
+                                <div className="md:text-2xl text-xl border-b-2 border-r-2 border-indigo-600 py-4 text-indigo-600">
+                                    Description:
+                                    <p className="py-4 indent-8">
+                                        {model.description}
+                                    </p>
+                                </div>
                             </div>
                         </div>
                     </div>

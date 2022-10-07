@@ -4,7 +4,7 @@ import Swal from "sweetalert2";
 import Main from "@/Layouts/Main";
 import Card from "@/Components/Card";
 import {
-    faBoxArchive,
+    faBoxArchive, faClock,
     faComputerMouse,
     faCopyright,
     faLayerGroup,
@@ -37,11 +37,18 @@ export default function Dashboard(props) {
                         label={"Users"}
                         data={props.users_count}
                         color={"bg-gradient-to-r from-violet-500 to-indigo-700"}
+                        // className={"xl:col-span-2 col-auto"}
+                    />
+                    <Card
+                        icon={faClock}
+                        label={"Items"}
+                        data={props.items_count}
+                        color={"bg-gradient-to-r from-yellow-500 to-green-700"}
                     />
                     <Card
                         icon={faBoxArchive}
-                        label={"Items"}
-                        data={props.items_count}
+                        label={"Products"}
+                        data={props.products_count}
                         color={"bg-gradient-to-r from-green-500 to-green-700"}
                     />
                     <Card

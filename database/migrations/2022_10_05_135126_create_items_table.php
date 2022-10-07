@@ -15,12 +15,16 @@ return new class extends Migration
     {
         Schema::create('items', function (Blueprint $table) {
             $table->id();
-            $table->string('name');
-            $table->text('description');
+            $table->foreignId('product_id')->constrained('products')->cascadeOnDelete();
             $table->string('serial_no')->unique();
-            $table->foreignId('model_id')->nullable()->constrained('item_models')->cascadeOnDelete();
-            $table->foreignId('brand_id')->nullable()->constrained('brands')->cascadeOnDelete();
-            $table->foreignId('category_id')->nullable()->constrained('categories')->cascadeOnDelete();
+            $table->string('received_by')->nullable();
+            $table->string('issued_by')->nullable();
+            $table->date('installed_date')->nullable();
+            $table->string('location');
+            $table->string('product_location');
+            $table->date('in_stock_date');
+            $table->date('out_of_stock_date')->nullable();
+            $table->foreignId('status_id')->constrained('item_statuses')->cascadeOnDelete();
             $table->timestamps();
         });
     }

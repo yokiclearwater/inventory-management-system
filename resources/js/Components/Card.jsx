@@ -3,7 +3,7 @@ import React from "react";
 
 function Card(props) {
     return (
-        <div className="bg-white p-4 rounded-lg flex flex-row justify-between shadow">
+        <div className={`bg-white p-4 rounded-lg flex flex-row justify-between shadow ${props.className}`}>
             <div className="text-3xl flex flex-col gap-2">
                 <span className="font-bold">{props.label}</span>
                 <span className="text-2xl">{props.data}</span>

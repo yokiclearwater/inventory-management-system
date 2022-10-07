@@ -12,11 +12,7 @@ const View = (props) => {
         <Main
             auth={props.auth}
             errors={props.errors}
-            header={
-                <h2 className="font-semibold text-xl text-gray-800 leading-tight">
-                    View Category
-                </h2>
-            }
+            title={"Categories"}
         >
             <Head title="View Category" />
 
@@ -32,15 +28,18 @@ const View = (props) => {
                     </div>
                     <div className="bg-white shadow-sm sm:rounded-lg p-4">
                         <div className="flex flex-col gap-4 p-4">
-                            <div className="font-bold text-3xl">
+                            <div className={"flex flex-row flex-wrap justify-between text-indigo-800 font-semibold text-3xl md:text-4xl border-b-2 py-4 border-gray-400"}>
+                                <div>Category Detail</div>
+                            </div>
+                            <div className="md:text-2xl text-xl border-b-2 border-r-2 border-indigo-600 py-4 text-indigo-600">
                                 ID: {category.id}
                             </div>
-                            <div className="font-bold text-3xl">
+                            <div className="md:text-2xl text-xl border-b-2 border-r-2 border-indigo-600 py-4 text-indigo-600">
                                 Name: {category.name}
                             </div>
-                            <div className="font-bold text-3xl">
+                            <div className="md:text-2xl text-xl border-b-2 border-r-2 border-indigo-600 py-4 text-indigo-600">
                                 Description:
-                                <p className="border-2 rounded my-4 text-xl font-normal p-4">
+                                <p className="py-4 px-2">
                                     {category.description}
                                 </p>
                             </div>

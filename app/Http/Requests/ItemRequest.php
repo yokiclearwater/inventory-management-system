@@ -27,12 +27,35 @@ class ItemRequest extends FormRequest
         $id = $this->route('item');
 
         return [
-            'name' => ['required', 'max:120', Rule::unique('items', 'name')->ignore($id, 'id')],
-            'description' => ['required'],
-            'serial_no' => ['required', Rule::unique('items', 'serial_no')->ignore($id, 'id')],
-            'model_id' => ['required', 'integer'],
-            'brand_id' => ['required', 'integer'],
-            'category_id' => ['required', 'integer'],
+            'product_id' => ['required'],
+            'serial_no' => ['required',  Rule::unique('items', 'serial_no')->ignore($id, 'id')],
+            'received_by' => ['required'],
+            'issued_by' => ['required'],
+            'installed_at' => ['date', 'nullable'],
+            'in_stock_date' => ['required', 'date'],
+            'location' => ['required'],
+            'product_location' => ['required'],
+            'out_of_stock_date' => ['date', 'nullable'],
+            'status_id' => ['required'],
+        ];
+    }
+
+    /**
+     * Get custom attributes for validator errors.
+     *
+     * @return array
+     */
+    public function attributes()
+    {
+        return [
+            'product_id' => 'product',
+            'serial_no' => 'serial number',
+            'received_by' => 'receiver',
+            'issued_by' => 'issuer',
+            'installed_at' => 'installed date',
+            'in_stock_date' => 'in stock date',
+            'out_of_stock_date' => 'out of stock date',
+            'status_id' => 'status',
         ];
     }
 }

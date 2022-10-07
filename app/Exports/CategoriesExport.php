@@ -3,22 +3,39 @@
 namespace App\Exports;
 
 use App\Models\Category;
+use Illuminate\Contracts\View\View;
 use Maatwebsite\Excel\Concerns\FromCollection;
+use Maatwebsite\Excel\Concerns\FromView;
+use Maatwebsite\Excel\Concerns\ShouldAutoSize;
+use Maatwebsite\Excel\Concerns\WithColumnWidths;
+use Maatwebsite\Excel\Concerns\WithDefaultStyles;
 use Maatwebsite\Excel\Concerns\WithHeadings;
+use Maatwebsite\Excel\Concerns\WithStyles;
+use PhpOffice\PhpSpreadsheet\Style\Alignment;
+use PhpOffice\PhpSpreadsheet\Style\Style;
+use PhpOffice\PhpSpreadsheet\Worksheet\Worksheet;
 
-class CategoriesExport implements FromCollection, WithHeadings
+class CategoriesExport implements FromView, ShouldAutoSize, WithColumnWidths, WithDefaultStyles
 {
-    /**
-     * @return \Illuminate\Support\Collection
-     */
-    public function collection()
-    {
 
-        return Category::all();
+    public function view(): View
+    {
+        // TODO: Implement view() method.
+        return view('categories', [
+            'categories' => Category::all(),
+        ]);
     }
 
-    public function headings(): array
+    public function columnWidths(): array
     {
-        return  array_keys($this->collection()->first()->toArray());
+        return [
+            'C' => 60,
+        ];
+    }
+
+    public function defaultStyles(Style $defaultStyle)
+    {
+        // TODO: Implement defaultStyles() method.
+        return $defaultStyle->getAlignment()->setVertical(Alignment::VERTICAL_CENTER)->setWrapText(true);
     }
 }
