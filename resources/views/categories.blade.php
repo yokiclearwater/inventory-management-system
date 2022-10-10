@@ -8,41 +8,34 @@
     <title>Categories</title>
 {{--    @vite('resources/js/app.jsx')--}}
     <style>
-        * {
-            box-sizing: border-box;
-            font-size: 20px;
-            text-align: left !important;
-            font-family: 'Rubik', 'Arial', 'Roboto', 'Helvetica Neue', sans-serif;
-        }
-
         table {
             border-collapse: collapse;
-            font-family: sans-serif;
-            min-width: 100%;
-            box-shadow: 0 0 20px rgba(0, 0, 0, 0.15);
+        }
+        thead {
+            vertical-align: bottom;
+            text-align: center;
+            font-weight: bold;
+        }
+        tfoot {
+            text-align: center;
+            font-weight: bold;
+        }
+        th {
+            text-align: left;
+            padding: 10px 20px;
+            vertical-align: middle !important;
+        }
+        td {
+            padding: 10px 20px;
+            vertical-align: middle !important;
         }
 
         thead tr {
-            background-color: #f08011;
-            color: #ffffff;
-            text-align: left;
+            background: #ffa26b;
         }
 
-        th,
-        td {
-            padding: 12px 15px;
-        }
-
-        tbody tr {
-            border-bottom: 1px solid #dddddd;
-        }
-
-        tbody tr:nth-of-type(even) {
-            background-color: #f3f3f3;
-        }
-
-        tbody tr:last-of-type {
-            border-bottom: 2px solid #f08011;
+        tbody tr:nth-child(even) {
+            background: #e7e7e7;
         }
     </style>
 </head>

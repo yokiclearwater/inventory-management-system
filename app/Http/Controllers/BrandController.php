@@ -10,6 +10,7 @@ use Illuminate\Http\Request;
 use Inertia\Inertia;
 use Illuminate\Support\Facades\Redirect;
 use Maatwebsite\Excel\Facades\Excel;
+use Mpdf\Mpdf;
 
 class BrandController extends Controller
 {
@@ -126,18 +127,18 @@ class BrandController extends Controller
         return Excel::download(new BrandsExport, 'brands.xlsx');
     }
 
-    public function show_pdf()
-    {
-        $brands = Brand::all();
-        return view('brands', [
-            'brands' => $brands,
-        ]);
-    }
-
     public function export_pdf() {
         $brands = Brand::all();
-        view()->share('brands', $brands);
-        $pdf = Pdf::loadView('brands')->setPaper('a4', 'landscape');
-        return $pdf->download('brands.pdf');
+        $mpdf = new Mpdf([
+            'mode' => 'utf-8',
+            'orientation' => 'L',
+            'default_font' => 'khmeros',
+            'default_font_size' => 14,
+        ]);
+        $html = view("brands", compact('brands'));
+        $mpdf->writeHTML($html);
+        $mpdf->Output('brands.pdf', 'D');
+
+        return Redirect::route('brands.index');
     }
 }

@@ -5,11 +5,13 @@ namespace App\Http\Controllers;
 use App\Exports\CategoriesExport;
 use App\Http\Requests\CategoryRequest;
 use App\Models\Category;
+use App\Models\Product;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Redirect;
 use Inertia\Inertia;
 use Maatwebsite\Excel\Facades\Excel;
 use Barryvdh\DomPDF\Facade\Pdf;
+use Mpdf\Mpdf;
 
 class CategoryController extends Controller
 {
@@ -140,8 +142,16 @@ class CategoryController extends Controller
 
     public function export_pdf() {
         $categories = Category::all();
-        view()->share('categories', $categories);
-        $pdf = Pdf::loadView('categories')->setPaper('a4', 'landscape');
-        return $pdf->download('categories.pdf');
+        $mpdf = new Mpdf([
+            'mode' => 'utf-8',
+            'orientation' => 'L',
+            'default_font' => 'khmeros',
+            'default_font_size' => 14,
+        ]);
+        $html = view("categories", compact('categories'));
+        $mpdf->writeHTML($html);
+        $mpdf->Output('categories.pdf', 'D');
+
+        return Redirect::route('categories.index');
     }
 }

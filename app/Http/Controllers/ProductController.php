@@ -166,10 +166,13 @@ class ProductController extends Controller
         $mpdf = new Mpdf([
             'mode' => 'utf-8',
             'orientation' => 'L',
-            'default_font' => 'khmeros'
+            'default_font' => 'khmeros',
+            'default_font_size' => 14,
         ]);
         $html = view("products", compact('products'));
         $mpdf->writeHTML($html);
         $mpdf->Output('products.pdf', 'D');
+
+        return Redirect::route('products.index');
     }
 }

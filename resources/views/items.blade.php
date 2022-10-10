@@ -8,37 +8,34 @@
     <title>Brands</title>
     {{--    @vite('resources/js/app.jsx')--}}
     <style>
-        * {
-            padding: 0;
-            margin: 0;
-            box-sizing: border-box;
-            font-size: 16px;
-            text-align: left !important;
-        }
-
         table {
             border-collapse: collapse;
-            min-width: 100%;
-            box-shadow: 0 0 20px rgba(0, 0, 0, 0.15);
+        }
+        thead {
+            vertical-align: bottom;
+            text-align: center;
+            font-weight: bold;
+        }
+        tfoot {
+            text-align: center;
+            font-weight: bold;
+        }
+        th {
+            text-align: left;
+            padding: 10px 20px;
+            vertical-align: middle !important;
+        }
+        td {
+            padding: 10px 20px;
+            vertical-align: middle !important;
         }
 
         thead tr {
-            background-color: #ccffb2;
-            text-align: left;
-            color: black;
-        }
-
-        th,
-        td {
-            padding: 12px 15px;
-        }
-
-        tbody tr td, th {
-            border-bottom: 1px solid rgb(221, 221, 221);
+            background: #c3ff80;
         }
 
         tbody tr:nth-child(even) {
-            background-color: #f3f3f3;
+            background: #e7e7e7;
         }
     </style>
 </head>
@@ -71,7 +68,7 @@
             <td>{{ $item->in_stock_date }}</td>
             <td>{{ $item->out_of_stock_date }}</td>
             <td>{{ $item->location }}</td>
-            <td>{{ $item->product_location }}</td>
+            <td style="min-width: 200px; width: 200px;">{{ $item->product_location }}</td>
         </tr>
     @endforeach
     </tbody>

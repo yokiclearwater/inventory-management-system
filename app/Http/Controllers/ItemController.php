@@ -2,6 +2,8 @@
 
 namespace App\Http\Controllers;
 
+use App\Exports\CategoriesExport;
+use App\Exports\ItemsExport;
 use App\Http\Requests\ItemRequest;
 use App\Models\Item;
 use App\Models\ItemStatus;
@@ -10,6 +12,7 @@ use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Redirect;
 use Inertia\Inertia;
+use Maatwebsite\Excel\Facades\Excel;
 use Mpdf\Mpdf;
 use niklasravnsborg\LaravelPdf\Facades\Pdf;
 
@@ -121,15 +124,28 @@ class ItemController extends Controller
         return Redirect::route('items.index');
     }
 
+    public function export($method = "xlsx")
+    {
+
+        if ($method === "csv") {
+            return Excel::download(new ItemsExport, 'items.csv');
+        }
+
+        return Excel::download(new ItemsExport, 'items.xlsx');
+    }
+
     public function export_pdf() {
         $items = Item::with('product')->with('status')->get();
         $mpdf = new Mpdf([
             'mode' => 'utf-8',
             'orientation' => 'L',
-            'default_font' => 'khmeros'
+            'default_font' => 'khmeros',
+            'default_font_size' => 14,
         ]);
         $html = view("items", compact('items'));
         $mpdf->writeHTML($html);
         $mpdf->Output('items.pdf', 'D');
+
+        return Redirect::route('items.index');
     }
 }
