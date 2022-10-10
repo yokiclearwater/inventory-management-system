@@ -8,7 +8,6 @@
     <title>Brands</title>
     {{--    @vite('resources/js/app.jsx')--}}
     <style>
-
         * {
             padding: 0;
             margin: 0;
@@ -24,9 +23,9 @@
         }
 
         thead tr {
-            background-color: #3fc700;
-            color: #ffffff;
+            background-color: #ccffb2;
             text-align: left;
+            color: black;
         }
 
         th,
@@ -34,23 +33,19 @@
             padding: 12px 15px;
         }
 
-        tbody tr {
-            border-bottom: 1px solid #dddddd;
+        tbody tr td, th {
+            border-bottom: 1px solid rgb(221, 221, 221);
         }
 
-        tbody tr:nth-of-type(even) {
+        tbody tr:nth-child(even) {
             background-color: #f3f3f3;
-        }
-
-        tbody tr:last-of-type {
-            border-bottom: 2px solid #3fc700;
         }
     </style>
 </head>
 
 <body>
 <table>
-    <thead>
+    <thead style="color: white;">
     <tr>
         <th>ID</th>
         <th>Name</th>
@@ -64,7 +59,7 @@
         <th>Product Location</th>
     </tr>
     </thead>
-    <tbody>
+    <tbody style="color: black;">
     @foreach ($items as $item)
         <tr>
             <th>{{ $item->id }}</th>

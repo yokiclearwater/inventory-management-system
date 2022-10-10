@@ -121,14 +121,6 @@ class ItemController extends Controller
         return Redirect::route('items.index');
     }
 
-    public function show_pdf() {
-//        dd(storage_path('fonts\Chenla-Regular.ttf'));
-
-        $items = Item::with('product')->with('status')->get();
-
-        return view('items', compact('items'));
-    }
-//
     public function export_pdf() {
         $items = Item::with('product')->with('status')->get();
         $mpdf = new Mpdf([
@@ -137,7 +129,7 @@ class ItemController extends Controller
             'default_font' => 'khmeros'
         ]);
         $html = view("items", compact('items'));
-        $html->render();$mpdf->writeHTML($html);
-        $mpdf->Output();
+        $mpdf->writeHTML($html);
+        $mpdf->Output('items.pdf', 'D');
     }
 }

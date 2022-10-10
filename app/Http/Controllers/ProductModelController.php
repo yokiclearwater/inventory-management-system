@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Exports\ProductModelsExport;
+use App\Models\Product;
 use App\Models\ProductModel;
 use App\Http\Requests\ProductModelRequest;
 use Barryvdh\DomPDF\Facade\Pdf;
@@ -10,6 +11,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Redirect;
 use Inertia\Inertia;
 use Maatwebsite\Excel\Facades\Excel;
+use Mpdf\Mpdf;
 
 class ProductModelController extends Controller
 {
@@ -128,19 +130,19 @@ class ProductModelController extends Controller
         return Excel::download(new ProductModelsExport, 'models.xlsx');
     }
 
-    public function show_pdf()
-    {
-        $models = ProductModel::all();
-        return view('models', [
-            'models' => $models,
-        ]);
-    }
-
     public function export_pdf()
     {
         $models = ProductModel::all();
-        view()->share('models', $models);
-        $pdf = Pdf::loadView('models')->setPaper('a4', 'landscape');
-        return $pdf->download('models.pdf');
+        $mpdf = new Mpdf([
+            'mode' => 'utf-8',
+            'orientation' => 'L',
+            'default_font' => 'khmeros',
+            'default_font_size' => 14,
+        ]);
+        $html = view("models", compact('models'));
+        $mpdf->writeHTML($html);
+        $mpdf->Output('models.pdf', 'D');
+
+        return Redirect::route('models.index');
     }
 }

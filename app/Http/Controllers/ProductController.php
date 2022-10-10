@@ -150,8 +150,6 @@ class ProductController extends Controller
     }
 
     public function export($method = "xlsx") {
-
-
         if ($method === "csv") {
             return Excel::download(new ProductsExport, 'products.csv');
         }
@@ -172,6 +170,6 @@ class ProductController extends Controller
         ]);
         $html = view("products", compact('products'));
         $mpdf->writeHTML($html);
-        $mpdf->Output();
+        $mpdf->Output('products.pdf', 'D');
     }
 }
