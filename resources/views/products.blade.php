@@ -17,7 +17,6 @@
 
         table {
             border-collapse: collapse;
-            font-family: sans-serif;
             min-width: 100%;
             box-shadow: 0 0 20px rgba(0, 0, 0, 0.15);
         }
@@ -57,8 +56,6 @@
                 <th>Category</th>
                 <th>Brand</th>
                 <th>Model</th>
-                <th>Created At</th>
-                <th>Updated At</th>
             </tr>
         </thead>
         <tbody>
@@ -70,8 +67,6 @@
                     <td>{{ $product->category->name }}</td>
                     <td>{{ $product->brand->name }}</td>
                     <td>{{ $product->model->name }}</td>
-                    <td>{{ $product->created_at }}</td>
-                    <td>{{ $product->updated_at }}</td>
                 </tr>
             @endforeach
         </tbody>

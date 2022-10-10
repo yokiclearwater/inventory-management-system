@@ -8,6 +8,7 @@ import Button from "@/Components/Button";
 import TextArea from "@/Components/TextArea";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faBackward } from "@fortawesome/free-solid-svg-icons";
+import Swal from "sweetalert2";
 
 const Create = (props) => {
     const form = useForm({
@@ -20,7 +21,6 @@ const Create = (props) => {
     };
 
     const submitSuccess = () => {
-        form.reset();
         Swal.fire('Added Successfully', '', 'success');
     }
 

@@ -95,18 +95,18 @@ Route::name('logs.')->middleware(['auth', 'verified', 'role:user,admin,super_adm
 });
 
 
+Route::name('items.')->middleware(['auth', 'verified', 'role:user,admin,super_admin'])->prefix('items')->group(function () {
+    Route::get('/show-pdf', [ItemController::class, 'show_pdf'])->name('show-pdf');
+    Route::get('/export-pdf', [ItemController::class, 'export_pdf'])->name('export-pdf');
+    Route::get('/export/{method?}', [ItemController::class, 'export'])->name('export');
+});
+Route::resource('items', ItemController::class)->middleware(['auth', 'verified', 'role:admin,super_admin']);
+
 Route::name('products.')->middleware(['auth', 'verified', 'role:user,admin,super_admin'])->prefix('products')->group(function () {
     Route::get('/show-pdf', [ProductController::class, 'show_pdf'])->name('show-pdf');
     Route::get('/export-pdf', [ProductController::class, 'export_pdf'])->name('export-pdf');
     Route::get('/export/{method?}', [ProductController::class, 'export'])->name('export');
 });
 Route::resource('products', ProductController::class)->middleware(['auth', 'verified', 'role:admin,super_admin']);
-
-//Route::name('items.')->middleware(['auth', 'verified', 'role:user,admin,super_admin'])->prefix('items')->group(function () {
-//    Route::get('/show-pdf', [ItemController::class, 'show_pdf'])->name('show-pdf');
-//    Route::get('/export-pdf', [ItemController::class, 'export_pdf'])->name('export-pdf');
-//    Route::get('/export/{method?}', [ItemController::class, 'export'])->name('export');
-//});
-Route::resource('items', ItemController::class)->middleware(['auth', 'verified', 'role:admin,super_admin']);
 
 require __DIR__ . '/auth.php';

@@ -51,7 +51,7 @@ const Index = (props) => {
                         name={"search"}
                         autoComplete={"off"}
                     />
-                    <Button className="bg-indigo-600 text-base shadown hover:bg-indigo-700">
+                    <Button className="bg-indigo-600 text-base shadow hover:bg-indigo-700">
                         Search
                     </Button>
                 </form>
@@ -78,12 +78,12 @@ const Index = (props) => {
                                 tables={products}
                                 className="p-4 self-center"
                             />
-                            <div className="flex flex-col self-end products-end">
+                            <div className="flex flex-col self-end items-end">
                                 <button
                                     onClick={() =>
                                         setExportActive(!exportActive)
                                     }
-                                    className="text-white bg-indigo-700 hover:bg-indigo-800 focus:ring-4 focus:outline-none focus:ring-indigo-300 font-medium rounded-lg px-4 py-2.5 text-center inline-flex products-center"
+                                    className="text-white bg-indigo-700 hover:bg-indigo-800 focus:ring-4 focus:outline-none focus:ring-indigo-300 font-medium rounded-lg px-4 py-2.5 text-center inline-flex items-center"
                                     type="button"
                                 >
                                     Export
@@ -104,15 +104,15 @@ const Index = (props) => {
                                     </svg>
                                 </button>
                                 {exportActive && (
-                                    <div className="z-[100] md:absolute my-4 md:my-14 w-44 bg-white rounded divide-y divide-gray-100 shadow">
+                                    <div
+                                        className="z-[100] absolute my-14 w-44 bg-white rounded divide-y divide-gray-100 shadow">
                                         <ul
                                             className="py-1 text-gray-700"
                                         >
                                             <li>
                                                 <a
                                                     href={route(
-                                                        "products.export",
-                                                        "xlsx"
+                                                        "products.export"
                                                     )}
                                                     className="block py-2 px-4 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white"
                                                 >
@@ -149,7 +149,7 @@ const Index = (props) => {
                 ) : (
                     <>
                         <div className="max-w-full mx-auto flex products-center justify-center p-4">
-                            <div className="p-4 my-8 text-4xl text-red-500 font-semibold ">
+                            <div className="p-4 my-8 text-4xl text-red-500 font-semibold">
                                 No Products Found!!
                             </div>
                         </div>

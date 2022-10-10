@@ -10,6 +10,8 @@ use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Redirect;
 use Inertia\Inertia;
+use Mpdf\Mpdf;
+use niklasravnsborg\LaravelPdf\Facades\Pdf;
 
 class ItemController extends Controller
 {
@@ -25,7 +27,7 @@ class ItemController extends Controller
                 $q->where('name', 'LIKE', "%$search%");
             });
         })->with('product')->with('status')->paginate(10)->withQueryString();
-//        $items = Item::with('product')->with('status')->paginate();
+
 
         return Inertia::render('Item/Index', [
             'items' => $items->toArray(),
@@ -58,8 +60,6 @@ class ItemController extends Controller
     {
         $request->validated();
         Item::create($request->all());
-
-//        return Redirect::route('items.index');
     }
 
     /**
@@ -119,5 +119,25 @@ class ItemController extends Controller
         Item::destroy($id);
 
         return Redirect::route('items.index');
+    }
+
+    public function show_pdf() {
+//        dd(storage_path('fonts\Chenla-Regular.ttf'));
+
+        $items = Item::with('product')->with('status')->get();
+
+        return view('items', compact('items'));
+    }
+//
+    public function export_pdf() {
+        $items = Item::with('product')->with('status')->get();
+        $mpdf = new Mpdf([
+            'mode' => 'utf-8',
+            'orientation' => 'L',
+            'default_font' => 'khmeros'
+        ]);
+        $html = view("items", compact('items'));
+        $html->render();$mpdf->writeHTML($html);
+        $mpdf->Output();
     }
 }

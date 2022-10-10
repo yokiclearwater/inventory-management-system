@@ -6,7 +6,7 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Brands</title>
-    {{-- @vite('resources/js/app.jsx') --}}
+     @vite('resources/js/app.jsx')
     <style>
         * {
             box-sizing: border-box;
@@ -17,7 +17,6 @@
 
         table {
             border-collapse: collapse;
-            font-family: sans-serif;
             min-width: 100%;
             box-shadow: 0 0 20px rgba(0, 0, 0, 0.15);
         }
@@ -54,18 +53,14 @@
                 <th>ID</th>
                 <th>Name</th>
                 <th>Description</th>
-                <th>Created At</th>
-                <th>Updated At</th>
             </tr>
         </thead>
         <tbody>
             @foreach ($models as $model)
                 <tr>
-                    <th>{{ $model->id }}</th>
+                    <th style="max-width: fit-content">{{ $model->id }}</th>
                     <td>{{ $model->name }}</td>
                     <td>{{ $model->description }}</td>
-                    <td>{{ $model->created_at }}</td>
-                    <td>{{ $model->updated_at }}</td>
                 </tr>
             @endforeach
         </tbody>

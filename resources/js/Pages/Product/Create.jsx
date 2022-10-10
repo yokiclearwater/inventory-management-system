@@ -30,7 +30,6 @@ const Create = (props) => {
     };
 
     const submitSuccess = () => {
-        form.reset();
         Swal.fire('Added Successfully', '', 'success');
     }
 

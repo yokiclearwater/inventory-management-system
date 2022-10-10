@@ -12,6 +12,10 @@
     box-sizing: border-box;
 }
 
+body {
+background: rgb(229 231 235);
+}
+
 pre {
     white-space: pre-wrap;
     /* Since CSS 2.1 */

@@ -54,8 +54,6 @@
                 <th>ID</th>
                 <th>Name</th>
                 <th>Description</th>
-                <th>Created At</th>
-                <th>Updated At</th>
             </tr>
         </thead>
         <tbody>
@@ -64,8 +62,6 @@
                     <th>{{ $brand->id }}</th>
                     <td>{{ $brand->name }}</td>
                     <td>{{ $brand->description }}</td>
-                    <td>{{ $brand->created_at }}</td>
-                    <td>{{ $brand->updated_at }}</td>
                 </tr>
             @endforeach
         </tbody>

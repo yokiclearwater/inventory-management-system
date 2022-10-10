@@ -13,13 +13,15 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Redirect;
 use Inertia\Inertia;
 use Maatwebsite\Excel\Facades\Excel;
+use Mpdf\Mpdf;
+use Mpdf\MpdfException;
 
 class ProductController extends Controller
 {
     /**
      * Display a listing of the resource.
      *
-     * @return \Illuminate\Http\Response
+     * @return \Inertia\Response
      */
     public function index(Request $request)
     {
@@ -35,7 +37,7 @@ class ProductController extends Controller
     /**
      * Show the form for creating a new resource.
      *
-     * @return \Illuminate\Http\Response
+     * @return \Inertia\Response
      */
     public function create()
     {
@@ -95,7 +97,7 @@ class ProductController extends Controller
      * Show the form for editing the specified resource.
      *
      * @param  int  $id
-     * @return \Illuminate\Http\Response
+     * @return \Inertia\Response
      */
     public function edit($id)
     {
@@ -117,7 +119,7 @@ class ProductController extends Controller
      *
      * @param  \Illuminate\Http\Request  $request
      * @param  int  $id
-     * @return \Illuminate\Http\Response
+     * @return \Illuminate\Http\RedirectResponse
      */
     public function update(ProductRequest $request, $id)
     {
@@ -137,7 +139,7 @@ class ProductController extends Controller
      * Remove the specified resource from storage.
      *
      * @param  int  $id
-     * @return \Illuminate\Http\Response
+     * @return \Illuminate\Http\RedirectResponse
      */
     public function destroy($id)
     {
@@ -152,25 +154,24 @@ class ProductController extends Controller
 
         if ($method === "csv") {
             return Excel::download(new ProductsExport, 'products.csv');
-        } else {
-            return Excel::download(new ProductsExport, 'products.xlsx');
         }
 
         return Excel::download(new ProductsExport, 'products.xlsx');
     }
 
-    public function show_pdf()
-    {
-        $products = Product::all();
-        return view('products', [
-            'products' => $products,
-        ]);
-    }
 
+    /**
+     * @throws MpdfException
+     */
     public function export_pdf() {
         $products = Product::all();
-        view()->share('products', $products);
-        $pdf = Pdf::loadView('products')->setPaper('a4', 'landscape');
-        return $pdf->download('products.pdf');
+        $mpdf = new Mpdf([
+            'mode' => 'utf-8',
+            'orientation' => 'L',
+            'default_font' => 'khmeros'
+        ]);
+        $html = view("products", compact('products'));
+        $mpdf->writeHTML($html);
+        $mpdf->Output();
     }
 }

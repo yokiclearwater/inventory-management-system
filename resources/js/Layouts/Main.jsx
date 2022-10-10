@@ -70,7 +70,7 @@ const Main = ({ auth, children, title="Dashboard" }) => {
     ];
 
     return (
-        <div className="bg-gray-200 min-h-screen h-full">
+        <div className="bg-gray-200 min-h-[120vh] h-full">
             <div className="min-h-[400px] bg-[url('https://images.hdqwalls.com/wallpapers/mountain-landscape-illustration-ls.jpg')] bg-indigo-400 z-1 bg-blend-overlay absolute w-full"></div>
             <SideNav navActive={showNavigation} listItems={listItems} />
             <main className="block xl:ml-[17rem] m-l-0 relative transition-all min-h-screen min-w-screen h-full">

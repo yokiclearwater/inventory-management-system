@@ -159,7 +159,7 @@ const Index = (props) => {
                                 </button>
                                 {exportActive && (
                                     <div
-                                        className="z-[100] md:absolute my-4 md:my-14 w-44 bg-white rounded divide-y divide-gray-100 shadow">
+                                        className="z-[100] absolute my-14 w-44 bg-white rounded divide-y divide-gray-100 shadow">
                                         <ul
                                             className="py-1 text-gray-700"
                                         >

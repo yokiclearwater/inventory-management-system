@@ -54,8 +54,6 @@
                 <th>ID</th>
                 <th>Name</th>
                 <th>Description</th>
-                <th>Created At</th>
-                <th>Updated At</th>
             </tr>
         </thead>
         <tbody>
@@ -64,8 +62,6 @@
                     <th>{{ $category->id }}</th>
                     <td>{{ $category->name }}</td>
                     <td>{{ $category->description }}</td>
-                    <td>{{ $category->created_at }}</td>
-                    <td>{{ $category->updated_at }}</td>
                 </tr>
             @endforeach
         </tbody>
