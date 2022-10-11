@@ -69,7 +69,7 @@ class ProductController extends Controller
         $product->model_id = $request->model_id;
         $product->save();
 
-        return Redirect::route('products.index');
+//        return Redirect::route('products.index');
     }
 
     /**

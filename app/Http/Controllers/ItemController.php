@@ -14,7 +14,6 @@ use Illuminate\Support\Facades\Redirect;
 use Inertia\Inertia;
 use Maatwebsite\Excel\Facades\Excel;
 use Mpdf\Mpdf;
-use niklasravnsborg\LaravelPdf\Facades\Pdf;
 
 class ItemController extends Controller
 {
@@ -25,6 +24,7 @@ class ItemController extends Controller
      */
     public function index(Request $request)
     {
+
         $items = Item::when($request->search, function ($query, $search) {
             $query->where('serial_no', 'LIKE', "%$search%")->orWhereHas('product', function ($q) use ($search) {
                 $q->where('name', 'LIKE', "%$search%");

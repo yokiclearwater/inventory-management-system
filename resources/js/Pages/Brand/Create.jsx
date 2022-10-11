@@ -39,7 +39,7 @@ const Create = (props) => {
             <div className="max-w-full m-auto">
                 <div className="py-4 text-2xl font-semibold flex w-full justify-between flex-wrap gap-4">
                     <a
-                        href={route('categories.index')}
+                        href={route('brands.index')}
                         className="bg-indigo-600 text-xl hover:bg-indigo-700 text-white px-4 py-2 rounded-md shadow cursor-pointer"
                     >
                         <FontAwesomeIcon icon={faBackward} /> Back

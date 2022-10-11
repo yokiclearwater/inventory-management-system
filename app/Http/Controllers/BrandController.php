@@ -54,7 +54,7 @@ class BrandController extends Controller
         $brand->description = $request->description;
         $brand->save();
 
-        return Redirect::route('brands.index');
+//        return Redirect::route('brands.index');
     }
 
     /**
