@@ -61,8 +61,9 @@ const Edit = (props) => {
         <Main
             auth={props.auth}
             errors={props.errors}
+            title={"Items"}
         >
-            <Head title="Edit Category" />
+            <Head title="Edit Item" />
 
             <div className="max-w-full m-auto">
                 <div className="py-4 text-2xl font-semibold flex w-full justify-between flex-wrap gap-4">

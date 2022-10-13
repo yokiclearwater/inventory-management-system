@@ -37,7 +37,6 @@ export default function Dashboard(props) {
                         label={"Users"}
                         data={props.users_count}
                         color={"bg-gradient-to-r from-violet-500 to-indigo-700"}
-                        // className={"xl:col-span-2 col-auto"}
                     />
                     <Card
                         icon={faClock}

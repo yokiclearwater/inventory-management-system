@@ -12,11 +12,7 @@ const View = (props) => {
         <Main
             auth={props.auth}
             errors={props.errors}
-            header={
-                <h2 className="font-semibold text-xl text-gray-800 leading-tight">
-                    View Category
-                </h2>
-            }
+            title="Items"
         >
             <Head title="View Category" />
 

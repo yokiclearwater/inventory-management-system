@@ -16,7 +16,9 @@ class AuditLogController extends Controller
             $query->where("auditable_type", "LIKE", "$type");
         })->when($request->event, function ($query, $search) {
             $query->where("event", "LIKE", "$search");
-        })->paginate(10)->withQueryString();
+        })->orderBy('created_at', 'desc')->paginate(10)->withQueryString();
+
+//        dd($audits);
 
 
         $auditable_types = Audit::distinct()->get(['auditable_type']);
@@ -30,9 +32,7 @@ class AuditLogController extends Controller
     }
 
     public function show($id) {
-        // dd($id);
         $audit = Audit::with('user')->find($id);
-        // dd($audit->toArray());
 
         return Inertia::render('Log/View')->with('audit', $audit);
     }

@@ -20,7 +20,6 @@ const Log = (props) => {
         form.setData(e.target.name, e.target.value);
     };
 
-    console.log(props.audits);
 
     return (
         <>

@@ -16,7 +16,6 @@ import SideNav from "@/Components/SideNav";
 
 const Main = ({ auth, children, title="Dashboard" }) => {
     const [showNavigation, setShowNavigation] = React.useState(false);
-
     const listItems = [
         {
             icon: faComputer,

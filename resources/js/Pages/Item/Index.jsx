@@ -16,7 +16,6 @@ const Index = (props) => {
         "delete": "items.delete",
     }
 
-    console.log(items);
 
     const handleDelete = (id) => {
         Swal.fire({

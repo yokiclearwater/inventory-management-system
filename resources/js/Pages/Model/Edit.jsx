@@ -51,8 +51,9 @@ const Edit = (props) => {
         <Main
             auth={props.auth}
             errors={props.errors}
+            title="Model"
         >
-            <Head title="Edit Category" />
+            <Head title="Edit Model" />
 
             <div className="max-w-full m-auto">
                 <div className="py-4 text-2xl font-semibold flex w-full justify-between flex-wrap gap-4">
@@ -72,7 +73,7 @@ const Edit = (props) => {
                             <Label
                                 className={"text-xl py-2"}
                                 forInput="name"
-                                value="Category Name"
+                                value="Model Name"
                             />
 
                             <Input
@@ -95,7 +96,7 @@ const Edit = (props) => {
                             <Label
                                 className={"text-xl py-2"}
                                 forInput="description"
-                                value="Category Description"
+                                value="Model Description"
                             />
                             <TextArea
                                 className="w-full text-lg"

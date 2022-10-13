@@ -51,6 +51,7 @@ const Edit = (props) => {
         <Main
             auth={props.auth}
             errors={props.errors}
+            title={"Categories"}
         >
             <Head title="Edit Category" />
 

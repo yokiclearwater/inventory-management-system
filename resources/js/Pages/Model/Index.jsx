@@ -15,7 +15,7 @@ const Index = (props) => {
         "show": "models.show",
         "edit": "models.edit",
         "delete": "models.delete",
-    }
+    }   
 
     const handleDelete = (id) => {
         Swal.fire({

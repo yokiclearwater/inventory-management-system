@@ -42,7 +42,7 @@ const Create = (props) => {
     };
 
     return (
-        <Main auth={props.auth}>
+        <Main auth={props.auth} title="Products">
             <Head title="Add Product" />
 
             <div className="max-w-full m-auto">

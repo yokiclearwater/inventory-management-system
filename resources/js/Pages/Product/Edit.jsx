@@ -55,8 +55,8 @@ const Edit = (props) => {
     };
 
     return (
-        <Main auth={props.auth} errors={props.errors}>
-            <Head title="Edit Item" />
+        <Main auth={props.auth} errors={props.errors} title="Items">
+            <Head title="Edit Product" />
 
             <div className="max-w-full m-auto">
                 <div className="py-4 text-2xl font-semibold flex w-full justify-between flex-wrap gap-4">
@@ -76,7 +76,7 @@ const Edit = (props) => {
                             <Label
                                 className={"text-xl py-2"}
                                 forInput="name"
-                                value="Item Name"
+                                value="Product Name"
                             />
 
                             <Input
@@ -99,7 +99,7 @@ const Edit = (props) => {
                             <Label
                                 className={"text-xl py-2"}
                                 forInput="description"
-                                value="Item Description"
+                                value="Product Description"
                             />
                             <TextArea
                                 className="w-full text-lg"
@@ -119,7 +119,7 @@ const Edit = (props) => {
                             <Label
                                 className={"text-xl py-2"}
                                 forInput="category_id"
-                                value="Item Category"
+                                value="Product Category"
                             />
                             <Select
                                 className="text-xl w-full"
@@ -150,7 +150,7 @@ const Edit = (props) => {
                             <Label
                                 className={"text-xl py-2"}
                                 forInput="brand_id"
-                                value="Item Brand"
+                                value="Product Brand"
                             />
                             <Select
                                 className="text-xl w-full"
@@ -181,7 +181,7 @@ const Edit = (props) => {
                             <Label
                                 className={"text-xl py-2"}
                                 forInput="model_id"
-                                value="Item Model"
+                                value="Product Model"
                             />
                             <Select
                                 className="text-xl w-full"

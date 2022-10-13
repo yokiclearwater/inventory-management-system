@@ -22,10 +22,8 @@ class RoleMiddleware
         if (Auth::check()) {
             $id = Auth::user()->id;
             $auth = User::find($id);
-            foreach($roles as $role) {
-                if($auth->role()->first()->name === $role) {
-                    return $next($request);
-                }
+            if (in_array($auth->role()->first()->name, $roles, true)) {
+                return $next($request);
             }
             return Redirect::route('welcome');
         } else {
