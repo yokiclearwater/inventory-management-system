@@ -15,6 +15,12 @@ use Mpdf\Mpdf;
 
 class CategoryController extends Controller
 {
+    public function __construct()
+    {
+        $this->middleware('role:user,admin,super_admin')->only(['index', 'show']);
+        $this->middleware('role:super_admin,admin')->except(['show_pdf', 'export_pdf', 'export']);
+    }
+
     /**
      * Display a listing of the resource.
      *

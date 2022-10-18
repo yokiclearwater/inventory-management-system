@@ -20,14 +20,19 @@ class RoleMiddleware
      */
     public function handle(Request $request, Closure $next, ...$roles)
     {
+//        dd($roles);
         if (Auth::check()) {
             $id = Auth::user()->id;
             $auth = User::find($id);
-            if (in_array($auth->role()->first()->name, $roles, true)) {
-                return $next($request);
+
+            foreach ($roles as $role) {
+                if($auth->role()->first()->name === $role) {
+                    return $next($request);
+                }
             }
 
             abort(403, 'Access Denied');
+//            return Redirect::route('welcome');
         }
 
         return Redirect::route('login');

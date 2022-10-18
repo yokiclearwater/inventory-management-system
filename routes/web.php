@@ -65,10 +65,7 @@ Route::get('/access-denied', function () {
 
 
 
-require __DIR__ . '/web/items.php';
-
-
-Route::middleware(['auth', 'verified', 'role:user,admin,super_admin'])->group(function () {
+Route::middleware(['auth', 'verified'])->group(function () {
     require __DIR__ . '/web/categories.php';
     require __DIR__ . '/web/brands.php';
     require __DIR__ . '/web/models.php';
@@ -76,6 +73,8 @@ Route::middleware(['auth', 'verified', 'role:user,admin,super_admin'])->group(fu
     require __DIR__ . '/web/products.php';
     require __DIR__ . '/web/items.php';
 });
+
+//require __DIR__ . '/web/items.php';
 
 Route::get('/roles',[RoleController::class, 'index'])->middleware(['auth', 'verified', 'role:super_admin'])->name('roles.index');
 Route::put('/roles/update/', [RoleController::class, 'update'])->middleware(['auth', 'verified', 'role:super_admin'])->name('roles.update');
