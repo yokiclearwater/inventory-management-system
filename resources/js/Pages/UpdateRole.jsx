@@ -48,7 +48,7 @@ export default function UpdateRole(props) {
         <>
             {openedModal && <Modal className={"rounded-lg shadow"}>
                 <form className="p-4 flex gap-4 flex-col" onSubmit={submitForm}>
-                    <div className="text-indigo-800 text-2xl font-semibold w-full border-b-violet-800 border-b-2 py-2">
+                    <div className="text-blue-800 text-2xl font-semibold w-full border-b-violet-800 border-b-2 py-2">
                         Edit Role
                     </div>
                     <Select
@@ -88,7 +88,7 @@ export default function UpdateRole(props) {
                         </div>
                         <div className="relative overflow-x-auto">
                             <table className="text-left w-full table-auto lg:text-xl text-lg">
-                                <thead className="bg-indigo-500 text-white">
+                                <thead className="bg-blue-500 text-white">
                                 <tr itemScope={"row"}>
                                     <th className="py-3 px-4" scope="col">
                                         User ID

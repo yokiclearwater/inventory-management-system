@@ -52,7 +52,7 @@
         <th>In Stock Date</th>
         <th>Out Of Stock Date</th>
         <th>Location</th>
-        <th>Product Location</th>
+        <th>Inventory Location</th>
     </tr>
     </thead>
     <tbody style="color: black;">

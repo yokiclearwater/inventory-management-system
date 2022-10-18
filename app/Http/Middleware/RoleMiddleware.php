@@ -4,6 +4,7 @@ namespace App\Http\Middleware;
 
 use Closure;
 use Illuminate\Http\Request;
+use Illuminate\Http\Response;
 use Illuminate\Support\Facades\Auth;
 use App\Models\User;
 use Illuminate\Support\Facades\Redirect;
@@ -25,9 +26,8 @@ class RoleMiddleware
             if (in_array($auth->role()->first()->name, $roles, true)) {
                 return $next($request);
             }
-            return Redirect::route('welcome');
-        } else {
-            return Redirect::route('dashboard');
+
+            abort(403, 'Access Denied');
         }
 
         return Redirect::route('login');

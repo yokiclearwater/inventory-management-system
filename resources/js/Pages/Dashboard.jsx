@@ -23,7 +23,7 @@ export default function Dashboard(props) {
                 <div className="bg-white rounded p-4 shadow">
                     <div className="md:text-4xl text-2xl">
                         Welcome Back,{" "}
-                        <span className="text-indigo-700 font-bold">
+                        <span className="text-blue-700 font-bold">
                             {props.user.name}
                         </span>
                     </div>
@@ -36,7 +36,7 @@ export default function Dashboard(props) {
                         icon={faPeopleGroup}
                         label={"Users"}
                         data={props.users_count}
-                        color={"bg-gradient-to-r from-violet-500 to-indigo-700"}
+                        color={"bg-gradient-to-r from-violet-500 to-blue-700"}
                     />
                     <Card
                         icon={faClock}

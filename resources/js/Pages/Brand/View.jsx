@@ -21,23 +21,23 @@ const View = (props) => {
                     <div className="py-4 text-2xl font-semibold flex w-full justify-between flex-wrap gap-4">
                         <a
                             href={route("brands.index")}
-                            className="bg-indigo-600 text-xl hover:bg-indigo-700 text-white px-4 py-2 rounded-md shadow cursor-pointer"
+                            className="bg-blue-600 text-xl hover:bg-blue-700 text-white px-4 py-2 rounded-md shadow cursor-pointer"
                         >
                             <FontAwesomeIcon icon={faBackward} /> Back
                         </a>
                     </div>
                     <div className="bg-white shadow-sm sm:rounded-lg p-4">
                         <div className="flex flex-col gap-4 p-4">
-                            <div className={"flex flex-row flex-wrap justify-between text-indigo-800 font-semibold text-3xl md:text-4xl border-b-2 py-4 border-gray-400"}>
+                            <div className={"flex flex-row flex-wrap justify-between text-blue-800 font-semibold text-3xl md:text-4xl border-b-2 py-4 border-gray-400"}>
                                 <div>Brand Detail</div>
                             </div>
-                            <div className="md:text-2xl text-xl border-b-2 border-r-2 border-indigo-600 py-4 text-indigo-600">
+                            <div className="md:text-2xl text-xl border-b-2 border-r-2 border-blue-600 py-4 text-blue-600">
                                 ID: {brand.id}
                             </div>
-                            <div className="md:text-2xl text-xl border-b-2 border-r-2 border-indigo-600 py-4 text-indigo-600">
+                            <div className="md:text-2xl text-xl border-b-2 border-r-2 border-blue-600 py-4 text-blue-600">
                                 Name: {brand.name}
                             </div>
-                            <div className="md:text-2xl text-xl border-b-2 border-r-2 border-indigo-600 py-4 text-indigo-600">
+                            <div className="md:text-2xl text-xl border-b-2 border-r-2 border-blue-600 py-4 text-blue-600">
                                 Description:
                                 <p className="py-4 px-2">
                                     {brand.description}

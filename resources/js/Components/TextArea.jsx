@@ -14,7 +14,7 @@ function TextArea({
             <textarea
                 disabled={processing}
                 required={required}
-                className={`border-gray-300 border-2 focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50 rounded-md shadow-sm ${className}`}
+                className={`border-gray-300 border-2 focus:border-blue-300 focus:ring focus:ring-blue-200 focus:ring-opacity-50 rounded-md shadow-sm ${className}`}
                 placeholder={placeholder}
                 value={value}
                 name={name}

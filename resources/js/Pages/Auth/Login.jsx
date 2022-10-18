@@ -100,7 +100,7 @@ export default function Login({ status, canResetPassword }) {
 
                     <div className="my-4 text-center">
                         <Button
-                            className="flex items-center justify-center w-full text-center bg-indigo-700 hover:bg-indigo-800 md:!text-lg text-sm"
+                            className="flex items-center justify-center w-full text-center bg-blue-700 hover:bg-blue-800 md:!text-lg text-sm"
                             processing={processing}
                         >
                             Log in
@@ -110,14 +110,14 @@ export default function Login({ status, canResetPassword }) {
                         {canResetPassword && (
                             <Link
                                 href={route("password.request")}
-                                className="italic hover:underline md:!text-lg text-sm text-indigo-600 hover:text-indigo-900"
+                                className="italic hover:underline md:!text-lg text-sm text-blue-600 hover:text-blue-900"
                             >
                                 Forgot your password?
                             </Link>
                         )}
                         <Link
                             href={route("register")}
-                            className="italic hover:underline md:!text-lg text-sm text-indigo-600 hover:text-indigo-900"
+                            className="italic hover:underline md:!text-lg text-sm text-blue-600 hover:text-blue-900"
                         >
                             Don't have an account yet?
                         </Link>

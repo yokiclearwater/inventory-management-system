@@ -12,7 +12,7 @@ export default function SideNav({ navActive, listItems }) {
             <div className="bg-white p-2 w-[90%] h-[97vh] rounded-xl shadow overflow-y-auto">
                 <div className="w-full p-4 flex flex-row gap-2">
                     <FontAwesomeIcon className="text-2xl" icon={faDashboard} />
-                    <span>Inventory</span>
+                    <span>IMS</span>
                 </div>
                 <hr className="my-2" />
                 <ul className="">

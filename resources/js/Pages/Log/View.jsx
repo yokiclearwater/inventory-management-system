@@ -24,19 +24,19 @@ const View = (props) => {
                     <div className="py-4 text-2xl font-semibold flex w-full justify-between flex-wrap gap-4">
                         <a
                             href={route("logs.index")}
-                            className="bg-indigo-600 text-xl hover:bg-indigo-700 text-white px-4 py-2 rounded-md shadow cursor-pointer"
+                            className="bg-blue-800 text-xl hover:bg-blue-700 text-white px-4 py-2 rounded-md shadow cursor-pointer"
                         >
                             <FontAwesomeIcon icon={faBackward} /> Back
                         </a>
                     </div>
                     <div className="bg-white shadow-sm sm:rounded-lg p-4">
                         <div className="flex flex-col gap-4 p-4">
-                            <div className="flex flex-row flex-wrap justify-between text-indigo-800 font-semibold text-3xl md:text-4xl border-b-2 py-4 border-gray-400">
+                            <div className="flex flex-row flex-wrap justify-between text-blue-800 font-semibold text-3xl md:text-4xl border-b-2 py-4 border-gray-400">
                                 <div>Log Detail</div>
-                                <span className="bg-indigo-500 text-white p-2 font-semibold capitalize rounded shadow text-2xl">{audit.event} Event</span>
+                                <span className="bg-blue-500 text-white p-2 font-semibold capitalize rounded shadow text-2xl">{audit.event} Event</span>
                             </div>
                             <div className="flex flex-col gap-2 flex-wrap">
-                                <h2 className="md:text-2xl text-xl border-b-2 border-r-2 border-indigo-600 py-4 text-indigo-600">
+                                <h2 className="md:text-2xl text-xl border-b-2 border-r-2 border-blue-600 py-4 text-blue-600">
                                     ID :{" "}
                                     {
                                         <span className="font-normal">
@@ -46,7 +46,7 @@ const View = (props) => {
                                 </h2>
                             </div>
                             <div className="flex flex-col gap-2 flex-wrap">
-                                <h2 className="md:text-2xl text-xl border-b-2 border-r-2 border-indigo-600 py-4 text-indigo-600">
+                                <h2 className="md:text-2xl text-xl border-b-2 border-r-2 border-blue-600 py-4 text-blue-600">
                                     Username :{" "}
                                     {
                                         <span className="font-normal">
@@ -56,7 +56,7 @@ const View = (props) => {
                                 </h2>
                             </div>
                             <div className="flex flex-col gap-2 flex-wrap">
-                                <h2 className="md:text-2xl text-xl border-b-2 border-r-2 border-indigo-600 py-4 text-indigo-600">
+                                <h2 className="md:text-2xl text-xl border-b-2 border-r-2 border-blue-600 py-4 text-blue-600">
                                     Model ID :{" "}
                                     {
                                         <span className="font-normal">
@@ -66,7 +66,7 @@ const View = (props) => {
                                 </h2>
                             </div>
                             <div className="flex flex-col gap-2 flex-wrap">
-                                <h2 className="md:text-2xl text-xl border-b-2 border-r-2 border-indigo-600 py-4 text-indigo-600">
+                                <h2 className="md:text-2xl text-xl border-b-2 border-r-2 border-blue-600 py-4 text-blue-600">
                                     Model Type :{" "}
                                     {
                                         <span className="font-normal">
@@ -76,28 +76,28 @@ const View = (props) => {
                                 </h2>
                             </div>
                             <div className="flex flex-col gap-2 flex-wrap">
-                                <h2 className="md:text-2xl text-xl border-b-2 border-r-2 border-indigo-600 py-4 text-indigo-600">
+                                <h2 className="md:text-2xl text-xl border-b-2 border-r-2 border-blue-600 py-4 text-blue-600">
                                     View URL :{" "}
                                     {
-                                        <a href={audit.url} className="font-normal text-indigo-500 hover:underline hover:text-indigo-700 cursor-pointer md:text-2xl text-3xl">
+                                        <a href={audit.url} className="font-normal text-blue-500 hover:underline hover:text-blue-700 cursor-pointer md:text-2xl text-3xl">
                                             {audit.url}
                                         </a>
                                     }
                                 </h2>
                             </div>
                             <div className="flex flex-col gap-2 flex-wrap">
-                                <h2 className="md:text-2xl text-xl border-b-2 border-r-2 border-indigo-600 py-4 text-indigo-600">
+                                <h2 className="md:text-2xl text-xl border-b-2 border-r-2 border-blue-600 py-4 text-blue-600">
                                     Old Values :
                                 </h2>
-                                <pre className="bg-indigo-800 text-white shadow rounded p-4 text-xl md:text-2xl">
+                                <pre className="bg-blue-800 text-white shadow rounded p-4 text-xl md:text-2xl">
                                     {JSON.stringify(audit.old_values, null, 2)}
                                 </pre>
                             </div>
                             <div className="flex flex-col gap-2 flex-wrap">
-                                <h2 className="md:text-2xl text-xl border-b-2 border-r-2 border-indigo-600 py-4 text-indigo-600">
+                                <h2 className="md:text-2xl text-xl border-b-2 border-r-2 border-blue-600 py-4 text-blue-600">
                                     New Values :
                                 </h2>
-                                <pre className="bg-indigo-800 text-white shadow rounded p-4 text-xl md:text-2xl">
+                                <pre className="bg-blue-800 text-white shadow rounded p-4 text-xl md:text-2xl">
                                     {JSON.stringify(audit.new_values, null, 2)}
                                 </pre>
                             </div>

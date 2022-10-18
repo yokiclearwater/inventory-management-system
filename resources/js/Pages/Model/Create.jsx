@@ -40,7 +40,7 @@ const Create = (props) => {
                 <div className="py-4 text-2xl font-semibold flex w-full justify-between flex-wrap gap-4">
                     <a
                         href={route('models.index')}
-                        className="bg-indigo-600 text-xl hover:bg-indigo-700 text-white px-4 py-2 rounded-md shadow cursor-pointer"
+                        className="bg-blue-600 text-xl hover:bg-blue-700 text-white px-4 py-2 rounded-md shadow cursor-pointer"
                     >
                         <FontAwesomeIcon icon={faBackward} /> Back
                     </a>

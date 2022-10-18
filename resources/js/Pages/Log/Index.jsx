@@ -26,7 +26,7 @@ const Log = (props) => {
             {modalOpened && (
                 <Modal className={"rounded-lg"}>
                     <form className="p-4 flex gap-4 flex-col">
-                        <div className="text-indigo-800 text-2xl font-semibold w-full border-b-violet-800 border-b-2 py-2">
+                        <div className="text-blue-800 text-2xl font-semibold w-full border-b-violet-800 border-b-2 py-2">
                             Filter
                         </div>
                         <Select
@@ -77,7 +77,7 @@ const Log = (props) => {
                     <Button
                         type="button"
                         handleClick={() => setModalOpened(!modalOpened)}
-                        className="bg-indigo-600 text-base shadown hover:bg-indigo-700"
+                        className="bg-blue-600 text-base shadown hover:bg-blue-700"
                     >
                         Filter
                     </Button>
@@ -89,7 +89,7 @@ const Log = (props) => {
                     <div className="max-w-full mx-auto">
                         <div className="relative overflow-x-auto">
                             <table className="text-center w-full table-auto lg:text-xl text-lg">
-                                <thead className="bg-indigo-500 text-white">
+                                <thead className="bg-blue-600 text-white">
                                     <tr>
                                         <th className="py-2 px-4">#</th>
                                         <th className="py-2 px-4">User ID</th>
@@ -103,7 +103,7 @@ const Log = (props) => {
                                 </thead>
                                 <tbody>
                                     {props.audits.data.map((audit, index) => (
-                                        <tr key={audit.id} className={`${(index % 2 ? "bg-indigo-100" : "bg-indigo-200")} hover:bg-indigo-300`}>
+                                        <tr key={audit.id} className={`${(index % 2 ? "bg-blue-100" : "bg-blue-200")} hover:bg-blue-300`}>
                                             <td className="py-3 px-4">
                                                 {audit.id}
                                             </td>
@@ -124,7 +124,7 @@ const Log = (props) => {
                                                     href={route("logs.show", {
                                                         id: audit.id,
                                                     })}
-                                                    className="hover:underline text-blue-500 font-semibold"
+                                                    className="hover:underline text-blue-700 font-semibold"
                                                 >
                                                     View Detail
                                                 </a>

@@ -14,7 +14,7 @@ function Select({
             <select
                 disabled={processing}
                 required={required}
-                className={`border-gray-300 focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50 rounded-md shadow-sm ${className}`}
+                className={`border-gray-300 focus:border-blue-300 focus:ring focus:ring-blue-200 focus:ring-opacity-50 rounded-md shadow-sm ${className}`}
                 value={value}
                 name={name}
                 onChange={(e) => handleChange(e)}

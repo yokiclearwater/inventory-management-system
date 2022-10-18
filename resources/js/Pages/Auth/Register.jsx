@@ -120,7 +120,7 @@ export default function Register() {
 
                     <div className="my-4 text-center">
                         <Button
-                            className="flex items-center justify-center w-full text-center bg-indigo-700 hover:bg-indigo-800 md:!text-lg text-sm"
+                            className="flex items-center justify-center w-full text-center bg-blue-700 hover:bg-blue-800 md:!text-lg text-sm"
                             processing={processing}
                         >
                             Register
@@ -128,7 +128,7 @@ export default function Register() {
                     </div>
                     <Link
                         href={route("login")}
-                        className="italic hover:underline md:!text-lg text-sm text-indigo-600 hover:text-indigo-900"
+                        className="italic hover:underline md:!text-lg text-sm text-blue-600 hover:text-blue-900"
                     >
                         Already registered?
                     </Link>

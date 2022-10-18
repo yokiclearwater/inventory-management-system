@@ -51,7 +51,7 @@ const Index = (props) => {
                         name={"search"}
                         autoComplete={"off"}
                     />
-                    <Button className="bg-indigo-600 text-base shadow hover:bg-indigo-700">
+                    <Button className="bg-blue-600 text-base shadow hover:bg-blue-700">
                         Search
                     </Button>
                 </form>
@@ -61,7 +61,7 @@ const Index = (props) => {
                     <span>Products</span>
                     <a
                         href={route("products.create")}
-                        className="bg-indigo-600 text-xl hover:bg-indigo-700 text-white p-2 rounded-md shadow cursor-pointer"
+                        className="bg-blue-600 text-xl hover:bg-blue-700 text-white p-2 rounded-md shadow cursor-pointer"
                     >
                         Add New Products
                     </a>
@@ -83,7 +83,7 @@ const Index = (props) => {
                                     onClick={() =>
                                         setExportActive(!exportActive)
                                     }
-                                    className="text-white bg-indigo-700 hover:bg-indigo-800 focus:ring-4 focus:outline-none focus:ring-indigo-300 font-medium rounded-lg px-4 py-2.5 text-center inline-flex items-center"
+                                    className="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg px-4 py-2.5 text-center inline-flex items-center"
                                     type="button"
                                 >
                                     Export

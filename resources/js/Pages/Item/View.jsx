@@ -21,26 +21,27 @@ const View = (props) => {
                     <div className="py-4 text-2xl font-semibold flex w-full justify-between flex-wrap gap-4">
                         <a
                             href={route("items.index")}
-                            className="bg-indigo-600 text-xl hover:bg-indigo-700 text-white px-4 py-2 rounded-md shadow cursor-pointer"
+                            className="bg-blue-600 text-xl hover:bg-blue-700 text-white px-4 py-2 rounded-md shadow cursor-pointer"
                         >
                             <FontAwesomeIcon icon={faBackward} /> Back
                         </a>
                     </div>
                     <div className="bg-white shadow-sm sm:rounded-lg p-4">
                         <div className="flex flex-col gap-4 p-4">
-                            <div className={"flex flex-row flex-wrap justify-between text-indigo-800 font-semibold text-3xl md:text-4xl border-b-2 py-4 border-gray-400"}>
+                            <div className={"flex flex-row flex-wrap justify-between text-blue-800 font-semibold text-3xl md:text-4xl border-b-2 py-4 border-gray-400"}>
                                 <div>Item Detail</div>
-                                <div className={`capitalize text-indigo-600 font-semibold`}>{(item.status.type).replace(/_/g, ' ')}</div>
+                                <div className={`capitalize text-blue-600 font-semibold`}>{(item.status.type).replace(/_/g, ' ')}</div>
                             </div>
-                            <div className={"md:text-2xl text-xl border-b-2 border-r-2 border-indigo-600 py-4 text-indigo-600"}>Item ID: {item.id}</div>
-                            <div className={"md:text-2xl text-xl border-b-2 border-r-2 border-indigo-600 py-4 text-indigo-600"}><a className={"hover:text-indigo-700 hover:font-semibold"} href={route('products.show', item.product_id)}>Product Name: {item.product.name}</a></div>
-                            <div className={"md:text-2xl text-xl border-b-2 border-r-2 border-indigo-600 py-4 text-indigo-600"}>Serial Number: {item.serial_no}</div>
-                            <div className={"md:text-2xl text-xl border-b-2 border-r-2 border-indigo-600 py-4 text-indigo-600"}>Received By: {item.received_by}</div>
-                            <div className={"md:text-2xl text-xl border-b-2 border-r-2 border-indigo-600 py-4 text-indigo-600"}>Installation Date: {item.installed_date}</div>
-                            <div className={"md:text-2xl text-xl border-b-2 border-r-2 border-indigo-600 py-4 text-indigo-600"}>Location: {item.location}</div>
-                            <div className={"md:text-2xl text-xl border-b-2 border-r-2 border-indigo-600 py-4 text-indigo-600"}>Product Location: {item.product_location}</div>
-                            <div className={"md:text-2xl text-xl border-b-2 border-r-2 border-indigo-600 py-4 text-indigo-600"}>In Stock: {item.in_stock_date}</div>
-                            <div className={"md:text-2xl text-xl border-b-2 border-r-2 border-indigo-600 py-4 text-indigo-600"}>Out of Stock: {item.out_of_stock_date}</div>
+                            <div className={"md:text-2xl text-xl border-b-2 border-r-2 border-blue-600 py-4 text-blue-600"}>Item ID: {item.id}</div>
+                            <div className={"md:text-2xl text-xl border-b-2 border-r-2 border-blue-600 py-4 text-blue-600"}><a className={"hover:text-blue-700 hover:font-semibold"} href={route('products.show', item.product_id)}>Product Name: {item.product.name}</a></div>
+                            <div className={"md:text-2xl text-xl border-b-2 border-r-2 border-blue-600 py-4 text-blue-600"}>Serial Number: {item.serial_no}</div>
+                            <div className={"md:text-2xl text-xl border-b-2 border-r-2 border-blue-600 py-4 text-blue-600"}>Received By: {item.received_by}</div>
+                            <div className={"md:text-2xl text-xl border-b-2 border-r-2 border-blue-600 py-4 text-blue-600"}>Issued By: {item.issued_by}</div>
+                            <div className={"md:text-2xl text-xl border-b-2 border-r-2 border-blue-600 py-4 text-blue-600"}>Installation Date: {item.installed_date}</div>
+                            <div className={"md:text-2xl text-xl border-b-2 border-r-2 border-blue-600 py-4 text-blue-600"}>Location: {item.location}</div>
+                            <div className={"md:text-2xl text-xl border-b-2 border-r-2 border-blue-600 py-4 text-blue-600"}>Inventory Location: {item.product_location}</div>
+                            <div className={"md:text-2xl text-xl border-b-2 border-r-2 border-blue-600 py-4 text-blue-600"}>In Stock: {item.in_stock_date}</div>
+                            <div className={"md:text-2xl text-xl border-b-2 border-r-2 border-blue-600 py-4 text-blue-600"}>Out of Stock: {item.out_of_stock_date}</div>
                         </div>
                     </div>
                 </div>

@@ -10,6 +10,7 @@ use App\Models\ItemStatus;
 use App\Models\Product;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Redirect;
 use Inertia\Inertia;
 use Maatwebsite\Excel\Facades\Excel;
@@ -17,6 +18,12 @@ use Mpdf\Mpdf;
 
 class ItemController extends Controller
 {
+    public function __construct()
+    {
+        $this->middleware('role:admin,super_admin')->except(['index', 'show']);
+    }
+
+
     /**
      * Display a listing of the resource.
      *
@@ -24,7 +31,6 @@ class ItemController extends Controller
      */
     public function index(Request $request)
     {
-
         $items = Item::when($request->search, function ($query, $search) {
             $query->where('serial_no', 'LIKE', "%$search%")->orWhereHas('product', function ($q) use ($search) {
                 $q->where('name', 'LIKE', "%$search%");

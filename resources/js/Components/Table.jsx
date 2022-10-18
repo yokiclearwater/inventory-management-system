@@ -4,7 +4,7 @@ function Table({ tables, handleDelete, routeList }) {
     return (
         <>
             <table className="text-left w-full table-auto lg:text-xl text-lg">
-                <thead className="bg-indigo-500 text-white">
+                <thead className="bg-blue-600 text-white">
                     <tr itemScope={"row"}>
                         <th className="py-3 px-4" scope="col">
                             ID
@@ -23,7 +23,7 @@ function Table({ tables, handleDelete, routeList }) {
 
                         return (
                             <tr
-                                className={`even:bg-indigo-200 odd:bg-indigo-100 hover:bg-indigo-300`}
+                                className={`even:bg-blue-200 odd:bg-blue-100 hover:bg-blue-300`}
                                 itemScope={"row"}
                                 key={index}
                             >
@@ -46,7 +46,7 @@ function Table({ tables, handleDelete, routeList }) {
                                         View
                                     </a>
                                     <a
-                                        className="hover:underline cursor-pointer text-indigo-600 font-semibold"
+                                        className="hover:underline cursor-pointer text-blue-600 font-semibold"
                                         href={route(routeList.edit, {
                                             id: table.id,
                                         })}

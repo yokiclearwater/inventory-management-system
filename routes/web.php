@@ -40,13 +40,6 @@ Route::get('/', function () {
     ]);
 })->name('welcome');
 
-//Route::get('/main', function () {
-//    return Inertia::render('Test', [
-//        'users' => App\Models\User::all(),
-//        'roles' => App\Models\Role::all(),
-//    ]);
-//})->name('main');
-
 Route::get('/dashboard', function () {
     $id = Auth::user()->id;
     $user = User::find($id);
@@ -66,50 +59,25 @@ Route::get('/dashboard', function () {
     ]);
 })->middleware(['auth', 'verified', 'role:user,admin,super_admin'])->name('dashboard');
 
+Route::get('/access-denied', function () {
+    return Inertia::render('AccessDenied');
+})->name('access.denied');
 
-Route::name('categories.')->middleware(['auth', 'verified', 'role:admin,super_admin'])->prefix('categories')->group(function () {
-    Route::get('/export-pdf', [CategoryController::class, 'export_pdf'])->name('export-pdf');
-    Route::get('/show-pdf', [CategoryController::class, 'show_pdf'])->name('show-pdf');
-    Route::get('/export/{method?}', [CategoryController::class, 'export'])->name('export');
+
+
+require __DIR__ . '/web/items.php';
+
+
+Route::middleware(['auth', 'verified', 'role:user,admin,super_admin'])->group(function () {
+    require __DIR__ . '/web/categories.php';
+    require __DIR__ . '/web/brands.php';
+    require __DIR__ . '/web/models.php';
+    require __DIR__ . '/web/logs.php';
+    require __DIR__ . '/web/products.php';
+    require __DIR__ . '/web/items.php';
 });
 
-Route::resource('categories', CategoryController::class)->middleware(['auth', 'verified', 'role:admin,super_admin']);
-
-Route::name('brands.')->middleware(['auth', 'verified', 'role:admin,super_admin'])->prefix('brands')->group(function () {
-    Route::get('/export-pdf', [BrandController::class, 'export_pdf'])->name('export-pdf');
-    Route::get('/show-pdf', [BrandController::class, 'show_pdf'])->name('show-pdf');
-    Route::get('/export/{method?}', [BrandController::class, 'export'])->name('export');
-});
-Route::resource('brands', BrandController::class)->middleware(['auth', 'verified', 'role:admin,super_admin']);
-
-Route::name('models.')->middleware(['auth', 'verified', 'role:admin,super_admin'])->prefix('models')->group(function () {
-    Route::get('/export-pdf', [ProductModelController::class, 'export_pdf'])->name('export-pdf');
-    Route::get('/show-pdf', [ProductModelController::class, 'show_pdf'])->name('show-pdf');
-    Route::get('/export/{method?}', [ProductModelController::class, 'export'])->name('export');
-});
-Route::resource('models', ProductModelController::class)->middleware(['auth', 'verified', 'role:admin,super_admin']);
-
-Route::name('logs.')->middleware(['auth', 'verified', 'role:admin,super_admin'])->prefix('logs')->group(function () {
-    Route::get('/', [AuditLogController::class, 'index'])->name('index');
-    Route::get('/{audit}', [AuditLogController::class, 'show'])->name('show');
-});
-
-
-Route::name('items.')->middleware(['auth', 'verified', 'role:admin,super_admin'])->prefix('items')->group(function () {
-    Route::get('/show-pdf', [ItemController::class, 'show_pdf'])->name('show-pdf');
-    Route::get('/export-pdf', [ItemController::class, 'export_pdf'])->name('export-pdf');
-    Route::get('/export/{method?}', [ItemController::class, 'export'])->name('export');
-});
-Route::resource('items', ItemController::class)->middleware(['auth', 'verified', 'role:admin,super_admin']);
-
-Route::name('products.')->middleware(['auth', 'verified', 'role:admin,super_admin'])->prefix('products')->group(function () {
-    Route::get('/show-pdf', [ProductController::class, 'show_pdf'])->name('show-pdf');
-    Route::get('/export-pdf', [ProductController::class, 'export_pdf'])->name('export-pdf');
-    Route::get('/export/{method?}', [ProductController::class, 'export'])->name('export');
-});
-Route::resource('products', ProductController::class)->middleware(['auth', 'verified', 'role:admin,super_admin']);
-
-Route::get('/roles',[RoleController::class, 'index'])->middleware(['auth', 'verified', 'role:admin,super_admin'])->name('roles.index');
-Route::put('/roles/update/', [RoleController::class, 'update'])->middleware(['auth', 'verified', 'role:admin,super_admin'])->name('roles.update');
+Route::get('/roles',[RoleController::class, 'index'])->middleware(['auth', 'verified', 'role:super_admin'])->name('roles.index');
+Route::put('/roles/update/', [RoleController::class, 'update'])->middleware(['auth', 'verified', 'role:super_admin'])->name('roles.update');
 
 require __DIR__ . '/auth.php';

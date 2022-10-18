@@ -52,7 +52,7 @@ const Index = (props) => {
                         name={"search"}
                         autoComplete={"off"}
                     />
-                    <Button className="bg-indigo-600 text-base shadown hover:bg-indigo-700">
+                    <Button className="bg-blue-600 text-base shadown hover:bg-blue-700">
                         Search
                     </Button>
                 </form>
@@ -62,7 +62,7 @@ const Index = (props) => {
                     <span>Items</span>
                     <a
                         href={route("items.create")}
-                        className="bg-indigo-600 text-xl hover:bg-indigo-700 text-white p-2 rounded-md shadow cursor-pointer"
+                        className="bg-blue-600 text-xl hover:bg-blue-700 text-white p-2 rounded-md shadow cursor-pointer"
                     >
                         Add New Item
                     </a>
@@ -72,7 +72,7 @@ const Index = (props) => {
                         <div className="max-w-full mx-auto">
                             <div className="relative overflow-x-auto">
                                 <table className={"text-left w-full table-auto lg:text-xl text-lg"}>
-                                    <thead className="bg-indigo-500 text-white">
+                                    <thead className="bg-blue-600 text-white">
                                     <tr itemScope={"row"}>
                                         <th className="py-3 px-4" scope="col">
                                             ID
@@ -94,12 +94,16 @@ const Index = (props) => {
                                     <tbody>
                                     {items.data.map((item, index) => {
                                         return (
-                                            <tr key={index} className={"even:bg-indigo-200 odd:bg-indigo-100 hover:bg-indigo-300"}>
+                                            <tr key={index}
+                                                className={"even:bg-blue-200 odd:bg-blue-100 hover:bg-blue-300"}>
                                                 <th className="py-2 px-4" scope="col">{item.id}</th>
-                                                <td className="py-2 px-4 min-w-[300px]" scope="col">{item.product.name}</td>
+                                                <td className="py-2 px-4 min-w-[300px]"
+                                                    scope="col">{item.product.name}</td>
                                                 <td className="py-2 px-4" scope="col">{item.serial_no}</td>
-                                                <td className="py-2 px-4 capitalize min-w-[120px]" scope="col">{(item.status.type).replace(/_/g, ' ')}</td>
-                                                <td className="py-2 px-4 inline-flex space-x-2 items-center justify-start" scope="col">
+                                                <td className="py-2 px-4 capitalize min-w-[120px]"
+                                                    scope="col">{(item.status.type).replace(/_/g, ' ')}</td>
+                                                <td className="py-2 px-4 inline-flex space-x-2 items-center justify-start"
+                                                    scope="col">
                                                     <a
                                                         className="hover:underline cursor-pointer text-green-700 font-semibold"
                                                         href={route('items.show', item.id)}
@@ -107,7 +111,7 @@ const Index = (props) => {
                                                         View
                                                     </a>
                                                     <a
-                                                        className="hover:underline cursor-pointer text-indigo-600 font-semibold"
+                                                        className="hover:underline cursor-pointer text-blue-600 font-semibold"
                                                         href={route('items.edit', item.id)}
                                                     >
                                                         Edit
@@ -136,7 +140,7 @@ const Index = (props) => {
                                     onClick={() =>
                                         setExportActive(!exportActive)
                                     }
-                                    className="text-white bg-indigo-700 hover:bg-indigo-800 focus:ring-4 focus:outline-none focus:ring-indigo-300 font-medium rounded-lg px-4 py-2.5 text-center inline-flex items-center"
+                                    className="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg px-4 py-2.5 text-center inline-flex items-center"
                                     type="button"
                                 >
                                     Export
