@@ -8,6 +8,7 @@ use App\Models\ProductModel;
 use App\Http\Requests\ProductModelRequest;
 use Barryvdh\DomPDF\Facade\Pdf;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Redirect;
 use Inertia\Inertia;
 use Maatwebsite\Excel\Facades\Excel;
@@ -17,8 +18,10 @@ class ProductModelController extends Controller
 {
     public function __construct()
     {
-        $this->middleware('role:user,admin,super_admin')->only(['index', 'show']);
-        $this->middleware('role:super_admin,admin')->except(['show_pdf', 'export_pdf', 'export']);
+        $this->middleware('permission:create,admin')->only(['create', 'store']);
+        $this->middleware('permission:view,admin')->only(['index', 'show']);
+        $this->middleware('permission:update,admin')->only(['edit', 'update']);
+        $this->middleware('permission:delete,admin')->only(['destroy']);
     }
 
     /**
@@ -28,13 +31,19 @@ class ProductModelController extends Controller
      */
     public function index(Request $request)
     {
-
         $models = ProductModel::when($request->search, function ($query, $search) {
             $query->where('name', 'LIKE', "%$search%");
         })->paginate(10)->withQueryString()->toArray();
+        $user = Auth::user();
 
         return Inertia::render('Model/Index', [
             'models' => $models,
+            'can' => [
+                'create' => $user->can('create', $user),
+                'view' => $user->can('view', $user),
+                'update' => $user->can('update', $user),
+                'delete' => $user->can('delete', $user),
+            ],
         ]);
     }
 

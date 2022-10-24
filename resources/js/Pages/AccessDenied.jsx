@@ -3,7 +3,6 @@ import { Link, Head } from "@inertiajs/inertia-react";
 import Guest from "@/Layouts/Guest";
 
 export default function AccessDenied(props) {
-    console.log(props.isAuth);
 
     return (
         <>

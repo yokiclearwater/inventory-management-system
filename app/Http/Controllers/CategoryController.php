@@ -7,6 +7,7 @@ use App\Http\Requests\CategoryRequest;
 use App\Models\Category;
 use App\Models\Product;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Redirect;
 use Inertia\Inertia;
 use Maatwebsite\Excel\Facades\Excel;
@@ -17,8 +18,10 @@ class CategoryController extends Controller
 {
     public function __construct()
     {
-        $this->middleware('role:user,admin,super_admin')->only(['index', 'show']);
-        $this->middleware('role:super_admin,admin')->except(['show_pdf', 'export_pdf', 'export']);
+        $this->middleware('permission:create,admin')->only(['create', 'store']);
+        $this->middleware('permission:view,admin')->only(['index', 'show']);
+        $this->middleware('permission:update,admin')->only(['edit', 'update']);
+        $this->middleware('permission:delete,admin')->only(['destroy']);
     }
 
     /**
@@ -31,10 +34,16 @@ class CategoryController extends Controller
         $categories = Category::when($request->search, function ($query, $search) {
             $query->where('name', 'LIKE', "%$search%");
        })->paginate(10)->withQueryString();
-
+        $user = Auth::user();
 
         return Inertia::render('Category/Index', [
             'categories' => $categories,
+            'can' => [
+                'create' => $user->can('create', $user),
+                'view' => $user->can('view', $user),
+                'update' => $user->can('update', $user),
+                'delete' => $user->can('delete', $user),
+            ],
         ]);
     }
 

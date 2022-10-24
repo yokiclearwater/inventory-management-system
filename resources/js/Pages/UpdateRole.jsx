@@ -48,7 +48,7 @@ export default function UpdateRole(props) {
         <>
             {openedModal && <Modal className={"rounded-lg shadow"}>
                 <form className="p-4 flex gap-4 flex-col" onSubmit={submitForm}>
-                    <div className="text-blue-800 text-2xl font-semibold w-full border-b-violet-800 border-b-2 py-2">
+                    <div className="text-blue-800 text-2xl font-semibold w-full border-b-blue-800 border-b-2 py-2">
                         Edit Role
                     </div>
                     <Select
@@ -72,7 +72,7 @@ export default function UpdateRole(props) {
                         >
                             Cancel
                         </Button>
-                        <Button className="!text-lg w-fit bg-violet-500 !text-gray-100 hover:bg-violet-700 hover:!text-gray-200 rounded font-semibold shadow">
+                        <Button className="!text-lg w-fit bg-blue-500 !text-gray-100 hover:bg-blue-700 hover:!text-gray-200 rounded font-semibold shadow">
                             Apply
                         </Button>
                     </div>

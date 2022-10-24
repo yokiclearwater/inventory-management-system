@@ -9,16 +9,12 @@ use OwenIt\Auditing\Models\Audit;
 class AuditLogController extends Controller
 {
     public function index(Request $request) {
-        // dd($request->toArray());
-
         $audits = Audit::when($request->type, function ($query, $search) {
             $type = str_replace("\\", "\\\\", $search);
             $query->where("auditable_type", "LIKE", "$type");
         })->when($request->event, function ($query, $search) {
             $query->where("event", "LIKE", "$search");
         })->orderBy('created_at', 'desc')->paginate(10)->withQueryString();
-
-//        dd($audits);
 
 
         $auditable_types = Audit::distinct()->get(['auditable_type']);

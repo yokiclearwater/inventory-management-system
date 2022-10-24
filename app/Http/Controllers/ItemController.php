@@ -5,9 +5,11 @@ namespace App\Http\Controllers;
 use App\Exports\CategoriesExport;
 use App\Exports\ItemsExport;
 use App\Http\Requests\ItemRequest;
+use App\Models\Category;
 use App\Models\Item;
 use App\Models\ItemStatus;
 use App\Models\Product;
+use App\Models\ProductModel;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -20,8 +22,10 @@ class ItemController extends Controller
 {
     public function __construct()
     {
-        $this->middleware('role:user,admin,super_admin')->only(['index', 'show']);
-        $this->middleware('role:super_admin,admin')->except(['show_pdf', 'export_pdf', 'export']);
+        $this->middleware('permission:create,admin')->only(['create', 'store']);
+        $this->middleware('permission:view,admin')->only(['index', 'show']);
+        $this->middleware('permission:update,admin')->only(['edit', 'update']);
+        $this->middleware('permission:delete,admin')->only(['destroy']);
     }
 
     /**
@@ -35,11 +39,33 @@ class ItemController extends Controller
             $query->where('serial_no', 'LIKE', "%$search%")->orWhereHas('product', function ($q) use ($search) {
                 $q->where('name', 'LIKE', "%$search%");
             });
+        })->when($request->category, function ($query, $search) {
+            $query->whereHas('product', function ($q) use ($search) {
+                $q->whereHas('category', function ($qc) use ($search) {
+                    $qc->where('name', 'LIKE', "%$search%");
+                });
+            });
+        })->when($request->model, function ($query, $search) {
+            $query->whereHas('product', function ($q) use ($search) {
+                $q->whereHas('model', function ($qc) use ($search) {
+                    $qc->where('name', 'LIKE', "%$search%");
+                });
+            });
         })->with('product')->with('status')->paginate(10)->withQueryString();
 
 
+        $user = Auth::user();
+
         return Inertia::render('Item/Index', [
             'items' => $items->toArray(),
+            'categories' => Category::all(),
+            'models' => ProductModel::all(),
+            'can' => [
+                'create' => $user->can('create', $user),
+                'view' => $user->can('view', $user),
+                'update' => $user->can('update', $user),
+                'delete' => $user->can('delete', $user),
+            ],
         ]);
     }
 
@@ -140,7 +166,8 @@ class ItemController extends Controller
         return Excel::download(new ItemsExport, 'items.xlsx');
     }
 
-    public function export_pdf() {
+    public function export_pdf()
+    {
         $items = Item::with('product')->with('status')->get();
         $mpdf = new Mpdf([
             'mode' => 'utf-8',

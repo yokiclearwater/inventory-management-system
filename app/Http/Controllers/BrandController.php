@@ -7,6 +7,7 @@ use App\Http\Requests\BrandRequest;
 use App\Models\Brand;
 use Barryvdh\DomPDF\Facade\Pdf;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 use Inertia\Inertia;
 use Illuminate\Support\Facades\Redirect;
 use Maatwebsite\Excel\Facades\Excel;
@@ -16,8 +17,10 @@ class BrandController extends Controller
 {
     public function __construct()
     {
-        $this->middleware('role:user,admin,super_admin')->only(['index', 'show']);
-        $this->middleware('role:super_admin,admin')->except(['show_pdf', 'export_pdf', 'export']);
+        $this->middleware('permission:create,admin')->only(['create', 'store']);
+        $this->middleware('permission:view,admin')->only(['index', 'show']);
+        $this->middleware('permission:update,admin')->only(['edit', 'update']);
+        $this->middleware('permission:delete,admin')->only(['destroy']);
     }
 
     /**
@@ -30,9 +33,17 @@ class BrandController extends Controller
         $brands = Brand::when($request->search, function ($query, $search) {
             $query->where('name', 'LIKE', "%$search%");
        })->paginate(10)->withQueryString()->toArray();
+        $user = Auth::user();
+
 
         return Inertia::render('Brand/Index', [
             'brands' => $brands,
+            'can' => [
+                'create' => $user->can('create', $user),
+                'view' => $user->can('view', $user),
+                'update' => $user->can('update', $user),
+                'delete' => $user->can('delete', $user),
+            ],
         ]);
     }
 

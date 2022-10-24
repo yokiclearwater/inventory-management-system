@@ -8,6 +8,7 @@ import Button from "@/Components/Button";
 import Table from "@/Components/Table";
 import Modal from "@/Components/Modal";
 import Select from "@/Components/Select";
+import Label from "@/Components/Label";
 
 const Log = (props) => {
     const [modalOpened, setModalOpened] = React.useState(false);
@@ -26,37 +27,45 @@ const Log = (props) => {
             {modalOpened && (
                 <Modal className={"rounded-lg"}>
                     <form className="p-4 flex gap-4 flex-col">
-                        <div className="text-blue-800 text-2xl font-semibold w-full border-b-violet-800 border-b-2 py-2">
+                        <div className="text-blue-800 text-2xl font-semibold w-full border-b-blue-800 border-b-2 py-2">
                             Filter
                         </div>
-                        <Select
-                            value={form.data.type}
-                            handleChange={onHandleChange}
-                            name={"type"}
-                            className="capitalize"
-                        >
-                            <option disabled value={""}>
-                                Select a model type
-                            </option>
-                            {props.auditable_types.map((type, index) => (
-                                <option key={index}>
-                                    {type.auditable_type}
+                        <div className={"flex flex-col gap-4"}>
+                            <Label className={"font-semibold !text-xl border-b-2 py-2"}>Model Type</Label>
+                            <Select
+                                value={form.data.type}
+                                handleChange={onHandleChange}
+                                name={"type"}
+                                className="capitalize w-full py-2"
+                            >
+                                <option disabled value={""}>
+                                    Select a model type
                                 </option>
-                            ))}
-                        </Select>
-                        <Select
-                            value={form.data.event}
-                            handleChange={onHandleChange}
-                            name={"event"}
-                            className="capitalize"
-                        >
-                            <option disabled value={""}>
-                                Select a model event
-                            </option>
-                            {props.events.map((data, index) => (
-                                <option key={index}>{data.event}</option>
-                            ))}
-                        </Select>
+                                {props.auditable_types.map((type, index) => (
+                                    <option key={index}>
+                                        {type.auditable_type}
+                                    </option>
+                                ))}
+                            </Select>
+                        </div>
+                        <div className={"flex flex-col gap-4"}>
+                            <Label className={"font-semibold !text-xl border-b-2 py-2"}>Model Event</Label>
+                            <Select
+                                value={form.data.event}
+                                handleChange={onHandleChange}
+                                name={"event"}
+                                className="capitalize w-full py-2"
+                            >
+                                <option disabled value={""}>
+                                    Select a model event
+                                </option>
+                                {props.events.map((data, index) => (
+                                    <option key={index}>{data.event}</option>
+                                ))}
+                            </Select>
+                        </div>
+
+
                         <div className="inline-flex space-x-2 self-end">
                             <Button
                                 handleClick={() => setModalOpened(!modalOpened)}
@@ -64,7 +73,7 @@ const Log = (props) => {
                             >
                                 Cancel
                             </Button>
-                            <Button className="!text-lg w-fit bg-violet-500 !text-gray-100 hover:bg-violet-700 hover:!text-gray-200 rounded font-semibold shadow">
+                            <Button className="!text-lg w-fit bg-blue-500 !text-gray-100 hover:bg-blue-700 hover:!text-gray-200 rounded font-semibold shadow">
                                 Apply
                             </Button>
                         </div>
@@ -77,7 +86,7 @@ const Log = (props) => {
                     <Button
                         type="button"
                         handleClick={() => setModalOpened(!modalOpened)}
-                        className="bg-blue-600 text-base shadown hover:bg-blue-700"
+                        className="bg-blue-600 text-base shadow hover:bg-blue-700"
                     >
                         Filter
                     </Button>

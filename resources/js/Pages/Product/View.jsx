@@ -10,7 +10,6 @@ const View = (props) => {
     const category = props.category;
     const brand = props.brand;
     const model = props.model;
-    console.log(product);
 
     return (
         <Main

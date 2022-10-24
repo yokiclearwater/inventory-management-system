@@ -51,7 +51,7 @@ const Index = (props) => {
                         name={"search"}
                         autoComplete={"off"}
                     />
-                    <Button className="bg-blue-600 text-base shadown hover:bg-blue-700">
+                    <Button className="bg-blue-600 text-base shadow hover:bg-blue-700">
                         Search
                     </Button>
                 </form>
@@ -59,18 +59,18 @@ const Index = (props) => {
             <div className="bg-white rounded-xl shadow">
                 <div className="p-4 text-2xl font-semibold flex w-full justify-between flex-wrap gap-4">
                     <span>Brands</span>
-                    <a
+                    {(props.can.create) && <a
                         href={route("brands.create")}
                         className="bg-blue-600 text-xl hover:bg-blue-700 text-white p-2 rounded-md shadow cursor-pointer"
                     >
                         Add New Brands
-                    </a>
+                    </a>}
                 </div>
                 {brands.data.length > 0 ? (
                     <>
                         <div className="max-w-full mx-auto">
                             <div className="relative overflow-x-auto">
-                                <Table tables={props.brands} handleDelete={handleDelete} routeList={routeList} />
+                                <Table tables={props.brands} handleDelete={handleDelete} routeList={routeList} can={props.can}/>
                             </div>
                         </div>
                         <div className="w-full p-4 flex flex-col">

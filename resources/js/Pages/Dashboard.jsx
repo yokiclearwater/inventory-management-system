@@ -36,7 +36,7 @@ export default function Dashboard(props) {
                         icon={faPeopleGroup}
                         label={"Users"}
                         data={props.users_count}
-                        color={"bg-gradient-to-r from-violet-500 to-blue-700"}
+                        color={"bg-gradient-to-r from-blue-500 to-blue-700"}
                     />
                     <Card
                         icon={faClock}
@@ -60,7 +60,7 @@ export default function Dashboard(props) {
                         icon={faCopyright}
                         label={"Brands"}
                         data={props.brands_count}
-                        color={"bg-gradient-to-r from-blue-500 to-sky-700"}
+                        color={"bg-gradient-to-r from-blue-500 to-blue-700"}
                     />
                     <Card
                         icon={faLayerGroup}

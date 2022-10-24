@@ -44,7 +44,7 @@ const Index = (props) => {
         <Main auth={props.auth} errors={props.errors} title="Products">
             <Head title="Products" />
             <div className="flex justify-end my-4 w-full h-full">
-                <form  className="inline-flex products-center space-x-2 max-w-full">
+                <form className="inline-flex products-center space-x-2 max-w-full">
                     <Input
                         handleChange={() => {}}
                         placeholder="Search query"
@@ -59,18 +59,18 @@ const Index = (props) => {
             <div className="bg-white rounded-xl shadow">
                 <div className="p-4 text-2xl font-semibold flex w-full justify-between flex-wrap gap-4">
                     <span>Products</span>
-                    <a
+                    {(props.can.create) && <a
                         href={route("products.create")}
                         className="bg-blue-600 text-xl hover:bg-blue-700 text-white p-2 rounded-md shadow cursor-pointer"
                     >
                         Add New Products
-                    </a>
+                    </a>}
                 </div>
                 {products.data.length > 0 ? (
                     <>
                         <div className="max-w-full mx-auto">
                             <div className="relative overflow-x-auto">
-                                <Table tables={props.products} handleDelete={handleDelete} routeList={routeList} />
+                                <Table tables={props.products} handleDelete={handleDelete} routeList={routeList} can={props.can} />
                             </div>
                         </div>
                         <div className="w-full p-4 flex flex-col">
