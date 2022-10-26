@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Exports\CategoriesExport;
 use App\Exports\ItemsExport;
 use App\Http\Requests\ItemRequest;
+use App\Models\Brand;
 use App\Models\Category;
 use App\Models\Item;
 use App\Models\ItemStatus;
@@ -51,6 +52,12 @@ class ItemController extends Controller
                     $qc->where('name', 'LIKE', "%$search%");
                 });
             });
+        })->when($request->brand, function ($query, $search) {
+            $query->whereHas('product', function ($q) use ($search) {
+                $q->whereHas('brand', function ($qc) use ($search) {
+                    $qc->where('name', 'LIKE', "%$search%");
+                });
+            });
         })->with('product')->with('status')->paginate(10)->withQueryString();
 
 
@@ -60,6 +67,7 @@ class ItemController extends Controller
             'items' => $items->toArray(),
             'categories' => Category::all(),
             'models' => ProductModel::all(),
+            'brands' => Brand::all(),
             'can' => [
                 'create' => $user->can('create', $user),
                 'view' => $user->can('view', $user),

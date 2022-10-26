@@ -20,7 +20,6 @@ class RoleMiddleware
      */
     public function handle(Request $request, Closure $next, ...$roles)
     {
-//        dd($roles);
         if (Auth::check()) {
             $id = Auth::user()->id;
             $auth = User::find($id);

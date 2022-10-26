@@ -47,7 +47,7 @@ const Index = (props) => {
                 <form  className="inline-flex items-center space-x-2 max-w-full">
                     <Input
                         handleChange={() => {}}
-                        placeholder="Search query"
+                        placeholder="Search Name"
                         name={"search"}
                         autoComplete={"off"}
                     />

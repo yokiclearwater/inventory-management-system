@@ -131,7 +131,7 @@ export default function UpdateRole(props) {
                                                     };
                                                     form.setData(data);
                                                     setOpenedModal(true);
-                                                }} className={"bg-orange-500 text-base hover:bg-orange-700 shadow"}>Edit</Button>
+                                                }} className={"bg-amber-500 text-base hover:bg-amber-700 shadow"}>Edit</Button>
                                             </td>
                                         </tr>
                                     );

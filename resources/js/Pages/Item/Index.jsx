@@ -48,6 +48,11 @@ const Index = (props) => {
         form.setData(e.target.name, e.target.value);
     }
 
+    const handleSubmit = (e) => {
+        e.preventDefault();
+        form.get(route('items.index'));
+    }
+
     return (
         <>
             {(modalOpened) && <Modal className={"rounded-lg"}>
@@ -81,8 +86,23 @@ const Index = (props) => {
                                 className="capitalize py-2 w-full"
                             >
                                 <option value={""} disabled={true}>Select A Model</option>
-                                {props.models.map((category) => {
-                                    return <option key={category.id} value={category.name}>{category.name}</option>
+                                {props.models.map((model) => {
+                                    return <option key={model.id} value={model.name}>{model.name}</option>
+                                })}
+                            </Select>
+                        </div>
+                        <div className={"flex flex-col gap-4"}>
+                            <Label className={"font-semibold !text-xl border-b-2 py-2"}>Product Model</Label>
+                            <Select
+                                defaultValue={""}
+                                value={form.data.brand}
+                                handleChange={handleFilterForm}
+                                name={"brand"}
+                                className="capitalize py-2 w-full"
+                            >
+                                <option value={""} disabled={true}>Select A Brand</option>
+                                {props.brands.map((brand) => {
+                                    return <option key={brand.id} value={brand.name}>{brand.name}</option>
                                 })}
                             </Select>
                         </div>
@@ -110,10 +130,7 @@ const Index = (props) => {
             <Main auth={props.auth} errors={props.errors} title="Items">
                 <Head title="Item"/>
                 <div className="flex justify-end my-4 w-full h-full gap-2 flex-wrap">
-                    <form className="inline-flex items-center space-x-2 max-w-full" onSubmit={(e) => {
-                        e.preventDefault();
-                        form.get(route('items.index'));
-                    }}>
+                    <form className="inline-flex items-center space-x-2 max-w-full" onSubmit={handleSubmit}>
                         <Input
                             handleChange={handleFilterForm}
                             placeholder="Search Name/Serial No."

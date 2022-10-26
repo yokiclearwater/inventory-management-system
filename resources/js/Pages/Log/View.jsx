@@ -33,7 +33,9 @@ const View = (props) => {
                         <div className="flex flex-col gap-4 p-4">
                             <div className="flex flex-row flex-wrap justify-between text-blue-800 font-semibold text-3xl md:text-4xl border-b-2 py-4 border-gray-400">
                                 <div>Log Detail</div>
-                                <span className="bg-blue-500 text-white p-2 font-semibold capitalize rounded shadow text-2xl">{audit.event} Event</span>
+                                <span className="bg-blue-500 text-white p-2 font-semibold capitalize rounded shadow text-2xl">
+                                    {audit.event} Event
+                                </span>
                             </div>
                             <div className="flex flex-col gap-2 flex-wrap">
                                 <h2 className="md:text-2xl text-xl border-b-2 border-r-2 border-blue-600 py-4 text-blue-600">
@@ -45,16 +47,18 @@ const View = (props) => {
                                     }
                                 </h2>
                             </div>
-                            <div className="flex flex-col gap-2 flex-wrap">
-                                <h2 className="md:text-2xl text-xl border-b-2 border-r-2 border-blue-600 py-4 text-blue-600">
-                                    Username :{" "}
-                                    {
-                                        <span className="font-normal">
-                                            {audit.user.name}
-                                        </span>
-                                    }
-                                </h2>
-                            </div>
+                            {audit.user && (
+                                <div className="flex flex-col gap-2 flex-wrap">
+                                    <h2 className="md:text-2xl text-xl border-b-2 border-r-2 border-blue-600 py-4 text-blue-600">
+                                        Username :{" "}
+                                        {
+                                            <span className="font-normal">
+                                                {audit.user.name}
+                                            </span>
+                                        }
+                                    </h2>
+                                </div>
+                            )}
                             <div className="flex flex-col gap-2 flex-wrap">
                                 <h2 className="md:text-2xl text-xl border-b-2 border-r-2 border-blue-600 py-4 text-blue-600">
                                     Model ID :{" "}
@@ -79,7 +83,10 @@ const View = (props) => {
                                 <h2 className="md:text-2xl text-xl border-b-2 border-r-2 border-blue-600 py-4 text-blue-600">
                                     View URL :{" "}
                                     {
-                                        <a href={audit.url} className="font-normal text-blue-500 hover:underline hover:text-blue-700 cursor-pointer md:text-2xl text-3xl">
+                                        <a
+                                            href={audit.url}
+                                            className="font-normal text-blue-500 hover:underline hover:text-blue-700 cursor-pointer md:text-2xl text-3xl"
+                                        >
                                             {audit.url}
                                         </a>
                                     }
@@ -102,7 +109,6 @@ const View = (props) => {
                                 </pre>
                             </div>
                         </div>
-
                     </div>
                 </div>
             </div>

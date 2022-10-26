@@ -28,7 +28,7 @@ class AuditLogController extends Controller
     }
 
     public function show($id) {
-        $audit = Audit::with('user')->find($id);
+        $audit = Audit::with('user')->findOrFail($id);
 
         return Inertia::render('Log/View')->with('audit', $audit);
     }

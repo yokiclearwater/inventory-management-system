@@ -36,11 +36,26 @@ class ProductController extends Controller
     {
         $products = Product::when($request->search, function ($query, $search) {
             $query->where('name', 'LIKE', "%$search%");
+        })->when($request->category, function ($query, $search) {
+            $query->whereHas('category', function($q) use ($search) {
+                $q->where('name', 'LIKE', "%$search%");
+            });
+        })->when($request->model, function ($query, $search) {
+            $query->whereHas('model', function($q) use ($search) {
+                $q->where('name', 'LIKE', "%$search%");
+            });
+        })->when($request->brand, function ($query, $search) {
+            $query->whereHas('brand', function($q) use ($search) {
+                $q->where('name', 'LIKE', "%$search%");
+            });
         })->paginate(10)->withQueryString()->toArray();
         $user = Auth::user();
 
         return Inertia::render('Product/Index', [
             'products' => $products,
+            'categories' => Category::all(),
+            'models' => ProductModel::all(),
+            'brands' => Brand::all(),
             'can' => [
                 'create' => $user->can('create', $user),
                 'view' => $user->can('view', $user),
