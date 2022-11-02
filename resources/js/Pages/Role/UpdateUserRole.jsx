@@ -5,8 +5,9 @@ import Select from "@/Components/Select";
 import Button from "@/Components/Button";
 import Modal from "@/Components/Modal";
 import Swal from "sweetalert2";
+import Pagination from "@/Components/Pagination";
 
-export default function UpdateRole(props) {
+export default function UpdateUserRole(props) {
     const [openedModal, setOpenedModal] = React.useState(false);
     const initialFormData = {
         user_data: null,
@@ -57,7 +58,7 @@ export default function UpdateRole(props) {
                         name={"role_id"}
                         className="capitalize w-full"
                     >
-                        {props.roles.map(role => {
+                        {props.roles.data.map(role => {
                             return <option key={role.id} value={role.id}>{role.name.toUpperCase().replaceAll('_', ' ')}</option>
                         })}
                     </Select>
@@ -110,7 +111,9 @@ export default function UpdateRole(props) {
                                 <tbody>
                                 {props.users.map((user, index) => {
                                     return (
-                                        <tr key={user.id}>
+                                        <tr key={user.id} className={
+                                            "even:bg-blue-200 odd:bg-blue-100 hover:bg-blue-300"
+                                        }>
                                             <th className={"py-3 px-4"}>
                                                 {user.id}
                                             </th>
@@ -124,20 +127,26 @@ export default function UpdateRole(props) {
                                                 {user.role.name.toUpperCase().replaceAll('_', ' ')}
                                             </td>
                                             <td className={"py-3 px-4"}>
-                                                <Button handleClick={() => {
+                                                <a onClick={() => {
                                                     const data = {
                                                         user_data: user,
                                                         role_id: user.role_id,
                                                     };
                                                     form.setData(data);
                                                     setOpenedModal(true);
-                                                }} className={"bg-amber-500 text-base hover:bg-amber-700 shadow"}>Edit</Button>
+                                                }} className="hover:underline cursor-pointer text-blue-600 font-semibold">Edit</a>
                                             </td>
                                         </tr>
                                     );
                                 })}
                                 </tbody>
                             </table>
+                        </div>
+                        <div className="w-full flex items-center justify-center py-4">
+                            <Pagination
+                                tables={props.roles}
+                                className="p-4 self-center"
+                            />
                         </div>
                     </div>
                 </div>

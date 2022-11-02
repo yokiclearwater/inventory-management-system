@@ -74,7 +74,7 @@ const Edit = (props) => {
                     >
                         <div>
                             <Label
-                                className={"text-xl py-2"}
+                                className={"!text-xl py-2"}
                                 forInput="name"
                                 value="Product Name"
                             />
@@ -97,7 +97,7 @@ const Edit = (props) => {
                         </div>
                         <div>
                             <Label
-                                className={"text-xl py-2"}
+                                className={"!text-xl py-2"}
                                 forInput="description"
                                 value="Product Description"
                             />
@@ -117,7 +117,7 @@ const Edit = (props) => {
                         </div>
                         <div>
                             <Label
-                                className={"text-xl py-2"}
+                                className={"!text-xl py-2"}
                                 forInput="category_id"
                                 value="Product Category"
                             />
@@ -148,7 +148,7 @@ const Edit = (props) => {
                         </div>
                         <div>
                             <Label
-                                className={"text-xl py-2"}
+                                className={"!text-xl py-2"}
                                 forInput="brand_id"
                                 value="Product Brand"
                             />
@@ -179,7 +179,7 @@ const Edit = (props) => {
                         </div>
                         <div>
                             <Label
-                                className={"text-xl py-2"}
+                                className={"!text-xl py-2"}
                                 forInput="model_id"
                                 value="Product Model"
                             />

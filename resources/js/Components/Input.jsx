@@ -9,6 +9,7 @@ export default function Input({
     required,
     isFocused,
     handleChange,
+    defaultChecked = false,
     placeholder = '',
 }) {
     const input = useRef();
@@ -29,6 +30,7 @@ export default function Input({
                     `border-gray-300 border-2 focus:border-blue-300 focus:ring focus:ring-blue-200 focus:ring-opacity-50 rounded-md shadow-sm` +
                     className
                 }
+                defaultChecked={defaultChecked}
                 ref={input}
                 autoComplete={autoComplete}
                 required={required}

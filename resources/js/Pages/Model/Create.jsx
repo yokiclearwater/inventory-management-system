@@ -52,7 +52,7 @@ const Create = (props) => {
                     >
                         <div>
                             <Label
-                                className={"text-xl py-2"}
+                                className={"!text-xl py-2"}
                                 forInput="name"
                                 value="Model Name"
                             />
@@ -75,7 +75,7 @@ const Create = (props) => {
                         </div>
                         <div>
                             <Label
-                                className={"text-xl py-2"}
+                                className={"!text-xl py-2"}
                                 forInput="description"
                                 value="Model Description"
                             />

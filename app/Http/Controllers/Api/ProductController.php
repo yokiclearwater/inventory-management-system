@@ -82,8 +82,6 @@ class ProductController extends Controller
         $request->validated();
         $product = Product::find($id);
         $product->update($request->all());
-        // $product->name = $request->name;
-        // $product->description = $request->description;
         return $product;
     }
 

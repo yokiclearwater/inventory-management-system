@@ -14,7 +14,7 @@ return new class extends Migration
     public function up()
     {
         Schema::table('users', function (Blueprint $table) {
-            $table->foreignId('role_id')->default(1)->constrained('roles')->cascadeOnDelete();
+            $table->foreignId('role_id')->default(1)->constrained('roles')->nullOnDelete();
         });
     }
 

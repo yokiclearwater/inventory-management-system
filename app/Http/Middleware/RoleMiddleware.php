@@ -24,14 +24,21 @@ class RoleMiddleware
             $id = Auth::user()->id;
             $auth = User::find($id);
 
+            if(!$auth->role->exists()) {
+                dd($auth);
+            }
+
             foreach ($roles as $role) {
-                if($auth->role()->first()->name === $role) {
+                if ($auth->role()->first()->name === $role) {
                     return $next($request);
                 }
             }
 
-            abort(403, 'Access Denied');
-//            return Redirect::route('welcome');
+            if ($request->is('api/*') || $request->wantsJson()) {
+                return response()->json(['message' => "Access Denied"], 403);
+            } else {
+                return Redirect::route('access.denied')->withErrors('Access Denied');
+            }
         }
 
         return Redirect::route('login');

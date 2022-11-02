@@ -71,7 +71,7 @@ const Edit = (props) => {
                     >
                         <div>
                             <Label
-                                className={"text-xl py-2"}
+                                className={"!text-xl py-2"}
                                 forInput="name"
                                 value="Model Name"
                             />
@@ -94,7 +94,7 @@ const Edit = (props) => {
                         </div>
                         <div>
                             <Label
-                                className={"text-xl py-2"}
+                                className={"!text-xl py-2"}
                                 forInput="description"
                                 value="Model Description"
                             />

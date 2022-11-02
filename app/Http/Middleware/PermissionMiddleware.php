@@ -7,6 +7,8 @@ use Closure;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Redirect;
+use Illuminate\Validation\ValidationException;
+use Inertia\Inertia;
 
 class PermissionMiddleware
 {
@@ -32,7 +34,11 @@ class PermissionMiddleware
                 }
             }
 
-            abort(403, 'Access Denied');
+            if ($request->is('api/*') || $request->wantsJson()) {
+                return response()->json(['message' => "Access Denied"], 403);
+            } else {
+                return Redirect::route('access.denied')->withErrors('Access Denied');
+            }
         }
 
         return Redirect::route('login');

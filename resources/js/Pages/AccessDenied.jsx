@@ -3,6 +3,7 @@ import { Link, Head } from "@inertiajs/inertia-react";
 import Guest from "@/Layouts/Guest";
 
 export default function AccessDenied(props) {
+    console.log(props);
 
     return (
         <>
@@ -14,8 +15,22 @@ export default function AccessDenied(props) {
             )}
             <Guest>
                 <div className="text-2xl">
-                    <div className={"text-3xl bg-red-500 w-fit p-2 text-white rounded-lg shadow"}>Access Denied</div>
-                    <div className={"py-4"}>⛔ You don't have permission to perform this action.</div>
+                    <div
+                        className={
+                            "text-3xl bg-red-500 w-fit p-2 text-white rounded-lg shadow"
+                        }
+                    >
+                        Access Denied
+                    </div>
+                    <div className={"py-4"}>
+                        ⛔ You don't have permission to perform this action.
+                    </div>
+                    <button
+                        className="hover:bg-blue-500 hover:text-white bg-white p-3 rounded-lg"
+                        onClick={() => window.history.back()}
+                    >
+                        Back
+                    </button>
                 </div>
             </Guest>
         </>

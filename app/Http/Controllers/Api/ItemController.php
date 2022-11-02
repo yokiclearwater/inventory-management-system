@@ -90,8 +90,6 @@ class ItemController extends Controller
         $request->validated();
         $item = Item::find($id);
         $item->update($request->all());
-        // $item->name = $request->name;
-        // $item->description = $request->description;
         return $item;
     }
 

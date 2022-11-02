@@ -43,6 +43,12 @@ Route::get('/', function () {
 Route::get('/dashboard', function () {
     $id = Auth::user()->id;
     $user = User::find($id);
+
+    if(!$user->role()->exists()) {
+        $user->role_id = 1;
+        $user->save();
+    }
+
     $users_count = User::count();
     $role = $user->role()->first()->toArray();
 
@@ -57,10 +63,16 @@ Route::get('/dashboard', function () {
         'items_count' => Item::count(),
         'ip' => Request::ip(),
     ]);
-})->middleware(['auth', 'verified', 'role:user,admin,super_admin'])->name('dashboard');
+})->middleware(['auth', 'verified'])->name('dashboard');
 
 Route::get('/access-denied', function () {
-    return Inertia::render('AccessDenied');
+    return Inertia::render('AccessDenied', [
+        'canLogin' => Route::has('login'),
+        'canRegister' => Route::has('register'),
+        'laravelVersion' => Application::VERSION,
+        'phpVersion' => PHP_VERSION,
+        'isAuth' => Auth::check(),
+    ]);
 })->name('access.denied');
 
 
@@ -74,9 +86,9 @@ Route::middleware(['auth', 'verified'])->group(function () {
     require __DIR__ . '/web/items.php';
 });
 
-//require __DIR__ . '/web/items.php';
 
-Route::get('/roles',[RoleController::class, 'index'])->middleware(['auth', 'verified', 'role:super_admin'])->name('roles.index');
-Route::put('/roles/update/', [RoleController::class, 'update'])->middleware(['auth', 'verified', 'role:super_admin'])->name('roles.update');
+Route::get('/roles/edit-user-role', [RoleController::class, 'edit_user_role'])->middleware(['auth', 'verified', 'role:super_admin'])->name('roles.edit_user_role');
+Route::put('/roles/update-user-role/', [RoleController::class, 'update_user_role'])->middleware(['auth', 'verified', 'role:super_admin'])->name('roles.update');
+Route::resource('roles', RoleController::class)->middleware(['auth', 'verified', 'role:super_admin']);
 
 require __DIR__ . '/auth.php';

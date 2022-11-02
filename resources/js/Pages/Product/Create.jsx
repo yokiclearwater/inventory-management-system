@@ -61,7 +61,7 @@ const Create = (props) => {
                     >
                         <div>
                             <Label
-                                className={"text-xl py-2"}
+                                className={"!text-xl py-2"}
                                 forInput="name"
                                 value="Product Name"
                             />
@@ -84,7 +84,7 @@ const Create = (props) => {
                         </div>
                         <div>
                             <Label
-                                className={"text-xl py-2"}
+                                className={"!text-xl py-2"}
                                 forInput="description"
                                 value="Product Description"
                             />
@@ -104,7 +104,7 @@ const Create = (props) => {
                         </div>
                         <div>
                             <Label
-                                className={"text-xl py-2"}
+                                className={"!text-xl py-2"}
                                 forInput="category_id"
                                 value="Product Category"
                             />
@@ -136,7 +136,7 @@ const Create = (props) => {
                         </div>
                         <div>
                             <Label
-                                className={"text-xl py-2"}
+                                className={"!text-xl py-2"}
                                 forInput="brand_id"
                                 value="Product Brand"
                             />
@@ -168,7 +168,7 @@ const Create = (props) => {
                         </div>
                         <div>
                             <Label
-                                className={"text-xl py-2"}
+                                className={"!text-xl py-2"}
                                 forInput="model_id"
                                 value="Product Model"
                             />
