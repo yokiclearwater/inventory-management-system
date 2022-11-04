@@ -18,7 +18,7 @@ class Item extends Model implements Auditable
         'issued_by',
         'installed_date',
         'location',
-        'product_location',
+        'inventory_location',
         'in_stock_date',
         'out_of_stock_date',
         'status_id',

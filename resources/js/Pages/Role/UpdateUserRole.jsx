@@ -37,7 +37,7 @@ export default function UpdateUserRole(props) {
             confirmButtonColor: 'orange',
         }).then((result) => {
             if(result.isConfirmed) {
-                form.put(route("roles.update"), {
+                form.put(route("roles.update_user_role"), {
                     onSuccess: () => updateSuccess(),
                     onError: () => Swal.fire('Updated Error', '', 'error'),
                 });
@@ -89,7 +89,7 @@ export default function UpdateUserRole(props) {
                         </div>
                         <div className="relative overflow-x-auto">
                             <table className="text-left w-full table-auto lg:text-xl text-lg">
-                                <thead className="bg-blue-500 text-white">
+                                <thead className="bg-blue-700 text-white">
                                 <tr itemScope={"row"}>
                                     <th className="py-3 px-4" scope="col">
                                         User ID

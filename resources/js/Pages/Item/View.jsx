@@ -39,7 +39,7 @@ const View = (props) => {
                             <div className={"md:text-2xl text-xl border-b-2 border-r-2 border-blue-600 py-4 text-blue-600"}>Issued By: {item.issued_by}</div>
                             <div className={"md:text-2xl text-xl border-b-2 border-r-2 border-blue-600 py-4 text-blue-600"}>Installation Date: {item.installed_date}</div>
                             <div className={"md:text-2xl text-xl border-b-2 border-r-2 border-blue-600 py-4 text-blue-600"}>Location: {item.location}</div>
-                            <div className={"md:text-2xl text-xl border-b-2 border-r-2 border-blue-600 py-4 text-blue-600"}>Inventory Location: {item.product_location}</div>
+                            <div className={"md:text-2xl text-xl border-b-2 border-r-2 border-blue-600 py-4 text-blue-600"}>Inventory Location: {item.inventory_location}</div>
                             <div className={"md:text-2xl text-xl border-b-2 border-r-2 border-blue-600 py-4 text-blue-600"}>In Stock: {item.in_stock_date}</div>
                             <div className={"md:text-2xl text-xl border-b-2 border-r-2 border-blue-600 py-4 text-blue-600"}>Out of Stock: {item.out_of_stock_date}</div>
                         </div>

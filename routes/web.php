@@ -88,7 +88,7 @@ Route::middleware(['auth', 'verified'])->group(function () {
 
 
 Route::get('/roles/edit-user-role', [RoleController::class, 'edit_user_role'])->middleware(['auth', 'verified', 'role:super_admin'])->name('roles.edit_user_role');
-Route::put('/roles/update-user-role/', [RoleController::class, 'update_user_role'])->middleware(['auth', 'verified', 'role:super_admin'])->name('roles.update');
+Route::put('/roles/update-user-role/', [RoleController::class, 'update_user_role'])->middleware(['auth', 'verified', 'role:super_admin'])->name('roles.update_user_role');
 Route::resource('roles', RoleController::class)->middleware(['auth', 'verified', 'role:super_admin']);
 
 require __DIR__ . '/auth.php';

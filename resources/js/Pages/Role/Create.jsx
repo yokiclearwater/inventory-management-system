@@ -52,7 +52,7 @@ const Create = (props) => {
 
     return (
         <Main auth={props.auth}>
-            <Head title="Add Category" />
+            <Head title="Add Role" />
 
             <div className="max-w-full m-auto">
                 <div className="py-4 text-2xl font-semibold flex w-full justify-between flex-wrap gap-4">

@@ -42,31 +42,24 @@ const Index = (props) => {
     return (
         <Main auth={props.auth} errors={props.errors} title="Roles">
             <Head title="Role" />
-            <div className="flex justify-end my-4 w-full h-full">
-                <form className="inline-flex items-center space-x-2 max-w-full">
-                    <Input
-                        handleChange={() => {}}
-                        placeholder="Search Name"
-                        name={"search"}
-                        autoComplete={"off"}
-                    />
-                    <Button className="bg-blue-600 text-base shadow hover:bg-blue-700">
-                        Search
-                    </Button>
-                </form>
-            </div>
             <div className="flex flex-col gap-4">
                 <div className="bg-white rounded-xl shadow">
                     <div className="p-4 text-2xl font-semibold flex w-full justify-between flex-wrap gap-4">
                         <span>Roles</span>
-                        {
+                        <div className="flex flex-wrap gap-4">
                             <a
                                 href={route("roles.create")}
                                 className="bg-blue-600 text-xl hover:bg-blue-700 text-white p-2 rounded-md shadow cursor-pointer"
                             >
                                 Add New Role
                             </a>
-                        }
+                            <a
+                                href={route("roles.edit_user_role")}
+                                className="bg-blue-600 text-xl hover:bg-blue-700 text-white p-2 rounded-md shadow cursor-pointer"
+                            >
+                                Edit User Role
+                            </a>
+                        </div>
                     </div>
                     {roles.data.length > 0 ? (
                         <>
@@ -104,7 +97,12 @@ const Index = (props) => {
                         <>
                             <div className="max-w-full mx-auto">
                                 <div className="relative overflow-x-auto">
-                                    <RestrictedRoleTable restricted_roles={props.restricted_roles} showRoute={"roles.show"} />
+                                    <RestrictedRoleTable
+                                        restricted_roles={
+                                            props.restricted_roles
+                                        }
+                                        showRoute={"roles.show"}
+                                    />
                                 </div>
                             </div>
                             <div className="w-full p-4 flex flex-col">
@@ -163,7 +161,7 @@ const RestrictedRoleTable = (props) => {
                                 className="py-2 px-4 inline-flex space-x-2 items-center justify-start"
                                 scope="col"
                             >
-                                {(
+                                {
                                     <a
                                         className="hover:underline cursor-pointer text-green-700 font-semibold"
                                         href={route(props.showRoute, {
@@ -172,7 +170,7 @@ const RestrictedRoleTable = (props) => {
                                     >
                                         View
                                     </a>
-                                )}
+                                }
                             </td>
                         </tr>
                     );

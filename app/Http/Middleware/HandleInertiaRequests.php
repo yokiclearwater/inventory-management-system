@@ -43,7 +43,7 @@ class HandleInertiaRequests extends Middleware
             ],
             'auth' => [
                 'user' =>  $request->user(),
-//                'role' => Auth::check() ? $request->user()->role : [],
+                'role' => Auth::check() ? $request->user()->role : [],
             ],
             'ziggy' => function () use ($request) {
                 return array_merge((new Ziggy)->toArray(), [

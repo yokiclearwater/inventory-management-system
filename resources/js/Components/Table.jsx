@@ -28,7 +28,7 @@ function Table({tables, handleDelete, routeList, can = {create: true, update: tr
                             <th className="py-2 px-4" scope="col">
                                 {table.id}
                             </th>
-                            <td className="py-2 px-4" scope="col">
+                            <td className="py-2 px-4 capitalize" scope="col">
                                 {table.name}
                             </td>
                             <td

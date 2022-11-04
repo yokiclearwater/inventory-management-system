@@ -1,6 +1,7 @@
 import React from "react";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faDashboard } from "@fortawesome/free-solid-svg-icons";
+import logo from '../../../storage/app/public/images/logo.png';
 
 export default function SideNav({ navActive, listItems }) {
     return (
@@ -10,9 +11,11 @@ export default function SideNav({ navActive, listItems }) {
             } xl:translate-x-0`}
         >
             <div className="bg-white p-2 w-[90%] h-[97vh] rounded-xl shadow overflow-y-auto">
-                <div className="w-full p-4 flex flex-row gap-2">
-                    <FontAwesomeIcon className="text-2xl" icon={faDashboard} />
-                    <span>IMS</span>
+                <div className="w-full p-2 flex flex-row gap-2 items-center text-2xl justify-start">
+                    {/* <FontAwesomeIcon className="text-2xl" icon={faDashboard} /> */}
+                    <img width={40} height={40} src={logo} alt="logo" />
+                    <span className="font-bold">IMS</span>
+
                 </div>
                 <hr className="my-2" />
                 <ul className="">

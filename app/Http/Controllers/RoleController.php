@@ -38,19 +38,25 @@ class RoleController extends Controller
         if(!in_array($role->name, $this->restricted_roles)) {
             return Inertia::render('Role/Edit', compact('role', 'permissions'));
         } else {
-            abort(403);
+            return Redirect::route('access.denied')->withErrors([
+                'forbidden' => 'Default Roles Are Restricted'
+            ]);
         }
     }
 
     public function update(Request $request, $id) {
-        dd($request->toArray());
+        $role = Role::find($id);
+        $role->name = $request->name;
+        $role->save();
+        $role->permissions()->sync($request->permissions);
+
+        return Redirect::route('roles.index');
     }
 
     public function edit_user_role() {
         $roles = Role::paginate();
         $users = User::with('role')->get()->except(Auth::id());
 
-        // dd($users->toArray());
         return Inertia::render('Role/UpdateUserRole', compact('roles', 'users'));
     }
 
@@ -98,7 +104,6 @@ class RoleController extends Controller
             return Redirect::route('access.denied')->withErrors([
                 'forbidden' => 'Default Roles Are Restricted'
             ]);
-
         }
 
         return Redirect::route('roles.index');

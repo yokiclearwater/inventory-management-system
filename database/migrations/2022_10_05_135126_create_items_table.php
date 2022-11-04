@@ -21,7 +21,7 @@ return new class extends Migration
             $table->string('issued_by')->nullable();
             $table->date('installed_date')->nullable();
             $table->string('location');
-            $table->string('inventory_location');
+            $table->string('inventory_location')->nullable();
             $table->date('in_stock_date');
             $table->date('out_of_stock_date')->nullable();
             $table->foreignId('status_id')->constrained('item_statuses')->cascadeOnDelete();

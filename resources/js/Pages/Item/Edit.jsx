@@ -23,7 +23,7 @@ const Edit = (props) => {
         issued_by: item.received_by,
         installed_date: item.installed_date,
         location: item.location,
-        product_location: item.product_location,
+        inventory_location: item.inventory_location,
         in_stock_date: item.in_stock_date,
         out_of_stock_date: item.out_of_stock_date,
         status_id: item.status_id,
@@ -90,7 +90,7 @@ const Edit = (props) => {
                         <FormInput name={"issued_by"} formDataValue={form.data.issued_by} placeholder={"Issued By"} handleChange={onHandleChange} formErrorMessage={form.errors.issued_by}  />
                         <FormInput name={"installed_date"} type={"date"} formDataValue={form.data.installed_date} placeholder={"Installed At"} handleChange={onHandleChange} formErrorMessage={form.errors.installed_date} />
                         <FormInput name={"location"} formDataValue={form.data.location} placeholder={"Location"} handleChange={onHandleChange} formErrorMessage={form.errors.location} />
-                        <FormInput name={"product_location"} type={"text"} formDataValue={form.data.product_location} placeholder={"Inventory Location"} handleChange={onHandleChange} formErrorMessage={form.errors.product_location}  />
+                        <FormInput name={"inventory_location"} type={"text"} formDataValue={form.data.inventory_location} placeholder={"Inventory Location"} handleChange={onHandleChange} formErrorMessage={form.errors.inventory_location}  />
                         <FormInput name={"in_stock_date"} type={"date"} formDataValue={form.data.in_stock_date} placeholder={"In Stock Date"} handleChange={onHandleChange} formErrorMessage={form.errors.in_stock_date} />
                         <FormInput name={"out_of_stock_date"} type={"date"} formDataValue={form.data.out_of_stock_date} placeholder={"Out Of Stock Date"} handleChange={onHandleChange} formErrorMessage={form.errors.out_of_stock_date}  />
                         <FormSelect name={"status_id"} formDataValue={form.data.status_id} placeholder={"Statues"} handleChange={onHandleChange} formErrorMessage={form.errors.status_id} className={"uppercase"}>

@@ -49,11 +49,10 @@ const Index = (props) => {
         form.setData(e.target.name, e.target.value);
     };
 
-
     const handleSubmit = (e) => {
         e.preventDefault();
-        form.get(route('products.index'));
-    }
+        form.get(route("products.index"));
+    };
 
     return (
         <>
@@ -179,23 +178,28 @@ const Index = (props) => {
             <Main auth={props.auth} errors={props.errors} title="Products">
                 <Head title="Products" />
                 <div className="flex justify-end my-4 w-full h-full">
-                    <form className="inline-flex products-center space-x-2 max-w-full" onSubmit={handleSubmit}>
+                    <form
+                        className="inline-flex products-center space-x-2 max-w-full"
+                        onSubmit={handleSubmit}
+                    >
                         <Input
-                            handleChange={() => {}}
+                            handleChange={handleFilterForm}
                             placeholder="Search Name"
                             name={"search"}
                             autoComplete={"off"}
                         />
-                        <Button className="bg-blue-600 text-base shadow hover:bg-blue-700">
-                            Search
-                        </Button>
-                        <Button
-                            type={"button"}
-                            handleClick={() => setModalOpened(true)}
-                            className="bg-blue-600 text-base shadow hover:bg-blue-700"
-                        >
-                            Filter
-                        </Button>
+                        <div className="flex flex-wrap gap-2">
+                            <Button className="bg-blue-600 text-base shadow hover:bg-blue-700">
+                                Search
+                            </Button>
+                            <Button
+                                type={"button"}
+                                handleClick={() => setModalOpened(true)}
+                                className="bg-blue-600 text-base shadow hover:bg-blue-700"
+                            >
+                                Filter
+                            </Button>
+                        </div>
                     </form>
                 </div>
                 <div className="bg-white rounded-xl shadow">

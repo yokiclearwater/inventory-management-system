@@ -34,7 +34,7 @@ class ItemRequest extends FormRequest
             'installed_at' => ['date', 'nullable'],
             'in_stock_date' => ['required', 'date'],
             'location' => ['required'],
-            'product_location' => ['required'],
+            'inventory_location' => ['required'],
             'out_of_stock_date' => ['date', 'nullable'],
             'status_id' => ['required'],
         ];

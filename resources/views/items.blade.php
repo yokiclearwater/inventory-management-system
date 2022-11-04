@@ -67,7 +67,7 @@
             <td>{{ $item->in_stock_date }}</td>
             <td>{{ $item->out_of_stock_date }}</td>
             <td>{{ $item->location }}</td>
-            <td style="min-width: 200px; width: 200px;">{{ $item->product_location }}</td>
+            <td style="min-width: 200px; width: 200px;">{{ $item->inventory_location }}</td>
         </tr>
     @endforeach
     </tbody>
