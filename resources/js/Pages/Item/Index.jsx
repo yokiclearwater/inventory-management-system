@@ -237,7 +237,19 @@ const Index = (props) => {
                                                     className="py-3 px-4"
                                                     scope="col"
                                                 >
-                                                    Serial No.
+                                                    Unit
+                                                </th>
+                                                <th
+                                                    className="py-3 px-4"
+                                                    scope="col"
+                                                >
+                                                    Quantity
+                                                </th>
+                                                <th
+                                                    className="py-3 px-4"
+                                                    scope="col"
+                                                >
+                                                    Location
                                                 </th>
                                                 <th
                                                     className="py-3 px-4"
@@ -278,7 +290,19 @@ const Index = (props) => {
                                                             className="py-2 px-4"
                                                             scope="col"
                                                         >
-                                                            {item.serial_no}
+                                                            {item.unit}
+                                                        </td>
+                                                        <td
+                                                            className="py-2 px-4"
+                                                            scope="col"
+                                                        >
+                                                            {item.quantity}
+                                                        </td>
+                                                        <td
+                                                            className="py-2 px-4"
+                                                            scope="col"
+                                                        >
+                                                            {`${item.location.product_location}, ${item.location.inventory_location}`}
                                                         </td>
                                                         <td
                                                             className="py-2 px-4 capitalize min-w-[120px]"

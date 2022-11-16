@@ -38,7 +38,11 @@ class ItemController extends Controller
      */
     public function index(Request $request)
     {
-        $items = Item::when($request->category, function ($query, $search) {
+        $items = Item::when($request->search, function ($query, $search) {
+            $query->whereHas('product', function ($q) use ($search) {
+                $q->where('name', 'LIKE', "%$search%");
+            });
+        })->when($request->category, function ($query, $search) {
             $query->whereHas('product', function ($q) use ($search) {
                 $q->whereHas('category', function ($qc) use ($search) {
                     $qc->where('name', 'LIKE', "%$search%");
@@ -56,7 +60,7 @@ class ItemController extends Controller
                     $qc->where('name', 'LIKE', "%$search%");
                 });
             });
-        })->with('product')->with('status')->paginate(10)->withQueryString();
+        })->with('product')->with('location')->with('status')->paginate(10)->withQueryString();
 
         $user = Auth::user();
 
@@ -95,12 +99,10 @@ class ItemController extends Controller
      * @param \Illuminate\Http\Request $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(ItemRequest $request)
     {
-        dd($request->toArray());
-
-        // $request->validated();
-        // Item::create($request->all());
+        $request->validated();
+        Item::create($request->all());
     }
 
     /**
@@ -111,7 +113,7 @@ class ItemController extends Controller
      */
     public function show($id)
     {
-        $item = Item::with('product')->with('status')->find($id);
+        $item = Item::with('product')->with('status')->with('location')->find($id);
 
         return Inertia::render('Item/View', ['item' => $item]);
     }
@@ -127,10 +129,13 @@ class ItemController extends Controller
         $item = Item::find($id);
         $products = Product::all();
         $statuses = ItemStatus::all();
+        $locations = Location::all();
+
         return Inertia::render('Item/Edit', [
             'statuses' => $statuses,
             'item' => $item,
             'products' => $products,
+            'locations' => $locations,
         ]);
     }
 
@@ -174,7 +179,7 @@ class ItemController extends Controller
 
     public function export_pdf()
     {
-        $items = Item::with('product')->with('status')->get();
+        $items = Item::with('product')->with('location')->with('status')->get();
         $mpdf = new Mpdf([
             'mode' => 'utf-8',
             'orientation' => 'L',

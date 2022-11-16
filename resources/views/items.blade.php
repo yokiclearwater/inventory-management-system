@@ -9,6 +9,7 @@
     <style>
         table {
             border-collapse: collapse;
+            width: 100% !important;
         }
         thead {
             vertical-align: bottom;
@@ -45,14 +46,13 @@
     <tr>
         <th>ID</th>
         <th>Name</th>
-        <th>Serial No.</th>
+        <th>Unit</th>
+        <th>Quantity</th>
         <th>Received By</th>
         <th>Issued By</th>
-        <th>Installation Date</th>
         <th>In Stock Date</th>
         <th>Out Of Stock Date</th>
         <th>Location</th>
-        <th>Inventory Location</th>
     </tr>
     </thead>
     <tbody style="color: black;">
@@ -60,14 +60,13 @@
         <tr>
             <th>{{ $item->id }}</th>
             <td>{{ $item->product->name }}</td>
-            <td>{{ $item->serial_no }}</td>
+            <td>{{ $item->unit }}</td>
+            <td>{{ $item->quantity }}</td>
             <td>{{ $item->received_by }}</td>
             <td>{{ $item->issued_by }}</td>
-            <td>{{ $item->installed_date }}</td>
             <td>{{ $item->in_stock_date }}</td>
             <td>{{ $item->out_of_stock_date }}</td>
-            <td>{{ $item->location }}</td>
-            <td style="min-width: 200px; width: 200px;">{{ $item->inventory_location }}</td>
+            <td>{{ $item->location->product_location . ", " . $item->location->inventory_location }}</td>
         </tr>
     @endforeach
     </tbody>

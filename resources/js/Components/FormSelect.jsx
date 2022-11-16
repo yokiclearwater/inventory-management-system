@@ -7,12 +7,12 @@ function FormSelect({placeholder, className, name, formErrorMessage, formDataVal
     return (
         <div>
             <Label
-                className={"text-xl py-2"}
+                className={"!text-xl py-2"}
                 forInput={name}
                 value={placeholder}
             />
 
-            <Select name={name} className={`w-full ${className}`} value={formDataValue} handleChange={handleChange}>
+            <Select name={name} className={`w-full !text-lg ${className}`} value={formDataValue} handleChange={handleChange}>
                 {children}
             </Select>
 

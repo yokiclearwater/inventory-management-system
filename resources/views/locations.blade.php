@@ -32,7 +32,7 @@
         }
 
         thead tr {
-            background: #8cb8ff;
+            background: #3be5ff;
         }
 
         tbody tr:nth-child(even) {
@@ -46,22 +46,18 @@
         <thead>
             <tr>
                 <th>ID</th>
-                <th>Name</th>
+                <th>Product Location</th>
+                <th>Inventory Location</th>
                 <th>Description</th>
-                <th>Category</th>
-                <th>Brand</th>
-                <th>Model</th>
             </tr>
         </thead>
         <tbody>
-            @foreach ($products as $product)
+            @foreach ($locations as $location)
                 <tr>
-                    <th>{{ $product->id }}</th>
-                    <td>{{ $product->name }}</td>
-                    <td>{{ $product->description }}</td>
-                    <td>{{ $product->category->name }}</td>
-                    <td>{{ $product->brand->name }}</td>
-                    <td>{{ $product->model->name }}</td>
+                    <th>{{ $location->id }}</th>
+                    <td>{{ $location->product_location }}</td>
+                    <td>{{ $location->inventory_location }}</td>
+                    <td>{{ $location->description }}</td>
                 </tr>
             @endforeach
         </tbody>

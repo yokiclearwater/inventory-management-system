@@ -28,13 +28,12 @@ class ItemRequest extends FormRequest
 
         return [
             'product_id' => ['required'],
-            'serial_no' => ['required',  Rule::unique('items', 'serial_no')->ignore($id, 'id')],
+            'unit' => ['required'],
+            'quantity' => ['required', 'integer'],
             'received_by' => ['required'],
             'issued_by' => ['required'],
-            'installed_at' => ['date', 'nullable'],
             'in_stock_date' => ['required', 'date'],
-            'location' => ['required'],
-            'inventory_location' => ['required'],
+            'location_id' => ['required'],
             'out_of_stock_date' => ['date', 'nullable'],
             'status_id' => ['required'],
         ];
@@ -49,10 +48,8 @@ class ItemRequest extends FormRequest
     {
         return [
             'product_id' => 'product',
-            'serial_no' => 'serial number',
             'received_by' => 'receiver',
             'issued_by' => 'issuer',
-            'installed_at' => 'installed date',
             'in_stock_date' => 'in stock date',
             'out_of_stock_date' => 'out of stock date',
             'status_id' => 'status',

@@ -13,6 +13,7 @@ import {
     faClock,
     faPerson,
     faCubesStacked,
+    faMap,
 } from "@fortawesome/free-solid-svg-icons";
 import Dropdown from "@/Components/Dropdown";
 import SideNav from "@/Components/SideNav";
@@ -62,6 +63,13 @@ const Main = ({ auth, children, title = "Dashboard" }) => {
             color: "text-pink-500",
             route: "models.index",
             activeRoute: "models.*",
+        },
+        {
+            icon: faMap,
+            label: "Locations",
+            color: "text-emerald-600",
+            route: "locations.index",
+            activeRoute: "locations.*",
         },
         {
             icon: faBook,

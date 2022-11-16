@@ -4,6 +4,7 @@ use App\Http\Controllers\AuditLogController;
 use App\Http\Controllers\BrandController;
 use App\Http\Controllers\CategoryController;
 use App\Http\Controllers\ItemController;
+use App\Http\Controllers\LocationController;
 use App\Http\Controllers\ProductController;
 use App\Http\Controllers\ProductModelController;
 use App\Http\Controllers\RoleController;
@@ -83,9 +84,8 @@ Route::middleware(['auth', 'verified'])->group(function () {
     require __DIR__ . '/web/logs.php';
     require __DIR__ . '/web/products.php';
     require __DIR__ . '/web/items.php';
+    require __DIR__ . '/web/locations.php';
 });
-
-
 
 Route::get('/roles/edit-user-role', [RoleController::class, 'edit_user_role'])->middleware(['auth', 'verified', 'role:super_admin'])->name('roles.edit_user_role');
 Route::put('/roles/update-user-role/', [RoleController::class, 'update_user_role'])->middleware(['auth', 'verified', 'role:super_admin'])->name('roles.update_user_role');

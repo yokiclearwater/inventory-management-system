@@ -13,12 +13,11 @@ class Item extends Model implements Auditable
 
     protected $fillable = [
         'product_id',
-        'serial_no',
+        'unit',
         'received_by',
         'issued_by',
-        'installed_date',
-        'location',
-        'inventory_location',
+        'quantity',
+        'location_id',
         'in_stock_date',
         'out_of_stock_date',
         'status_id',
@@ -30,5 +29,9 @@ class Item extends Model implements Auditable
 
     public function status() {
         return $this->hasOne(ItemStatus::class, 'id', 'status_id');
+    }
+
+    public function location() {
+        return $this->hasOne(Location::class, 'id', 'location_id');
     }
 }

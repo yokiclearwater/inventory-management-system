@@ -2,6 +2,7 @@
 
 namespace App\Exports;
 
+use App\Models\Location;
 use App\Models\ProductModel;
 use Illuminate\Contracts\View\View;
 use Maatwebsite\Excel\Concerns\FromView;
@@ -11,13 +12,13 @@ use Maatwebsite\Excel\Concerns\WithDefaultStyles;
 use PhpOffice\PhpSpreadsheet\Style\Alignment;
 use PhpOffice\PhpSpreadsheet\Style\Style;
 
-class ProductModelsExport implements FromView, ShouldAutoSize, WithColumnWidths, WithDefaultStyles
+class LocationsExport implements FromView, ShouldAutoSize, WithColumnWidths, WithDefaultStyles
 {
     public function view(): View
     {
         // TODO: Implement view() method.
-        return view('models', [
-            'models' => ProductModel::all(),
+        return view('locations', [
+            'locations' => Location::all(),
         ]);
     }
 

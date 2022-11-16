@@ -209,7 +209,7 @@ const Edit = (props) => {
                             />
                         </div>
                         <Button
-                            className="w-fit bg-orange-400 !text-base hover:bg-orange-500 shadow-lg"
+                            className="w-fit bg-orange-500 !text-base hover:bg-orange-600 shadow-lg"
                             processing={form.processing}
                         >
                             Update

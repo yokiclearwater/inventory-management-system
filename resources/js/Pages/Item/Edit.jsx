@@ -15,18 +15,19 @@ import FormInput from "@/Components/FormInput";
 
 const Edit = (props) => {
     const item = props.item;
+    const location = props.location;
 
     const form = useForm({
         product_id: item.product_id,
-        serial_no: item.serial_no,
+        unit: item.unit,
+        quantity: item.quantity,
         received_by: item.received_by,
-        issued_by: item.received_by,
-        installed_date: item.installed_date,
-        location: item.location,
-        inventory_location: item.inventory_location,
+        issued_by: item.issued_by,
+        location_id: item.location_id,
         in_stock_date: item.in_stock_date,
         out_of_stock_date: item.out_of_stock_date,
         status_id: item.status_id,
+        description: item.description,
     });
 
     const onHandleChange = (event) => {
@@ -85,22 +86,27 @@ const Edit = (props) => {
                                 <option key={product.id} value={product.id}>{product.name}</option>
                             ))}
                         </FormSelect>
-                        <FormInput name={"serial_no"} formDataValue={form.data.serial_no} placeholder={"Serial Number"} handleChange={onHandleChange} formErrorMessage={form.errors.serial_no}  />
+                        <FormInput name={"unit"} formDataValue={form.data.unit} placeholder={"Unit (Ex: PCS, SET, BOX)"} handleChange={onHandleChange} formErrorMessage={form.errors.unit}  />
+                        <FormInput name={"quantity"} formDataValue={form.data.quantity} placeholder={"Quantity"} handleChange={onHandleChange} formErrorMessage={form.errors.quantity}  />
+                        <FormSelect name={"location_id"} formDataValue={form.data.location_id} placeholder={"Locations (Product Location, Inventory Location)"} handleChange={onHandleChange} formErrorMessage={form.errors.location_id} className={"uppercase"}>
+                            <option value={""} disabled>Select A Location</option>
+                            {props.locations.map((location) => (
+                                <option key={location.id} value={location.id}>{`${location.product_location}, ${location.inventory_location}`}</option>
+                            ))}
+                        </FormSelect>
                         <FormInput name={"received_by"} formDataValue={form.data.received_by} placeholder={"Received By"} handleChange={onHandleChange} formErrorMessage={form.errors.received_by}  />
                         <FormInput name={"issued_by"} formDataValue={form.data.issued_by} placeholder={"Issued By"} handleChange={onHandleChange} formErrorMessage={form.errors.issued_by}  />
-                        <FormInput name={"installed_date"} type={"date"} formDataValue={form.data.installed_date} placeholder={"Installed At"} handleChange={onHandleChange} formErrorMessage={form.errors.installed_date} />
-                        <FormInput name={"location"} formDataValue={form.data.location} placeholder={"Location"} handleChange={onHandleChange} formErrorMessage={form.errors.location} />
-                        <FormInput name={"inventory_location"} type={"text"} formDataValue={form.data.inventory_location} placeholder={"Inventory Location"} handleChange={onHandleChange} formErrorMessage={form.errors.inventory_location}  />
+
                         <FormInput name={"in_stock_date"} type={"date"} formDataValue={form.data.in_stock_date} placeholder={"In Stock Date"} handleChange={onHandleChange} formErrorMessage={form.errors.in_stock_date} />
                         <FormInput name={"out_of_stock_date"} type={"date"} formDataValue={form.data.out_of_stock_date} placeholder={"Out Of Stock Date"} handleChange={onHandleChange} formErrorMessage={form.errors.out_of_stock_date}  />
-                        <FormSelect name={"status_id"} formDataValue={form.data.status_id} placeholder={"Statues"} handleChange={onHandleChange} formErrorMessage={form.errors.status_id} className={"uppercase"}>
-                            <option value={""} disabled>Select A Statuses</option>
+                        <FormSelect name={"status_id"} formDataValue={form.data.status_id} placeholder={"Status"} handleChange={onHandleChange} formErrorMessage={form.errors.status_id} className={"uppercase"}>
+                            <option value={""} disabled>Select A Status</option>
                             {props.statuses.map((status) => (
-                                <option key={status.id} value={status.id}>{status.type}</option>
+                                <option key={status.id} value={status.id}>{(status.type).replaceAll('_', ' ')}</option>
                             ))}
                         </FormSelect>
                         <Button
-                            className="w-fit bg-orange-400 !text-base hover:bg-orange-500 shadow-lg"
+                            className="w-fit bg-orange-500 !text-base hover:bg-orange-600 shadow-lg"
                             processing={form.processing}
                         >
                             Update

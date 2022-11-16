@@ -17,7 +17,7 @@ return new class extends Migration
             $table->id();
             $table->string('product_location');
             $table->string('inventory_location');
-            $table->text('description');
+            $table->text('description')->nullable();
             $table->timestamps();
         });
     }

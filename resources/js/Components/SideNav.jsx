@@ -1,7 +1,7 @@
 import React from "react";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faDashboard } from "@fortawesome/free-solid-svg-icons";
-import logo from '../../../storage/app/public/images/logo.png';
+import logo from '@/Assets/logo.png';
 
 export default function SideNav({ navActive, listItems }) {
     return (

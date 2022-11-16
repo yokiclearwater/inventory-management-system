@@ -18,6 +18,7 @@ return new class extends Migration
             $table->foreignId('product_id')->constrained('products')->cascadeOnDelete();
             $table->string('unit');
             $table->integer('quantity')->default(0);
+            $table->text('description')->default("N/A")->nullable();
             $table->string('received_by')->nullable();
             $table->string('issued_by')->nullable();
             $table->foreignId('location_id')->nullable()->constrained('locations')->nullOnDelete();

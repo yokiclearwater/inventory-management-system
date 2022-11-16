@@ -7,6 +7,7 @@ import { faBackward } from "@fortawesome/free-solid-svg-icons";
 import FormInput from "@/Components/FormInput";
 import FormSelect from "@/Components/FormSelect";
 import Swal from "sweetalert2";
+import FormTextArea from "@/Components/FormTextArea";
 
 const Create = (props) => {
     const form = useForm({
@@ -16,10 +17,10 @@ const Create = (props) => {
         received_by: "",
         issued_by: "",
         location_id: "",
-        inventory_location: "",
         in_stock_date: "",
         out_of_stock_date: "",
         status_id: "",
+        description: "",
     });
 
 
@@ -75,12 +76,13 @@ const Create = (props) => {
                         <FormInput name={"issued_by"} formDataValue={form.data.issued_by} placeholder={"Issued By"} handleChange={onHandleChange} formErrorMessage={form.errors.issued_by}  />
                         <FormInput name={"in_stock_date"} type={"date"} formDataValue={form.data.in_stock_date} placeholder={"In Stock Date"} handleChange={onHandleChange} formErrorMessage={form.errors.in_stock_date} />
                         <FormInput name={"out_of_stock_date"} type={"date"} formDataValue={form.data.out_of_stock_date} placeholder={"Out Of Stock Date"} handleChange={onHandleChange} formErrorMessage={form.errors.out_of_stock_date}  />
-                        <FormSelect name={"status_id"} formDataValue={form.data.status_id} placeholder={"Statues"} handleChange={onHandleChange} formErrorMessage={form.errors.status_id} className={"uppercase"}>
+                        <FormSelect name={"status_id"} formDataValue={form.data.status_id} placeholder={"Status"} handleChange={onHandleChange} formErrorMessage={form.errors.status_id} className={"uppercase"}>
                             <option value={""} disabled>Select A Status</option>
                             {props.statuses.map((status) => (
                                 <option key={status.id} value={status.id}>{(status.type).replaceAll('_', ' ')}</option>
                             ))}
                         </FormSelect>
+                        <FormTextArea formDataValue={form.data.description} formErrorMessage={form.errors.description} handleChange={onHandleChange} name={"description"} placeholder={"Item Description (Optional)"} processing={form.processing} />
                         <Button
                             className="w-fit bg-green-500 !text-base hover:bg-green-700 shadow-lg"
                             processing={form.processing}

@@ -10,6 +10,7 @@
     <style>
         table {
             border-collapse: collapse;
+            width: 100% !important;
         }
         thead {
             vertical-align: bottom;
