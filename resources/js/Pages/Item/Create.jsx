@@ -11,11 +11,11 @@ import Swal from "sweetalert2";
 const Create = (props) => {
     const form = useForm({
         product_id: "",
-        serial_no: "",
+        unit: "",
+        quantity: "",
         received_by: "",
         issued_by: "",
-        installed_date: "",
-        location: "",
+        location_id: "",
         inventory_location: "",
         in_stock_date: "",
         out_of_stock_date: "",
@@ -52,7 +52,7 @@ const Create = (props) => {
                         <FontAwesomeIcon icon={faBackward} /> Back
                     </a>
                 </div>
-                <div className="bg-white overflow-hidden shadow-sm sm:rounded-lg">
+                <div className="bg-white overflow-hidden shadow-sm rounded-lg">
                     <form
                         className="p-8 flex flex-col gap-4"
                         onSubmit={onHandleSubmit}
@@ -63,18 +63,22 @@ const Create = (props) => {
                                 <option key={product.id} value={product.id}>{product.name}</option>
                             ))}
                         </FormSelect>
-                        <FormInput name={"serial_no"} formDataValue={form.data.serial_no} placeholder={"Serial Number"} handleChange={onHandleChange} formErrorMessage={form.errors.serial_no}  />
+                        <FormInput name={"unit"} formDataValue={form.data.unit} placeholder={"Unit (Ex: PCS, SET, BOX)"} handleChange={onHandleChange} formErrorMessage={form.errors.unit}  />
+                        <FormInput type="number" name={"quantity"} formDataValue={form.data.quantity} placeholder={"Quantity"} handleInput={(e) => form.setData(e.target.name, Math.abs(Math.round(e.target.value)))} formErrorMessage={form.errors.quantity}  />
+                        <FormSelect name={"location_id"} formDataValue={form.data.location_id} placeholder={"Locations (Product Location, Inventory Location)"} handleChange={onHandleChange} formErrorMessage={form.errors.location_id} className={"uppercase"}>
+                            <option value={""} disabled>Select A Location</option>
+                            {props.locations.map((location) => (
+                                <option key={location.id} value={location.id}>{`${location.product_location}, ${location.inventory_location}`}</option>
+                            ))}
+                        </FormSelect>
                         <FormInput name={"received_by"} formDataValue={form.data.received_by} placeholder={"Received By"} handleChange={onHandleChange} formErrorMessage={form.errors.received_by}  />
                         <FormInput name={"issued_by"} formDataValue={form.data.issued_by} placeholder={"Issued By"} handleChange={onHandleChange} formErrorMessage={form.errors.issued_by}  />
-                        <FormInput name={"installed_date"} type={"date"} formDataValue={form.data.installed_date} placeholder={"Installed At"} handleChange={onHandleChange} formErrorMessage={form.errors.installed_date} />
-                        <FormInput name={"location"} formDataValue={form.data.location} placeholder={"Location"} handleChange={onHandleChange} formErrorMessage={form.errors.location} />
-                        <FormInput name={"inventory_location"} type={"text"} formDataValue={form.data.inventory_location} placeholder={"Inventory Location"} handleChange={onHandleChange} formErrorMessage={form.errors.inventory_location}  />
                         <FormInput name={"in_stock_date"} type={"date"} formDataValue={form.data.in_stock_date} placeholder={"In Stock Date"} handleChange={onHandleChange} formErrorMessage={form.errors.in_stock_date} />
                         <FormInput name={"out_of_stock_date"} type={"date"} formDataValue={form.data.out_of_stock_date} placeholder={"Out Of Stock Date"} handleChange={onHandleChange} formErrorMessage={form.errors.out_of_stock_date}  />
                         <FormSelect name={"status_id"} formDataValue={form.data.status_id} placeholder={"Statues"} handleChange={onHandleChange} formErrorMessage={form.errors.status_id} className={"uppercase"}>
-                            <option value={""} disabled>Select A Statuses</option>
+                            <option value={""} disabled>Select A Status</option>
                             {props.statuses.map((status) => (
-                                <option key={status.id} value={status.id}>{status.type}</option>
+                                <option key={status.id} value={status.id}>{(status.type).replaceAll('_', ' ')}</option>
                             ))}
                         </FormSelect>
                         <Button

@@ -9,6 +9,8 @@ import TextArea from "@/Components/TextArea";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faBackward } from "@fortawesome/free-solid-svg-icons";
 import Swal from "sweetalert2";
+import FormInput from "@/Components/FormInput";
+import FormTextArea from './../../Components/FormTextArea';
 
 const Create = (props) => {
     const form = useForm({
@@ -45,54 +47,13 @@ const Create = (props) => {
                         <FontAwesomeIcon icon={faBackward} /> Back
                     </a>
                 </div>
-                <div className="bg-white overflow-hidden shadow-sm sm:rounded-lg">
+                <div className="bg-white overflow-hidden shadow-sm rounded-lg">
                     <form
                         className="p-8 flex flex-col gap-4"
                         onSubmit={onHandleSubmit}
                     >
-                        <div>
-                            <Label
-                                className={"!text-xl py-2"}
-                                forInput="name"
-                                value="Category Name"
-                            />
-
-                            <Input
-                                type="text"
-                                name="name"
-                                value={form.data.name}
-                                className="mt-1 block w-full text-lg"
-                                autoComplete="off"
-                                isFocused={true}
-                                handleChange={onHandleChange}
-                                placeholder={"Name"}
-                            />
-
-                            <InputError
-                                message={form.errors.name}
-                                className="mt-2"
-                            />
-                        </div>
-                        <div>
-                            <Label
-                                className={"!text-xl py-2"}
-                                forInput="description"
-                                value="Category Description"
-                            />
-                            <TextArea
-                                className="w-full text-lg"
-                                placeholder={"Description"}
-                                processing={form.processing}
-                                name="description"
-                                value={form.data.description}
-                                handleChange={onHandleChange}
-                            />
-
-                            <InputError
-                                message={form.errors.description}
-                                className="mt-2"
-                            />
-                        </div>
+                        <FormInput formDataValue={form.data.name} placeholder={"Category Name"} formErrorMessage={form.errors.name} handleChange={onHandleChange} name={"name"} />
+                        <FormTextArea formDataValue={form.data.description} formErrorMessage={form.errors.description} handleChange={onHandleChange} name={"description"} placeholder={"Category Description"} />
                         <Button
                             className="w-fit bg-green-500 !text-base hover:bg-green-700 shadow-lg"
                             processing={form.processing}

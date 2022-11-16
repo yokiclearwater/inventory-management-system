@@ -7,6 +7,7 @@ use App\Http\Controllers\ItemController;
 use App\Http\Controllers\ProductController;
 use App\Http\Controllers\ProductModelController;
 use App\Http\Controllers\RoleController;
+use App\Http\Controllers\UnitController;
 use App\Models\Brand;
 use App\Models\Category;
 use App\Models\Item;
@@ -75,8 +76,6 @@ Route::get('/access-denied', function () {
     ]);
 })->name('access.denied');
 
-
-
 Route::middleware(['auth', 'verified'])->group(function () {
     require __DIR__ . '/web/categories.php';
     require __DIR__ . '/web/brands.php';
@@ -85,6 +84,7 @@ Route::middleware(['auth', 'verified'])->group(function () {
     require __DIR__ . '/web/products.php';
     require __DIR__ . '/web/items.php';
 });
+
 
 
 Route::get('/roles/edit-user-role', [RoleController::class, 'edit_user_role'])->middleware(['auth', 'verified', 'role:super_admin'])->name('roles.edit_user_role');

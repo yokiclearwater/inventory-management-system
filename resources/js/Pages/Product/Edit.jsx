@@ -67,7 +67,7 @@ const Edit = (props) => {
                         <FontAwesomeIcon icon={faBackward} /> Back
                     </a>
                 </div>
-                <div className="bg-white overflow-hidden shadow-sm sm:rounded-lg">
+                <div className="bg-white overflow-hidden shadow-sm rounded-lg">
                     <form
                         className="p-8 flex flex-col gap-4"
                         onSubmit={onHandleSubmit}

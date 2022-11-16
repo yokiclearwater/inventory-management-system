@@ -22,7 +22,7 @@ const View = (props) => {
                             <FontAwesomeIcon icon={faBackward} /> Back
                         </a>
                     </div>
-                    <div className="bg-white shadow-sm sm:rounded-lg p-4">
+                    <div className="bg-white shadow-sm rounded-lg p-4">
                         <div className="flex flex-col gap-4 p-4">
                             <div
                                 className={

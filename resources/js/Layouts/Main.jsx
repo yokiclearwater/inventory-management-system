@@ -12,6 +12,7 @@ import {
     faBox,
     faClock,
     faPerson,
+    faCubesStacked,
 } from "@fortawesome/free-solid-svg-icons";
 import Dropdown from "@/Components/Dropdown";
 import SideNav from "@/Components/SideNav";

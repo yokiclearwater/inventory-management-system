@@ -9,8 +9,10 @@ use App\Models\Brand;
 use App\Models\Category;
 use App\Models\Item;
 use App\Models\ItemStatus;
+use App\Models\Location;
 use App\Models\Product;
 use App\Models\ProductModel;
+use App\Models\Unit;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -36,11 +38,7 @@ class ItemController extends Controller
      */
     public function index(Request $request)
     {
-        $items = Item::when($request->search, function ($query, $search) {
-            $query->where('serial_no', 'LIKE', "%$search%")->orWhereHas('product', function ($q) use ($search) {
-                $q->where('name', 'LIKE', "%$search%");
-            });
-        })->when($request->category, function ($query, $search) {
+        $items = Item::when($request->category, function ($query, $search) {
             $query->whereHas('product', function ($q) use ($search) {
                 $q->whereHas('category', function ($qc) use ($search) {
                     $qc->where('name', 'LIKE', "%$search%");
@@ -59,7 +57,6 @@ class ItemController extends Controller
                 });
             });
         })->with('product')->with('status')->paginate(10)->withQueryString();
-
 
         $user = Auth::user();
 
@@ -86,11 +83,10 @@ class ItemController extends Controller
     {
         $products = Product::all();
         $statuses = ItemStatus::all();
+        $units = Unit::all();
+        $locations = Location::all();
 
-        return Inertia::render('Item/Create', [
-            'products' => $products,
-            'statuses' => $statuses,
-        ]);
+        return Inertia::render('Item/Create', compact('products', 'statuses', 'locations'));
     }
 
     /**
@@ -99,10 +95,12 @@ class ItemController extends Controller
      * @param \Illuminate\Http\Request $request
      * @return \Illuminate\Http\Response
      */
-    public function store(ItemRequest $request)
+    public function store(Request $request)
     {
-        $request->validated();
-        Item::create($request->all());
+        dd($request->toArray());
+
+        // $request->validated();
+        // Item::create($request->all());
     }
 
     /**

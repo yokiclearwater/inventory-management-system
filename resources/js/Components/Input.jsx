@@ -11,6 +11,7 @@ export default function Input({
     handleChange,
     defaultChecked = false,
     placeholder = '',
+    handleInput,
 }) {
     const input = useRef();
 
@@ -34,7 +35,8 @@ export default function Input({
                 ref={input}
                 autoComplete={autoComplete}
                 required={required}
-                onChange={(e) => handleChange(e)}
+                onChange={handleChange}
+                onInput={handleInput}
                 placeholder={placeholder}
             />
         </div>

@@ -92,15 +92,16 @@ class ProductController extends Controller
     public function store(ProductRequest $request)
     {
         $request->validated();
-        $product = new Product();
-        $product->name = $request->name;
-        $product->description = $request->description;
-        $product->category_id = $request->category_id;
-        $product->brand_id = $request->brand_id;
-        $product->model_id = $request->model_id;
-        $product->save();
+        Product::create($request->all());
+        // $product = new Product();
+        // $product->name = $request->name;
+        // $product->description = $request->description;
+        // $product->category_id = $request->category_id;
+        // $product->brand_id = $request->brand_id;
+        // $product->model_id = $request->model_id;
+        // $product->save();
 
-//        return Redirect::route('products.index');
+       return Redirect::route('products.index');
     }
 
     /**

@@ -13,8 +13,12 @@ return new class extends Migration
      */
     public function up()
     {
-        Schema::table('users', function (Blueprint $table) {
-            $table->foreignId('role_id')->default(1)->constrained('roles');
+        Schema::create('locations', function (Blueprint $table) {
+            $table->id();
+            $table->string('product_location');
+            $table->string('inventory_location');
+            $table->text('description');
+            $table->timestamps();
         });
     }
 
@@ -25,9 +29,6 @@ return new class extends Migration
      */
     public function down()
     {
-        Schema::table('users', function (Blueprint $table) {
-            $table->dropForeign(['role_id']);
-            $table->dropColumn('role_id');
-        });
+        Schema::dropIfExists('locations');
     }
 };

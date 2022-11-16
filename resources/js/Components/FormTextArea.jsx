@@ -1,9 +1,16 @@
 import React from "react";
 import Label from "@/Components/Label";
 import InputError from "@/Components/InputError";
-import Input from "@/Components/Input";
+import TextArea from "@/Components/TextArea";
 
-function FormInput({ placeholder, type = "text", name, formErrorMessage, formDataValue, handleChange, handleInput }) {
+function FormTextArea({
+    placeholder,
+    name,
+    formErrorMessage,
+    formDataValue,
+    handleChange,
+    processing,
+}) {
     return (
         <div>
             <Label
@@ -12,16 +19,13 @@ function FormInput({ placeholder, type = "text", name, formErrorMessage, formDat
                 value={placeholder}
             />
 
-            <Input
-                type={type}
+            <TextArea
+                className="w-full text-lg"
+                placeholder={placeholder}
+                processing={processing}
                 name={name}
                 value={formDataValue}
-                className="mt-1 block w-full text-lg"
-                autoComplete="off"
-                isFocused={true}
                 handleChange={handleChange}
-                placeholder={placeholder}
-                handleInput={handleInput}
             />
 
             <InputError message={formErrorMessage} className="mt-2" />
@@ -29,4 +33,4 @@ function FormInput({ placeholder, type = "text", name, formErrorMessage, formDat
     );
 }
 
-export default FormInput;
+export default FormTextArea;

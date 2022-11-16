@@ -29,7 +29,7 @@ const View = (props) => {
                             <FontAwesomeIcon icon={faBackward} /> Back
                         </a>
                     </div>
-                    <div className="bg-white shadow-sm sm:rounded-lg p-4">
+                    <div className="bg-white shadow-sm rounded-lg p-4">
                         <div className="flex flex-col gap-4 p-4">
                             <div className="flex flex-row flex-wrap justify-between text-blue-800 font-semibold text-3xl md:text-4xl border-b-2 py-4 border-gray-400">
                                 <div>Log Detail</div>
