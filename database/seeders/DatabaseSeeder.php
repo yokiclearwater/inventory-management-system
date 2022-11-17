@@ -32,7 +32,7 @@ class DatabaseSeeder extends Seeder
             'name' => 'Super Admin',
             'email' => 'super_admin@ims.com',
             'email_verified_at' => now(),
-            'password' => Hash::make('Super@Admin[$]2022'), // password
+            'password' => Hash::make('password'), // password
             'remember_token' => Str::random(10),
             'role_id' => 3,
         ]);

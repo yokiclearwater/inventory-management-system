@@ -7,16 +7,11 @@ import { faBackward } from "@fortawesome/free-solid-svg-icons";
 
 const View = (props) => {
     const product = props.product;
-    const category = props.category;
-    const brand = props.brand;
-    const model = props.model;
+
+    console.log(product);
 
     return (
-        <Main
-            auth={props.auth}
-            errors={props.errors}
-            title="Products"
-        >
+        <Main auth={props.auth} errors={props.errors} title="Products">
             <Head title="View Product" />
 
             <div className="py-12">
@@ -31,7 +26,11 @@ const View = (props) => {
                     </div>
                     <div className="bg-white shadow-sm rounded-lg p-4">
                         <div className="flex flex-col gap-4 p-4">
-                            <div className={"flex flex-row flex-wrap justify-between text-blue-800 font-semibold text-3xl md:text-4xl border-b-2 py-4 border-gray-400"}>
+                            <div
+                                className={
+                                    "flex flex-row flex-wrap justify-between text-blue-800 font-semibold text-3xl md:text-4xl border-b-2 py-4 border-gray-400"
+                                }
+                            >
                                 <div>Product Detail</div>
                             </div>
                             <div className="md:text-2xl text-xl border-b-2 border-r-2 border-blue-600 py-4 text-blue-600">
@@ -42,16 +41,33 @@ const View = (props) => {
                             </div>
                             <div className="md:text-2xl text-xl border-b-2 border-r-2 border-blue-600 py-4 text-blue-600">
                                 Description:
-                                <p className={"py-4 px-2"}>{product.description}</p>
+                                <p className={"py-4 px-2"}>
+                                    {product.description}
+                                </p>
                             </div>
                             <div className="md:text-2xl text-xl border-b-2 border-r-2 border-blue-600 py-4 text-blue-600">
-                                <a className="hover:text-blue-700 hover:font-semibold" href={route('categories.show', category.id)}>Category: {category.name}</a>
+                                <a
+                                    className="hover:text-blue-700 hover:font-semibold cursor-pointer"
+                                    href={product.category && route("categories.show", product.category.id)}
+                                >
+                                    Category: {product.category && product.category.name}
+                                </a>
                             </div>
                             <div className="md:text-2xl text-xl border-b-2 border-r-2 border-blue-600 py-4 text-blue-600">
-                                <a className="hover:text-blue-700 hover:font-semibold" href={route('categories.show', brand.id)}>Brand: {brand.name}</a>
+                                <a
+                                    className="hover:text-blue-700 hover:font-semibold cursor-pointer"
+                                    href={product.brand && route("brands.show", product.brand.id)}
+                                >
+                                    Brand: {product.brand && product.brand.name}
+                                </a>
                             </div>
                             <div className="md:text-2xl text-xl border-b-2 border-r-2 border-blue-600 py-4 text-blue-600">
-                                <a className="hover:text-blue-700 hover:font-semibold" href={route('models.show', model.id)}>Model: {model.name}</a>
+                                <a
+                                    className="hover:text-blue-700 hover:font-semibold cursor-pointer"
+                                    href={product.model && route("models.show", product.model.id)}
+                                >
+                                    Model: {product.model && product.model.name}
+                                </a>
                             </div>
                         </div>
                     </div>

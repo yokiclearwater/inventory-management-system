@@ -93,7 +93,7 @@ const View = (props) => {
                                     "md:text-2xl text-xl border-b-2 border-r-2 border-blue-600 py-4 text-blue-600"
                                 }
                             >
-                                Location: {`${item.location.product_location}, ${item.location.inventory_location}`}
+                                Location: {item.location && `${item.location.product_location}, ${item.location.inventory_location}`}
                             </div>
                             <div
                                 className={
@@ -108,6 +108,12 @@ const View = (props) => {
                                 }
                             >
                                 Out of Stock: {item.out_of_stock_date}
+                            </div>
+                            <div className="md:text-2xl text-xl border-b-2 border-r-2 border-blue-600 py-4 text-blue-600">
+                                Description:
+                                <p className="py-4 px-2">
+                                    {item.description}
+                                </p>
                             </div>
                         </div>
                     </div>

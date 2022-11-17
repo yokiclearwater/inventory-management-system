@@ -112,16 +112,12 @@ class ProductController extends Controller
      */
     public function show($id)
     {
-        $product = Product::findOrFail($id);
-        $category = $product->category;
-        $brand = $product->brand;
-        $model = $product->model;
+        $product = Product::with('model')->with('category')->with('brand')->findOrFail($id);
+
+        // dd($product->toArray());
 
         return Inertia::render('Product/View', [
             'product' => $product,
-            'category' => $category,
-            'brand' => $brand,
-            'model' => $model,
         ]);
     }
 
@@ -203,7 +199,7 @@ class ProductController extends Controller
         ]);
         $html = view("products", compact('products'));
         $mpdf->writeHTML($html);
-        $mpdf->Output('products.pdf', 'D');
+        $mpdf->Output('products.pdf', 'I');
 
         return Redirect::route('products.index');
     }

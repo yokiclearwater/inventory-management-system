@@ -130,7 +130,7 @@ class LocationController extends Controller
         ]);
         $html = view("locations", compact('locations'));
         $mpdf->writeHTML($html);
-        $mpdf->Output('locations.pdf', 'D');
+        $mpdf->Output('locations.pdf', 'I');
 
         return Redirect::route('locations.index');
     }

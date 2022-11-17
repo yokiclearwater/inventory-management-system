@@ -3,6 +3,7 @@
 use App\Http\Controllers\AuditLogController;
 use App\Http\Controllers\BrandController;
 use App\Http\Controllers\CategoryController;
+use App\Http\Controllers\EditProfileController;
 use App\Http\Controllers\ItemController;
 use App\Http\Controllers\LocationController;
 use App\Http\Controllers\ProductController;
@@ -86,6 +87,12 @@ Route::middleware(['auth', 'verified'])->group(function () {
     require __DIR__ . '/web/items.php';
     require __DIR__ . '/web/locations.php';
 });
+
+Route::middleware(['auth', 'verified'])->get('/edit-profile', [EditProfileController::class, 'index'])->name('edit-profile.index');
+
+Route::middleware(['auth', 'verified'])->put('/edit-profile/{user}', [EditProfileController::class, 'update'])->name('edit-profile.update');
+
+Route::middleware(['auth', 'verified'])->put('/edit-profile/change-password/{user}', [EditProfileController::class, 'update_password'])->name('edit-profile.update_password');
 
 Route::get('/roles/edit-user-role', [RoleController::class, 'edit_user_role'])->middleware(['auth', 'verified', 'role:super_admin'])->name('roles.edit_user_role');
 Route::put('/roles/update-user-role/', [RoleController::class, 'update_user_role'])->middleware(['auth', 'verified', 'role:super_admin'])->name('roles.update_user_role');

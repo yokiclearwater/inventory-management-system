@@ -26,7 +26,7 @@ class ItemsExport implements FromView, ShouldAutoSize, WithColumnWidths, WithDef
     public function columnWidths(): array
     {
         return [
-            'C' => 60,
+            'J' => 60,
         ];
     }
 

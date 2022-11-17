@@ -93,7 +93,7 @@ const Main = ({ auth, children, title = "Dashboard" }) => {
     return (
         <>
             <div className="bg-gray-200 min-h-[120vh] h-full">
-                <div className="min-h-[500px] bg-[url('https://images.hdqwalls.com/wallpapers/mountain-landscape-illustration-ls.jpg')] bg-blue-500 z-1 bg-blend-overlay absolute w-full"></div>
+                <div className="min-h-[500px] bg-blue-500 z-1 bg-blend-overlay absolute w-full"></div>
                 <SideNav navActive={showNavigation} listItems={listItems} />
                 <main className="block xl:ml-[17rem] m-l-0 relative transition-all min-h-screen min-w-screen h-full">
                     <nav className="text-white mx-4 text-xl">
@@ -107,7 +107,7 @@ const Main = ({ auth, children, title = "Dashboard" }) => {
                                         <span className="inline-flex rounded-md">
                                             <button
                                                 type="button"
-                                                className="inline-flex items-center px-3 py-2 border border-transparent text-sm leading-4 font-semibold rounded-md text-gray-500 bg-white hover:text-gray-700 focus:outline-none transition ease-in-out duration-150"
+                                                className="inline-flex items-center p-3 border border-transparent text-base leading-4 font-semibold rounded-md text-gray-500 bg-white hover:text-gray-700 focus:outline-none transition ease-in-out duration-150"
                                             >
                                                 <span className="flex gap-2">
                                                     <FontAwesomeIcon
@@ -141,6 +141,13 @@ const Main = ({ auth, children, title = "Dashboard" }) => {
                                             as="button"
                                         >
                                             {auth.user.name}
+                                        </Dropdown.Link>
+                                        <Dropdown.Link
+                                            href={route('edit-profile.index')}
+                                            method="get"
+                                            as="button"
+                                        >
+                                            Edit Profile
                                         </Dropdown.Link>
                                         <Dropdown.Link
                                             href={route("logout")}

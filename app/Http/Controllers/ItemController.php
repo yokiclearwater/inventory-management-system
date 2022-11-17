@@ -188,7 +188,7 @@ class ItemController extends Controller
         ]);
         $html = view("items", compact('items'));
         $mpdf->writeHTML($html);
-        $mpdf->Output('items.pdf', 'D');
+        $mpdf->Output('items.pdf', 'I');
 
         return Redirect::route('items.index');
     }

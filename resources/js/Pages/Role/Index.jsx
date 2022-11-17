@@ -49,13 +49,13 @@ const Index = (props) => {
                         <div className="flex flex-wrap gap-4">
                             <a
                                 href={route("roles.create")}
-                                className="bg-blue-600 text-xl hover:bg-blue-700 text-white p-2 rounded-md shadow cursor-pointer"
+                                className="bg-blue-600 text-xl hover:bg-blue-700 text-white px-4 py-3 rounded-md shadow cursor-pointer"
                             >
                                 Add New Role
                             </a>
                             <a
                                 href={route("roles.edit_user_role")}
-                                className="bg-blue-600 text-xl hover:bg-blue-700 text-white p-2 rounded-md shadow cursor-pointer"
+                                className="bg-blue-600 text-xl hover:bg-blue-700 text-white px-4 py-3 rounded-md shadow cursor-pointer"
                             >
                                 Edit User Role
                             </a>

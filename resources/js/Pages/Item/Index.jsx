@@ -83,7 +83,7 @@ const Index = (props) => {
                                         return (
                                             <option
                                                 key={category.id}
-                                                value={category.name}
+                                                // value={category.name}
                                             >
                                                 {category.name}
                                             </option>
@@ -113,7 +113,6 @@ const Index = (props) => {
                                         return (
                                             <option
                                                 key={model.id}
-                                                value={model.name}
                                             >
                                                 {model.name}
                                             </option>
@@ -143,7 +142,7 @@ const Index = (props) => {
                                         return (
                                             <option
                                                 key={brand.id}
-                                                value={brand.name}
+                                                // value={brand.name}
                                             >
                                                 {brand.name}
                                             </option>
@@ -182,7 +181,7 @@ const Index = (props) => {
                     >
                         <Input
                             handleChange={handleFilterForm}
-                            placeholder="Search Name/Serial No."
+                            placeholder="Search Product Name"
                             name={"search"}
                             autoComplete={"off"}
                         />
@@ -204,7 +203,7 @@ const Index = (props) => {
                         {props.can.create && (
                             <a
                                 href={route("items.create")}
-                                className="bg-blue-600 text-xl hover:bg-blue-700 text-white p-2 rounded-md shadow cursor-pointer"
+                                className="bg-blue-600 text-xl hover:bg-blue-700 text-white px-4 py-3 rounded-md shadow cursor-pointer"
                             >
                                 Add New Item
                             </a>
@@ -302,13 +301,13 @@ const Index = (props) => {
                                                             className="py-2 px-4"
                                                             scope="col"
                                                         >
-                                                            {`${item.location.product_location}, ${item.location.inventory_location}`}
+                                                            {item.location && `${item.location.product_location}, ${item.location.inventory_location}`}
                                                         </td>
                                                         <td
                                                             className="py-2 px-4 capitalize min-w-[120px]"
                                                             scope="col"
                                                         >
-                                                            {item.status.type.replace(
+                                                            {item.status && item.status.type.replace(
                                                                 /_/g,
                                                                 " "
                                                             )}
