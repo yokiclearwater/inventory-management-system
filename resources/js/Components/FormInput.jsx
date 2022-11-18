@@ -7,7 +7,7 @@ function FormInput({ placeholder, type = "text", name, formErrorMessage, formDat
     return (
         <div>
             <Label
-                className={"!text-xl py-2"}
+                className={"py-2"}
                 forInput={name}
                 value={placeholder}
             />

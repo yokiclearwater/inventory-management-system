@@ -73,7 +73,7 @@ class ProductModelController extends Controller
         $model->description = $request->description;
         $model->save();
 
-//        return Redirect::route('models.index');
+       return Redirect::route('models.index');
     }
 
     /**

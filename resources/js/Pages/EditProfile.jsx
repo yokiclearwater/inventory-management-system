@@ -7,6 +7,7 @@ import FormInput from "@/Components/FormInput";
 import FormTextArea from "@/Components/FormTextArea";
 import Button from "@/Components/Button";
 import Swal from "sweetalert2";
+import FormInputPassword from '@/Components/FormInputPassword';
 
 function EditProfile(props) {
     const user = props.user;
@@ -16,7 +17,11 @@ function EditProfile(props) {
         email: user.email,
     });
 
-    const passwordForm = useForm();
+    const passwordForm = useForm({
+        current_password: "",
+        new_password: "",
+        new_password_confirmation: "",
+    });
 
     const profileSubmit = (e) => {
         e.preventDefault();
@@ -97,21 +102,21 @@ function EditProfile(props) {
                     />
                 </FormContainer>
                 <FormContainer form={passwordForm} handleSubmit={passwordSubmit} title="Change Password" buttonPlaceholder={"Set Password"} >
-                    <FormInput
+                    <FormInputPassword
                         formDataValue={passwordForm.data.current_password}
                         placeholder={"Current Password"}
                         formErrorMessage={passwordForm.errors.current_password}
                         handleChange={passwordFormChange}
                         name={"current_password"}
                     />
-                    <FormInput
+                    <FormInputPassword
                         formDataValue={passwordForm.data.new_password}
                         placeholder={"New Password"}
                         formErrorMessage={passwordForm.errors.new_password}
                         handleChange={passwordFormChange}
                         name={"new_password"}
                     />
-                    <FormInput
+                    <FormInputPassword
                         formDataValue={passwordForm.data.new_password_confirmation}
                         placeholder={"Confirm New Password"}
                         formErrorMessage={passwordForm.errors.new_password_confirmation}
