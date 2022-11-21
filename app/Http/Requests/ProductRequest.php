@@ -29,9 +29,9 @@ class ProductRequest extends FormRequest
         return [
             'name' => ['required', 'max:120', Rule::unique('products', 'name')->ignore($id, 'id')],
             'description' => ['required'],
-            'model_id' => ['required', 'integer'],
-            'brand_id' => ['required', 'integer'],
-            'category_id' => ['required', 'integer'],
+            'model_id' => ['required', 'integer', 'exists:models,id'],
+            'brand_id' => ['required', 'integer', 'exists:brands,id'],
+            'category_id' => ['required', 'integer', 'exists:categories,id'],
         ];
     }
 

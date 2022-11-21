@@ -69,7 +69,7 @@ const Create = (props) => {
                         <FormSelect name={"location_id"} formDataValue={form.data.location_id} placeholder={"Locations (Product Location, Inventory Location)"} handleChange={onHandleChange} formErrorMessage={form.errors.location_id} className={"uppercase"}>
                             <option value={""} disabled>Select A Location</option>
                             {props.locations.map((location) => (
-                                <option key={location.id} value={location.id}>{`${location.product_location}, ${location.inventory_location}`}</option>
+                                <option key={location.id}>{`${location.product_location}, ${location.inventory_location}`}</option>
                             ))}
                         </FormSelect>
                         <FormInput name={"received_by"} formDataValue={form.data.received_by} placeholder={"Received By"} handleChange={onHandleChange} formErrorMessage={form.errors.received_by}  />
@@ -79,7 +79,7 @@ const Create = (props) => {
                         <FormSelect name={"status_id"} formDataValue={form.data.status_id} placeholder={"Status"} handleChange={onHandleChange} formErrorMessage={form.errors.status_id} className={"uppercase"}>
                             <option value={""} disabled>Select A Status</option>
                             {props.statuses.map((status) => (
-                                <option key={status.id} value={status.id}>{(status.type).replaceAll('_', ' ').toUpperCase()}</option>
+                                <option key={status.id}>{(status.type).replaceAll('_', ' ').toUpperCase()}</option>
                             ))}
                         </FormSelect>
                         <FormTextArea formDataValue={form.data.description} formErrorMessage={form.errors.description} handleChange={onHandleChange} name={"description"} placeholder={"Item Description (Optional)"} processing={form.processing} />

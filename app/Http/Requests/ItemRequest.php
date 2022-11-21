@@ -27,15 +27,15 @@ class ItemRequest extends FormRequest
         $id = $this->route('item');
 
         return [
-            'product_id' => ['required'],
-            'unit' => ['required'],
+            'product_id' => ['required', 'integer', 'exists:products,id'],
+            'unit' => ['required', 'string'],
             'quantity' => ['required', 'integer'],
-            'received_by' => ['required'],
-            'issued_by' => ['required'],
+            'received_by' => ['required', 'string'],
+            'issued_by' => ['required', 'string'],
             'in_stock_date' => ['required', 'date'],
-            'location_id' => ['required'],
+            'location_id' => ['required', 'integer', 'exists:locations,id'],
             'out_of_stock_date' => ['date', 'nullable'],
-            'status_id' => ['required'],
+            'status_id' => ['required', 'integer', 'exists:item_statuses,id'],
         ];
     }
 
