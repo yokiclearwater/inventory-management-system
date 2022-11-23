@@ -13,7 +13,7 @@ class Item extends Model implements Auditable
 
     protected $fillable = [
         'product_id',
-        'unit',
+        'unit_id',
         'received_by',
         'issued_by',
         'quantity',
@@ -33,5 +33,9 @@ class Item extends Model implements Auditable
 
     public function location() {
         return $this->hasOne(Location::class, 'id', 'location_id');
+    }
+
+    public function unit() {
+        return $this->hasOne(Unit::class, 'id', 'unit_id');
     }
 }

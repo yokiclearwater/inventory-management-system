@@ -10,7 +10,7 @@ const View = (props) => {
 
     return (
         <Main auth={props.auth} errors={props.errors} title="Items">
-            <Head title="View Category" />
+            <Head title="View Item" />
 
             <div className="py-12">
                 <div className="max-w-full mx-auto sm:px-6 lg:px-8">
@@ -65,7 +65,8 @@ const View = (props) => {
                                     "md:text-2xl text-xl border-b-2 border-r-2 border-blue-600 py-4 text-blue-600"
                                 }
                             >
-                                Unit: {item.unit}
+                                Unit:{" "}
+                                {item.unit.name && item.unit.name.toUpperCase()}
                             </div>
                             <div
                                 className={
@@ -93,7 +94,19 @@ const View = (props) => {
                                     "md:text-2xl text-xl border-b-2 border-r-2 border-blue-600 py-4 text-blue-600"
                                 }
                             >
-                                Location: {item.location && `${item.location.product_location}, ${item.location.inventory_location}`}
+                                <a
+                                    className={
+                                        "hover:text-blue-700 hover:font-semibold"
+                                    }
+                                    href={item.location && route(
+                                        "locations.show",
+                                        item.location_id
+                                    )}
+                                >
+                                    Location:{" "}
+                                    {item.location &&
+                                        `${item.location.product_location}, ${item.location.inventory_location}`}
+                                </a>
                             </div>
                             <div
                                 className={
@@ -111,9 +124,7 @@ const View = (props) => {
                             </div>
                             <div className="md:text-2xl text-xl border-b-2 border-r-2 border-blue-600 py-4 text-blue-600">
                                 Description:
-                                <p className="py-4 px-2">
-                                    {item.description}
-                                </p>
+                                <p className="py-4 px-2">{item.description}</p>
                             </div>
                         </div>
                     </div>

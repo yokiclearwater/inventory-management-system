@@ -60,7 +60,7 @@ class ItemController extends Controller
                     $qc->where('name', 'LIKE', "%$search%");
                 });
             });
-        })->with('product')->with('location')->with('status')->paginate(10)->withQueryString();
+        })->with('product')->with('unit')->with('location')->with('status')->paginate(10)->withQueryString();
 
         $user = Auth::user();
 
@@ -90,7 +90,7 @@ class ItemController extends Controller
         $units = Unit::all();
         $locations = Location::all();
 
-        return Inertia::render('Item/Create', compact('products', 'statuses', 'locations'));
+        return Inertia::render('Item/Create', compact('products', 'statuses', 'locations', 'units'));
     }
 
     /**
@@ -103,6 +103,8 @@ class ItemController extends Controller
     {
         $request->validated();
         Item::create($request->all());
+
+        return Redirect::route('items.index');
     }
 
     /**
@@ -113,7 +115,7 @@ class ItemController extends Controller
      */
     public function show($id)
     {
-        $item = Item::with('product')->with('status')->with('location')->find($id);
+        $item = Item::with('product')->with('status')->with('location')->with('unit')->find($id);
 
         return Inertia::render('Item/View', ['item' => $item]);
     }
@@ -130,12 +132,14 @@ class ItemController extends Controller
         $products = Product::all();
         $statuses = ItemStatus::all();
         $locations = Location::all();
+        $units = Unit::all();
 
         return Inertia::render('Item/Edit', [
             'statuses' => $statuses,
             'item' => $item,
             'products' => $products,
             'locations' => $locations,
+            'units' => $units,
         ]);
     }
 

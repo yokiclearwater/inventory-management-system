@@ -28,7 +28,7 @@ class ItemRequest extends FormRequest
 
         return [
             'product_id' => ['required', 'integer', 'exists:products,id'],
-            'unit' => ['required', 'string'],
+            'unit_id' => ['required', 'integer', 'exists:units,id'],
             'quantity' => ['required', 'integer'],
             'received_by' => ['required', 'string'],
             'issued_by' => ['required', 'string'],
@@ -48,6 +48,7 @@ class ItemRequest extends FormRequest
     {
         return [
             'product_id' => 'product',
+            'unit_id' => 'unit',
             'received_by' => 'receiver',
             'issued_by' => 'issuer',
             'in_stock_date' => 'in stock date',

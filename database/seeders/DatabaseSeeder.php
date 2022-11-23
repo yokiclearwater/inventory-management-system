@@ -25,7 +25,7 @@ class DatabaseSeeder extends Seeder
             PermissionSeeder::class,
             RolePermissionSeeder::class,
             ItemStatusSeeder::class,
-            // UnitSeeder::class,
+            UnitSeeder::class,
         ]);
 
         User::create([

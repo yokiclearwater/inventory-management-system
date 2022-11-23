@@ -46,7 +46,7 @@ class ItemController extends Controller
                     $qc->where('name', 'LIKE', "%$search%");
                 });
             });
-        })->with('product')->with('location')->with('status')->paginate(10)->withQueryString();
+        })->with('product')->with('unit')->with('location')->with('status')->paginate(10)->withQueryString();
 
         return $items;
     }
@@ -75,7 +75,7 @@ class ItemController extends Controller
      */
     public function show($id)
     {
-        return Item::find($id);
+        return Item::with('product')->with('status')->with('unit')->with('location')->find($id);
     }
 
     /**

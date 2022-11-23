@@ -20,7 +20,7 @@ const Edit = (props) => {
 
     const form = useForm({
         product_id: item.product_id,
-        unit: item.unit,
+        unit_id: item.unit_id,
         quantity: item.quantity,
         received_by: item.received_by,
         issued_by: item.issued_by,
@@ -87,7 +87,12 @@ const Edit = (props) => {
                                 <option key={product.id} value={product.id}>{product.name}</option>
                             ))}
                         </FormSelect>
-                        <FormInput name={"unit"} formDataValue={form.data.unit} placeholder={"Unit (Ex: PCS, SET, BOX)"} handleChange={onHandleChange} formErrorMessage={form.errors.unit}  />
+                        <FormSelect name={"unit_id"} formDataValue={form.data.unit_id} placeholder={"Unit"} handleChange={onHandleChange} formErrorMessage={form.errors.unit_id} className={"uppercase"}>
+                            <option value={""} disabled>Select A Unit</option>
+                            {props.units.map((unit) => (
+                                <option key={unit.id} value={unit.id}>{unit.name}</option>
+                            ))}
+                        </FormSelect>
                         <FormInput name={"quantity"} formDataValue={form.data.quantity} placeholder={"Quantity"} handleChange={onHandleChange} formErrorMessage={form.errors.quantity}  />
                         <FormSelect name={"location_id"} formDataValue={form.data.location_id} placeholder={"Locations (Product Location, Inventory Location)"} handleChange={onHandleChange} formErrorMessage={form.errors.location_id} className={"uppercase"}>
                             <option value={""} disabled>Select A Location</option>

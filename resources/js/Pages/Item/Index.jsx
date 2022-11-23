@@ -289,7 +289,7 @@ const Index = (props) => {
                                                             className="py-2 px-4"
                                                             scope="col"
                                                         >
-                                                            {item.unit}
+                                                            {item.unit && item.unit.name.toUpperCase()}
                                                         </td>
                                                         <td
                                                             className="py-2 px-4"

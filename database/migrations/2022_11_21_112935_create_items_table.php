@@ -16,7 +16,7 @@ return new class extends Migration
         Schema::create('items', function (Blueprint $table) {
             $table->id();
             $table->foreignId('product_id')->constrained('products')->cascadeOnDelete();
-            $table->string('unit');
+            $table->foreignId('unit_id')->nullable()->constrained('units')->nullOnDelete();
             $table->integer('quantity')->default(0);
             $table->text('description')->default("N/A")->nullable();
             $table->string('received_by')->nullable();

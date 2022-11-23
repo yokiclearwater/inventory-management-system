@@ -60,7 +60,7 @@
         <tr>
             <th>{{ $item->id }}</th>
             <td>{{ $item->product->name }}</td>
-            <td>{{ $item->unit }}</td>
+            <td>{{ strtoupper($item->unit->name) }}</td>
             <td>{{ $item->quantity }}</td>
             <td>{{ $item->received_by }}</td>
             <td>{{ $item->issued_by }}</td>

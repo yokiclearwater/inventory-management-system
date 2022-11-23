@@ -12,6 +12,7 @@ import FormTextArea from "@/Components/FormTextArea";
 const Create = (props) => {
     const form = useForm({
         product_id: "",
+        unit_id: "",
         unit: "",
         quantity: "",
         received_by: "",
@@ -64,12 +65,17 @@ const Create = (props) => {
                                 <option key={product.id} value={product.id}>{product.name}</option>
                             ))}
                         </FormSelect>
-                        <FormInput name={"unit"} formDataValue={form.data.unit} placeholder={"Unit (Ex: PCS, SET, BOX)"} handleChange={onHandleChange} formErrorMessage={form.errors.unit}  />
+                        <FormSelect name={"unit_id"} formDataValue={form.data.unit_id} placeholder={"Unit"} handleChange={onHandleChange} formErrorMessage={form.errors.unit_id} className={"uppercase"}>
+                            <option value={""} disabled>Select A Unit</option>
+                            {props.units.map((unit) => (
+                                <option key={unit.id} value={unit.id}>{unit.name}</option>
+                            ))}
+                        </FormSelect>
                         <FormInput type="number" name={"quantity"} formDataValue={form.data.quantity} placeholder={"Quantity"} handleInput={(e) => form.setData(e.target.name, Math.abs(Math.round(e.target.value)))} formErrorMessage={form.errors.quantity}  />
                         <FormSelect name={"location_id"} formDataValue={form.data.location_id} placeholder={"Locations (Product Location, Inventory Location)"} handleChange={onHandleChange} formErrorMessage={form.errors.location_id} className={"uppercase"}>
                             <option value={""} disabled>Select A Location</option>
                             {props.locations.map((location) => (
-                                <option key={location.id}>{`${location.product_location}, ${location.inventory_location}`}</option>
+                                <option key={location.id} value={location.id}>{`${location.product_location}, ${location.inventory_location}`}</option>
                             ))}
                         </FormSelect>
                         <FormInput name={"received_by"} formDataValue={form.data.received_by} placeholder={"Received By"} handleChange={onHandleChange} formErrorMessage={form.errors.received_by}  />
@@ -79,7 +85,7 @@ const Create = (props) => {
                         <FormSelect name={"status_id"} formDataValue={form.data.status_id} placeholder={"Status"} handleChange={onHandleChange} formErrorMessage={form.errors.status_id} className={"uppercase"}>
                             <option value={""} disabled>Select A Status</option>
                             {props.statuses.map((status) => (
-                                <option key={status.id}>{(status.type).replaceAll('_', ' ').toUpperCase()}</option>
+                                <option key={status.id} value={status.id}>{(status.type).replaceAll('_', ' ').toUpperCase()}</option>
                             ))}
                         </FormSelect>
                         <FormTextArea formDataValue={form.data.description} formErrorMessage={form.errors.description} handleChange={onHandleChange} name={"description"} placeholder={"Item Description (Optional)"} processing={form.processing} />
