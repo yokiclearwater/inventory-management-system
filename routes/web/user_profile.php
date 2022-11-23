@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\EditProfileController;
 use Illuminate\Support\Facades\Route;
 
 Route::get('/edit-profile', [EditProfileController::class, 'index'])->name('edit-profile.index');

@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\EditProfileController;
 use App\Http\Controllers\RoleController;
+use App\Http\Controllers\StockOutReportController;
 use App\Models\Brand;
 use App\Models\Category;
 use App\Models\Item;
@@ -80,6 +81,11 @@ Route::middleware(['auth', 'verified'])->group(function () {
     require __DIR__ . '/web/locations.php';
     require __DIR__ . '/web/user_profile.php';
 });
+
+
+Route::resource('stock-out-reports', StockOutReportController::class);
+
+
 
 Route::get('/roles/edit-user-role', [RoleController::class, 'edit_user_role'])->middleware(['auth', 'verified', 'role:super_admin'])->name('roles.edit_user_role');
 Route::put('/roles/update-user-role/', [RoleController::class, 'update_user_role'])->middleware(['auth', 'verified', 'role:super_admin'])->name('roles.update_user_role');

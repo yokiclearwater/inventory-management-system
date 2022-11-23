@@ -3,7 +3,7 @@ import Label from "@/Components/Label";
 import InputError from "@/Components/InputError";
 import Input from "@/Components/Input";
 
-function FormInput({ placeholder, type = "text", name, formErrorMessage, formDataValue, handleChange, handleInput }) {
+function FormInput({ readOnly = false, placeholder, type = "text", name, formErrorMessage, formDataValue, handleChange, handleInput }) {
     return (
         <div>
             <Label
@@ -22,6 +22,7 @@ function FormInput({ placeholder, type = "text", name, formErrorMessage, formDat
                 handleChange={handleChange}
                 placeholder={placeholder}
                 handleInput={handleInput}
+                readOnly={readOnly}
             />
 
             <InputError message={formErrorMessage} className="mt-2" />

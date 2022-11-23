@@ -15,7 +15,8 @@ return new class extends Migration
     {
         Schema::create('items', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('product_id')->constrained('products')->cascadeOnDelete();
+            $table->foreignId('product_id')->constrained('products')->restrictOnDelete();
+            $table->string('part_number')->nullable();
             $table->foreignId('unit_id')->nullable()->constrained('units')->nullOnDelete();
             $table->integer('quantity')->default(0);
             $table->text('description')->default("N/A")->nullable();
@@ -23,8 +24,6 @@ return new class extends Migration
             $table->string('issued_by')->nullable();
             $table->foreignId('location_id')->nullable()->constrained('locations')->nullOnDelete();
             $table->date('in_stock_date');
-            $table->date('out_of_stock_date')->nullable();
-            $table->foreignId('status_id')->constrained('item_statuses')->cascadeOnDelete();
             $table->timestamps();
         });
     }

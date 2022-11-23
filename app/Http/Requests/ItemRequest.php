@@ -28,14 +28,12 @@ class ItemRequest extends FormRequest
 
         return [
             'product_id' => ['required', 'integer', 'exists:products,id'],
+            'part_number' => ['string', 'nullable'],
             'unit_id' => ['required', 'integer', 'exists:units,id'],
-            'quantity' => ['required', 'integer'],
             'received_by' => ['required', 'string'],
             'issued_by' => ['required', 'string'],
             'in_stock_date' => ['required', 'date'],
             'location_id' => ['required', 'integer', 'exists:locations,id'],
-            'out_of_stock_date' => ['date', 'nullable'],
-            'status_id' => ['required', 'integer', 'exists:item_statuses,id'],
         ];
     }
 
@@ -52,8 +50,6 @@ class ItemRequest extends FormRequest
             'received_by' => 'receiver',
             'issued_by' => 'issuer',
             'in_stock_date' => 'in stock date',
-            'out_of_stock_date' => 'out of stock date',
-            'status_id' => 'status',
         ];
     }
 }

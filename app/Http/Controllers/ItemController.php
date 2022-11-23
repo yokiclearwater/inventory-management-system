@@ -17,6 +17,7 @@ use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Redirect;
+use Illuminate\Validation\ValidationException;
 use Inertia\Inertia;
 use Maatwebsite\Excel\Facades\Excel;
 use Mpdf\Mpdf;
@@ -41,7 +42,7 @@ class ItemController extends Controller
         $items = Item::when($request->search, function ($query, $search) {
             $query->whereHas('product', function ($q) use ($search) {
                 $q->where('name', 'LIKE', "%$search%");
-            });
+            })->orWhere('part_number', 'LIKE', "%$search%");
         })->when($request->category, function ($query, $search) {
             $query->whereHas('product', function ($q) use ($search) {
                 $q->whereHas('category', function ($qc) use ($search) {
@@ -166,9 +167,17 @@ class ItemController extends Controller
      */
     public function destroy($id)
     {
-        Item::destroy($id);
+        $item = Item::find($id);
+        // dd($item->toArray());
 
-        return Redirect::route('items.index');
+        if(!$item->stock_out_reports->isEmpty()) {
+            throw ValidationException::withMessages([
+                'message' => 'You cannot delete an item with stock report on it',
+            ]);
+        }
+
+
+        // return Redirect::route('items.index');
     }
 
     public function export($method = "xlsx")

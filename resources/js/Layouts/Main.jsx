@@ -14,6 +14,7 @@ import {
     faPerson,
     faCubesStacked,
     faMap,
+    faPaperPlane,
 } from "@fortawesome/free-solid-svg-icons";
 import Dropdown from "@/Components/Dropdown";
 import SideNav from "@/Components/SideNav";
@@ -28,6 +29,13 @@ const Main = ({ auth, children, title = "Dashboard" }) => {
             color: "text-green-500",
             route: "dashboard",
             activeRoute: "dashboard",
+        },
+        {
+            icon: faPaperPlane,
+            label: "Stock Reports",
+            color: "text-amber-500",
+            route: "stock-out-reports.index",
+            activeRoute: "stock-out-reports.*",
         },
         {
             icon: faClock,

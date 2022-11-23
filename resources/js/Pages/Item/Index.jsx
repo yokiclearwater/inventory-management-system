@@ -37,7 +37,7 @@ const Index = (props) => {
                         });
                         Swal.fire("Deleted Successfully", "", "success");
                     },
-                    onError: () => Swal.fire("Deleted Error", "", "error"),
+                    onError: () => Swal.fire("Deleted Error", "You cannot delete an item with existing stock report", "error"),
                 });
             }
         });
@@ -236,6 +236,12 @@ const Index = (props) => {
                                                     className="py-3 px-4"
                                                     scope="col"
                                                 >
+                                                    Part Number
+                                                </th>
+                                                <th
+                                                    className="py-3 px-4"
+                                                    scope="col"
+                                                >
                                                     Unit
                                                 </th>
                                                 <th
@@ -249,12 +255,6 @@ const Index = (props) => {
                                                     scope="col"
                                                 >
                                                     Location
-                                                </th>
-                                                <th
-                                                    className="py-3 px-4"
-                                                    scope="col"
-                                                >
-                                                    Status
                                                 </th>
                                                 <th
                                                     className="py-3 px-4"
@@ -280,10 +280,16 @@ const Index = (props) => {
                                                             {item.id}
                                                         </th>
                                                         <td
-                                                            className="py-2 px-4 min-w-[300px]"
+                                                            className="py-2 px-4 max-w-[200px]"
                                                             scope="col"
                                                         >
                                                             {item.product.name}
+                                                        </td>
+                                                        <td
+                                                            className="py-2 px-4 max-w-[200px] break-words"
+                                                            scope="col"
+                                                        >
+                                                            {item.part_number}
                                                         </td>
                                                         <td
                                                             className="py-2 px-4"
@@ -304,15 +310,6 @@ const Index = (props) => {
                                                             {item.location && `${item.location.product_location}, ${item.location.inventory_location}`}
                                                         </td>
                                                         <td
-                                                            className="py-2 px-4 capitalize min-w-[120px]"
-                                                            scope="col"
-                                                        >
-                                                            {item.status && item.status.type.replace(
-                                                                /_/g,
-                                                                " "
-                                                            )}
-                                                        </td>
-                                                        <td
                                                             className="py-2 px-4 inline-flex space-x-2 items-center justify-start"
                                                             scope="col"
                                                         >
@@ -327,8 +324,7 @@ const Index = (props) => {
                                                                     View
                                                                 </a>
                                                             )}
-                                                            {props.can
-                                                                .update && (
+                                                            {props.can.update && (
                                                                 <a
                                                                     className="hover:underline cursor-pointer text-blue-600 font-semibold"
                                                                     href={route(

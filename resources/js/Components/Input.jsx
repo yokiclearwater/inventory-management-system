@@ -12,6 +12,7 @@ export default function Input({
     defaultChecked = false,
     placeholder = '',
     handleInput,
+    readOnly = false,
 }) {
     const input = useRef();
 
@@ -38,6 +39,7 @@ export default function Input({
                 onChange={handleChange}
                 onInput={handleInput}
                 placeholder={placeholder}
+                readOnly={readOnly}
             />
         </div>
     );

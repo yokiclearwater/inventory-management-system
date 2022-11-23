@@ -13,14 +13,13 @@ class Item extends Model implements Auditable
 
     protected $fillable = [
         'product_id',
+        'part_number',
         'unit_id',
         'received_by',
         'issued_by',
         'quantity',
         'location_id',
         'in_stock_date',
-        'out_of_stock_date',
-        'status_id',
     ];
 
     public function product() {
@@ -37,5 +36,9 @@ class Item extends Model implements Auditable
 
     public function unit() {
         return $this->hasOne(Unit::class, 'id', 'unit_id');
+    }
+
+    public function stock_out_reports() {
+        return $this->hasMany(StockOutReport::class, 'item_id', 'id');
     }
 }
