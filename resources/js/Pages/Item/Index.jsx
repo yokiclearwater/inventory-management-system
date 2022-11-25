@@ -126,7 +126,7 @@ const Index = (props) => {
                                         "font-semibold !text-xl border-b-2 py-2"
                                     }
                                 >
-                                    Product Model
+                                    Product Brand
                                 </Label>
                                 <Select
                                     defaultValue={""}

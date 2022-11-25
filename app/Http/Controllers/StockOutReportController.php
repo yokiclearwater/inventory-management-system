@@ -12,6 +12,16 @@ use Inertia\Inertia;
 
 class StockOutReportController extends Controller
 {
+    public function __construct()
+    {
+        $this->authorizeResource(StockOutReport::class);
+
+        $this->middleware('permission:create,admin')->only(['create', 'store']);
+        $this->middleware('permission:view,admin')->only(['index', 'show']);
+        $this->middleware(['permission:update,admin'])->only(['edit', 'update']);
+        $this->middleware('permission:delete,admin')->only(['destroy']);
+    }
+
     /**
      * Display a listing of the resource.
      *
@@ -26,7 +36,17 @@ class StockOutReportController extends Controller
                 })->orWhere('part_number', 'LIKE', "%$search%");
             });
         })->with('item.product')->paginate(10);
+
         $user = Auth::user();
+
+        $data = $stock_out_reports->getCollection()->transform(function ($stockOutReport) use ($user) {
+            $stockOutReport->can = [
+                'update' => $user->can('update', $stockOutReport),
+            ];
+            return $stockOutReport;
+        });
+
+        $stock_out_reports->setCollection($data);
 
         return Inertia::render('StockOutReport/Index', [
             'stockOutReports' => $stock_out_reports,
@@ -47,8 +67,6 @@ class StockOutReportController extends Controller
     public function create()
     {
         $items = Item::with('product')->with('location')->get();
-        // dd($items->toArray());
-        // $user = Auth::user();
 
         return Inertia::render('StockOutReport/Create', compact('items'));
     }
@@ -61,7 +79,6 @@ class StockOutReportController extends Controller
      */
     public function store(Request $request)
     {
-
         $item = Item::find($request->item_id);
         $remaining_quantity = $item->quantity - $request->quantity;
 
@@ -73,7 +90,9 @@ class StockOutReportController extends Controller
             'quantity' => ['required', new QuantityRule($item->quantity)]
         ]);
 
-        StockOutReport::create($request->all());
+        $data = $request->all();
+        $data['user_id'] = Auth::user()->id;
+        StockOutReport::create($data);
 
 
         $item->quantity = $remaining_quantity;
@@ -104,7 +123,10 @@ class StockOutReportController extends Controller
      */
     public function edit(StockOutReport $stockOutReport)
     {
-        //
+        $item = $stockOutReport->item;
+        $product = $item->product;
+
+        return Inertia::render('StockOutReport/Edit', compact('stockOutReport', 'item', 'product'));
     }
 
     /**
@@ -116,7 +138,27 @@ class StockOutReportController extends Controller
      */
     public function update(Request $request, StockOutReport $stockOutReport)
     {
-        //
+        $item = Item::find($stockOutReport->item_id);
+        // previous quantity before stocking out
+        $previous_quantity = $item->quantity + $stockOutReport->quantity;
+        $remaining_quantity = $previous_quantity - $request->quantity;
+
+        $request->validate([
+            'received_by' => ['required', 'string'],
+            'stock_out_date' => ['required', 'date'],
+            'issued_by' => ['required', 'string'],
+            'quantity' => ['required', new QuantityRule($previous_quantity)]
+        ]);
+
+        $data = $request->all();
+        $data['user_id'] = Auth::user()->id;
+        $stockOutReport->update($data);
+
+        $item->quantity = $remaining_quantity;
+        $item->save();
+
+        return Redirect::route('stock-out-reports.index');
+
     }
 
     /**

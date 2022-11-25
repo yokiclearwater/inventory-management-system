@@ -13,9 +13,8 @@ return new class extends Migration
      */
     public function up()
     {
-        Schema::create('item_statuses', function (Blueprint $table) {
-            $table->id();
-            $table->string('type');
+        Schema::table('stock_out_reports', function (Blueprint $table) {
+            $table->foreignId('user_id')->nullable()->constrained('users')->nullOnDelete();
         });
     }
 
@@ -26,6 +25,9 @@ return new class extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('item_statuses');
+        Schema::table('stock_out_reports', function (Blueprint $table) {
+            $table->dropForeign(['user_id']);
+            $table->dropColumn('user_id');
+        });
     }
 };

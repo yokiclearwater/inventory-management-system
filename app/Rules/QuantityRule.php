@@ -41,6 +41,6 @@ class QuantityRule implements Rule
      */
     public function message()
     {
-        return 'Stock out quantity must be less than or equal to ' . $this->totalQuantity . ' (In Stock Quantity)';
+        return 'Stock out quantity must be less than or equal to ' . $this->totalQuantity;
     }
 }

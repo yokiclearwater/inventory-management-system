@@ -19,12 +19,10 @@ class DatabaseSeeder extends Seeder
      */
     public function run()
     {
-
         $this->callOnce([
             RoleSeeder::class,
             PermissionSeeder::class,
             RolePermissionSeeder::class,
-            ItemStatusSeeder::class,
             UnitSeeder::class,
         ]);
 

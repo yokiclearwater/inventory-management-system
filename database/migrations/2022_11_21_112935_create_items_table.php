@@ -15,8 +15,9 @@ return new class extends Migration
     {
         Schema::create('items', function (Blueprint $table) {
             $table->id();
+            $table->string('item_code')->nullable();
             $table->foreignId('product_id')->constrained('products')->restrictOnDelete();
-            $table->string('part_number')->nullable();
+            $table->string('part_number')->nullable()->unique();
             $table->foreignId('unit_id')->nullable()->constrained('units')->nullOnDelete();
             $table->integer('quantity')->default(0);
             $table->text('description')->default("N/A")->nullable();

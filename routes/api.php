@@ -7,6 +7,7 @@ use App\Http\Controllers\Api\ItemController;
 use App\Http\Controllers\Api\LocationController;
 use App\Http\Controllers\Api\ProductController;
 use App\Http\Controllers\Api\ProductModelController;
+use App\Http\Controllers\Api\StockOutReportController;
 use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
@@ -32,10 +33,12 @@ Route::middleware(['auth:sanctum'])->get('/user', function (Request $request) {
 Route::post('/auth/register', [AuthController::class, 'createUser']);
 Route::post('/auth/login', [AuthController::class, 'loginUser']);
 
-Route::apiResource('categories', CategoryController::class)->middleware(['auth:sanctum']);
-Route::apiResource('locations', LocationController::class)->middleware(['auth:sanctum']);
-Route::apiResource('brands', BrandController::class)->middleware(['auth:sanctum']);
-Route::apiResource('models', ProductModelController::class)->middleware(['auth:sanctum']);
-Route::apiResource('products', ProductController::class)->middleware(['auth:sanctum']);
-Route::apiResource('items', ItemController::class)->middleware(['auth:sanctum']);
-
+Route::name('api.')->group(function () {
+    Route::apiResource('categories', CategoryController::class)->middleware(['auth:sanctum']);
+    Route::apiResource('locations', LocationController::class)->middleware(['auth:sanctum']);
+    Route::apiResource('brands', BrandController::class)->middleware(['auth:sanctum']);
+    Route::apiResource('models', ProductModelController::class)->middleware(['auth:sanctum']);
+    Route::apiResource('products', ProductController::class)->middleware(['auth:sanctum']);
+    Route::apiResource('items', ItemController::class)->middleware(['auth:sanctum']);
+    Route::apiResource('stock-out-reports', StockOutReportController::class)->middleware(['auth:sanctum']);
+});

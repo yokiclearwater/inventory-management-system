@@ -11,6 +11,7 @@ import FormTextArea from "@/Components/FormTextArea";
 
 const Create = (props) => {
     const form = useForm({
+        item_code: "",
         product_id: "",
         part_number: "",
         unit_id: "",
@@ -57,6 +58,7 @@ const Create = (props) => {
                         className="p-8 flex flex-col gap-4"
                         onSubmit={onHandleSubmit}
                     >
+                        <FormInput name={"item_code"} formDataValue={form.data.item_code} placeholder={"Item Code"} handleChange={onHandleChange} formErrorMessage={form.errors.item_code}  />
                         <FormSelect name={"product_id"} formDataValue={form.data.product_id} placeholder={"Product Name"} handleChange={onHandleChange} formErrorMessage={form.errors.product_id} className={"uppercase"}>
                             <option value={""} disabled>Select A Product</option>
                             {props.products.map((product) => (

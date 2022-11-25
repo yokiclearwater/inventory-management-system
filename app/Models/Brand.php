@@ -10,4 +10,7 @@ class Brand extends Model implements Auditable
 {
     use \OwenIt\Auditing\Auditable;
     use HasFactory;
+
+    public $timestamps = true;
+    protected $fillable = ['name', 'description'];
 }

@@ -154,6 +154,7 @@ class ItemController extends Controller
     public function update(ItemRequest $request, $id)
     {
         $request->validated();
+        // dd($request->toArray());
         Item::find($id)->update($request->all());
 
         return Redirect::route('items.index');
@@ -168,16 +169,17 @@ class ItemController extends Controller
     public function destroy($id)
     {
         $item = Item::find($id);
-        // dd($item->toArray());
 
         if(!$item->stock_out_reports->isEmpty()) {
             throw ValidationException::withMessages([
                 'message' => 'You cannot delete an item with stock report on it',
             ]);
+        } else {
+            $item->delete();
+            return Redirect::route('items.index');
         }
 
 
-        // return Redirect::route('items.index');
     }
 
     public function export($method = "xlsx")

@@ -12,6 +12,7 @@ class Product extends Model implements Auditable
     use AuditingAuditable;
     use HasFactory;
 
+    public $timestamps = true;
     protected $fillable = ['name', 'description', 'category_id', 'model_id', 'brand_id'];
 
 

@@ -82,8 +82,7 @@ Route::middleware(['auth', 'verified'])->group(function () {
     require __DIR__ . '/web/user_profile.php';
 });
 
-
-Route::resource('stock-out-reports', StockOutReportController::class);
+Route::resource('stock-out-reports', StockOutReportController::class)->middleware(['auth', 'verified']);
 
 
 

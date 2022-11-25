@@ -9,15 +9,16 @@ import FormSelect from "@/Components/FormSelect";
 import FormInput from "@/Components/FormInput";
 
 const Edit = (props) => {
+    const stockOutReport = props.stockOutReport;
+
     const form = useForm({
-        item_id: "",
-        received_by: "",
-        issued_by: props.auth.user.name,
-        quantity: "",
-        stock_out_date: "",
+        received_by: stockOutReport.received_by,
+        issued_by: stockOutReport.issued_by,
+        quantity: stockOutReport.quantity,
+        stock_out_date: stockOutReport.stock_out_date,
     });
 
-    const [item, setItem] = useState(null);
+    const [item, setItem] = useState(props.item);
 
     const onHandleChange = (event) => {
         form.setData(event.target.name, event.target.value);
@@ -30,19 +31,19 @@ const Edit = (props) => {
     const onHandleSubmit = (event) => {
         event.preventDefault();
 
-        form.post(route("stock-out-reports.store"), {
+        form.put(route("stock-out-reports.update", stockOutReport.id), {
             onSuccess: () => submitSuccess(),
         });
     };
 
     return (
-        <Main auth={props.auth}>
-            <Head title="Add Model" />
+        <Main auth={props.auth} title="Edit Stock Out Report">
+            <Head title="Edit Stock Out Report" />
 
             <div className="max-w-full m-auto">
                 <div className="py-4 text-2xl font-semibold flex w-full justify-between flex-wrap gap-4">
                     <a
-                        href={route("models.index")}
+                        href={route("stock-out-reports.index")}
                         className="bg-blue-600 text-xl hover:bg-blue-700 text-white px-4 py-2 rounded-md shadow cursor-pointer"
                     >
                         <FontAwesomeIcon icon={faBackward} /> Back
@@ -53,30 +54,12 @@ const Edit = (props) => {
                         className="p-8 flex flex-col gap-4"
                         onSubmit={onHandleSubmit}
                     >
-                        <FormSelect
-                            name={"item_id"}
-                            formDataValue={form.data.item_id}
-                            placeholder={"Item"}
-                            handleChange={(e) => {
-                                onHandleChange(e);
-                                setItem(
-                                    props.items.find(
-                                        (item) => item.id == e.target.value
-                                    )
-                                );
-                            }}
-                            formErrorMessage={form.errors.item_id}
-                            className={"uppercase"}
-                        >
-                            <option value={""} disabled>
-                                Select A Item
-                            </option>
-                            {props.items.map((item) => (
-                                <option key={item.id} value={item.id}>
-                                    {item.product.name}
-                                </option>
-                            ))}
-                        </FormSelect>
+                        <FormInput
+                            formDataValue={props.product.name}
+                            handleChange={() => {}}
+                            placeholder={"Item Name"}
+                            readOnly={true}
+                        />
                         {item && (
                             <>
                                 <FormInput
@@ -101,7 +84,7 @@ const Edit = (props) => {
                         <FormInput
                             formDataValue={form.data.issued_by}
                             formErrorMessage={form.errors.issued_by}
-                            handleChange={onHandleChange}
+                            handleChange={() => {}}
                             name="issued_by"
                             placeholder={"Issuer"}
                             readOnly={true}
@@ -128,10 +111,10 @@ const Edit = (props) => {
                             placeholder={"Stock Out Date"}
                         />
                         <Button
-                            className="w-fit bg-green-500 !text-base hover:bg-green-700 shadow-lg"
+                            className="w-fit bg-orange-500 !text-base hover:bg-orange-600 shadow-lg"
                             processing={form.processing}
                         >
-                            Submit
+                            Update
                         </Button>
                     </form>
                 </div>

@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\StockOutReport;
 use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -41,6 +42,7 @@ class EditProfileController extends Controller
         ]);
 
         $user->update($request->all());
+        StockOutReport::where('user_id', '=', $user->id)->update(['issued_by' => $user->name]);
 
         return Redirect::route('edit-profile.index');
     }

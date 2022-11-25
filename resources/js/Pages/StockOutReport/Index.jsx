@@ -150,7 +150,7 @@ const Table = ({ tables, routeList, can }) => {
                                         View
                                     </a>
                                 )}
-                                {can.update && (
+                                {(table.can.update && can.update)  && (
                                     <a
                                         className="hover:underline cursor-pointer text-blue-600 font-semibold"
                                         href={route(routeList.edit, {

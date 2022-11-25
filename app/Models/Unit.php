@@ -9,5 +9,6 @@ class Unit extends Model
 {
     use HasFactory;
 
+    public $timestamp = true;
     protected $fillable = ['name'];
 }

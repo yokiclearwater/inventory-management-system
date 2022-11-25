@@ -11,5 +11,7 @@ class ProductModel extends Model implements Auditable
     use \OwenIt\Auditing\Auditable;
     use HasFactory;
 
+    public $timestamps = true;
     protected $table = 'product_models';
+    protected $fillable = ['name', 'description'];
 }

@@ -3,14 +3,16 @@ import Authenticated from "@/Layouts/Authenticated";
 import { Head } from "@inertiajs/inertia-react";
 import Main from "@/Layouts/Main";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faBackward } from "@fortawesome/free-solid-svg-icons";
+import { faBackward, faPrint } from "@fortawesome/free-solid-svg-icons";
+import ReactToPrint from 'react-to-print';
 
 const View = (props) => {
     const item = props.item;
     const stockOutReport = props.stockOutReport;
+    const componentRef = React.useRef();
 
     return (
-        <Main auth={props.auth} errors={props.errors} title="StockOutReports">
+        <Main auth={props.auth} errors={props.errors} title="Stock Out Reports">
             <Head title="View Stock Out Report" />
 
             <div className="py-12">
@@ -22,8 +24,16 @@ const View = (props) => {
                         >
                             <FontAwesomeIcon icon={faBackward} /> Back
                         </a>
+                        <ReactToPrint
+                            trigger={() => <button className="bg-blue-600 text-xl hover:bg-blue-700 text-white px-4 py-2 rounded-md shadow cursor-pointer">
+                                <FontAwesomeIcon icon={faPrint} /> Print
+                            </button>}
+                            content={() => componentRef.current}
+                        >
+                            Print
+                        </ReactToPrint>
                     </div>
-                    <div className="bg-white shadow-sm rounded-lg p-4">
+                    <div className="bg-white shadow-sm rounded-lg p-4" ref={componentRef}>
                         <div className="flex flex-col gap-4 p-4">
                             <div
                                 className={
@@ -68,21 +78,21 @@ const View = (props) => {
                                     "md:text-2xl text-xl border-b-2 border-r-2 border-blue-600 py-4 text-blue-600"
                                 }
                             >
-                                Receiver: {item.received_by}
+                                Receiver: {stockOutReport.received_by}
                             </div>
                             <div
                                 className={
                                     "md:text-2xl text-xl border-b-2 border-r-2 border-blue-600 py-4 text-blue-600"
                                 }
                             >
-                                Issuer: {item.issued_by}
+                                Issuer: {stockOutReport.issued_by}
                             </div>
                             <div
                                 className={
                                     "md:text-2xl text-xl border-b-2 border-r-2 border-blue-600 py-4 text-blue-600"
                                 }
                             >
-                                Issuer: {stockOutReport.stock_out_date}
+                                Stock Out Date: {stockOutReport.stock_out_date}
                             </div>
                         </div>
                     </div>

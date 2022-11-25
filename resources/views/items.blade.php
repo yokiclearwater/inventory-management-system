@@ -46,12 +46,12 @@
     <tr>
         <th>ID</th>
         <th>Name</th>
+        <th>Part Number</th>
         <th>Unit</th>
         <th>Quantity</th>
         <th>Received By</th>
         <th>Issued By</th>
         <th>In Stock Date</th>
-        <th>Out Of Stock Date</th>
         <th>Location</th>
     </tr>
     </thead>
@@ -60,12 +60,12 @@
         <tr>
             <th>{{ $item->id }}</th>
             <td>{{ $item->product->name }}</td>
+            <td>{{ $item->part_number }}</td>
             <td>{{ strtoupper($item->unit->name) }}</td>
             <td>{{ $item->quantity }}</td>
             <td>{{ $item->received_by }}</td>
             <td>{{ $item->issued_by }}</td>
             <td>{{ $item->in_stock_date }}</td>
-            <td>{{ $item->out_of_stock_date }}</td>
             <td>{{ $item->location->product_location . ", " . $item->location->inventory_location }}</td>
         </tr>
     @endforeach

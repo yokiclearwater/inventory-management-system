@@ -27,6 +27,7 @@ class ItemRequest extends FormRequest
         $id = $this->route('item');
 
         return [
+            'item_code' => ['string', 'nullable'],
             'product_id' => ['required', 'integer', 'exists:products,id'],
             'part_number' => ['string', 'nullable'],
             'unit_id' => ['required', 'integer', 'exists:units,id'],

@@ -43,6 +43,13 @@ const View = (props) => {
                                     "md:text-2xl text-xl border-b-2 border-r-2 border-blue-600 py-4 text-blue-600"
                                 }
                             >
+                                Item Code: {item.item_code}
+                            </div>
+                            <div
+                                className={
+                                    "md:text-2xl text-xl border-b-2 border-r-2 border-blue-600 py-4 text-blue-600"
+                                }
+                            >
                                 <a
                                     className={
                                         "hover:text-blue-700 hover:font-semibold"

@@ -11,6 +11,14 @@
     font-family: 'Merriweather Sans', 'Siemreap', 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
     box-sizing: border-box;
     -webkit-tap-highlight-color: transparent;
+    print-color-adjust: exact;
+}
+
+@media print {
+    * {
+        color: black !important;
+        border-color: black !important;
+    }
 }
 
 body {

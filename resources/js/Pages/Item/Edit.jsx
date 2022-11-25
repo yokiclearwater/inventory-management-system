@@ -16,10 +16,9 @@ import FormTextArea from "@/Components/FormTextArea";
 
 const Edit = (props) => {
     const item = props.item;
-    const location = props.location;
-
 
     const form = useForm({
+        item_code: item.item_code,
         product_id: item.product_id,
         part_number: item.part_number,
         unit_id: item.unit_id,
@@ -80,6 +79,7 @@ const Edit = (props) => {
                         className="p-8 flex flex-col gap-4"
                         onSubmit={onHandleSubmit}
                     >
+                        <FormInput name={"item_code"} formDataValue={form.data.item_code} placeholder={"Item Code"} handleChange={onHandleChange} formErrorMessage={form.errors.item_code}  />
                         <FormSelect name={"product_id"} formDataValue={form.data.product_id} placeholder={"Product Name"} handleChange={onHandleChange} formErrorMessage={form.errors.product_id} className={"uppercase"}>
                             <option value={""} disabled>Select A Product</option>
                             {props.products.map((product) => (
@@ -93,7 +93,7 @@ const Edit = (props) => {
                                 <option key={unit.id} value={unit.id}>{unit.name}</option>
                             ))}
                         </FormSelect>
-                        <FormInput readOnly={true} name={"quantity"} formDataValue={item.quantity} placeholder={"Quantity"} handleChange={() => {}}  />
+                        <FormInput name={"quantity"} formDataValue={item.quantity} placeholder={"Quantity"} handleChange={() => {}}  />
                         <FormSelect name={"location_id"} formDataValue={form.data.location_id} placeholder={"Locations (Product Location, Inventory Location)"} handleChange={onHandleChange} formErrorMessage={form.errors.location_id} className={"uppercase"}>
                             <option value={""} disabled>Select A Location</option>
                             {props.locations.map((location) => (

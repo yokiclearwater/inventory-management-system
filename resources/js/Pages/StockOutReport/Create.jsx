@@ -40,13 +40,13 @@ const Create = (props) => {
     };
 
     return (
-        <Main auth={props.auth}>
-            <Head title="Add Model" />
+        <Main auth={props.auth} title="Add Stock Out Report">
+            <Head title="Add Stock Out Report" />
 
             <div className="max-w-full m-auto">
                 <div className="py-4 text-2xl font-semibold flex w-full justify-between flex-wrap gap-4">
                     <a
-                        href={route("models.index")}
+                        href={route("stock-out-reports.index")}
                         className="bg-blue-600 text-xl hover:bg-blue-700 text-white px-4 py-2 rounded-md shadow cursor-pointer"
                     >
                         <FontAwesomeIcon icon={faBackward} /> Back

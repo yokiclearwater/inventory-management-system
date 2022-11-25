@@ -11,7 +11,9 @@ class Item extends Model implements Auditable
     use \OwenIt\Auditing\Auditable;
     use HasFactory;
 
+    public $timestamps = true;
     protected $fillable = [
+        'item_code',
         'product_id',
         'part_number',
         'unit_id',
