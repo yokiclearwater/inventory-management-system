@@ -37,7 +37,7 @@ const Index = (props) => {
                         });
                         Swal.fire("Deleted Successfully", "", "success");
                     },
-                    onError: () => Swal.fire("Deleted Error", "", "error"),
+                    onError: () => Swal.fire("Deleted Error", "You cannot delete an item with existing stock report", "error"),
                 });
             }
         });
@@ -83,7 +83,7 @@ const Index = (props) => {
                                         return (
                                             <option
                                                 key={category.id}
-                                                value={category.name}
+                                                // value={category.name}
                                             >
                                                 {category.name}
                                             </option>
@@ -113,7 +113,6 @@ const Index = (props) => {
                                         return (
                                             <option
                                                 key={model.id}
-                                                value={model.name}
                                             >
                                                 {model.name}
                                             </option>
@@ -127,7 +126,7 @@ const Index = (props) => {
                                         "font-semibold !text-xl border-b-2 py-2"
                                     }
                                 >
-                                    Product Model
+                                    Product Brand
                                 </Label>
                                 <Select
                                     defaultValue={""}
@@ -143,7 +142,7 @@ const Index = (props) => {
                                         return (
                                             <option
                                                 key={brand.id}
-                                                value={brand.name}
+                                                // value={brand.name}
                                             >
                                                 {brand.name}
                                             </option>
@@ -182,7 +181,7 @@ const Index = (props) => {
                     >
                         <Input
                             handleChange={handleFilterForm}
-                            placeholder="Search Name/Serial No."
+                            placeholder="Search Product Name"
                             name={"search"}
                             autoComplete={"off"}
                         />
@@ -204,7 +203,7 @@ const Index = (props) => {
                         {props.can.create && (
                             <a
                                 href={route("items.create")}
-                                className="bg-blue-600 text-xl hover:bg-blue-700 text-white p-2 rounded-md shadow cursor-pointer"
+                                className="bg-blue-600 text-xl hover:bg-blue-700 text-white px-4 py-3 rounded-md shadow cursor-pointer"
                             >
                                 Add New Item
                             </a>
@@ -237,13 +236,25 @@ const Index = (props) => {
                                                     className="py-3 px-4"
                                                     scope="col"
                                                 >
-                                                    Serial No.
+                                                    Part Number
                                                 </th>
                                                 <th
                                                     className="py-3 px-4"
                                                     scope="col"
                                                 >
-                                                    Status
+                                                    Unit
+                                                </th>
+                                                <th
+                                                    className="py-3 px-4"
+                                                    scope="col"
+                                                >
+                                                    Quantity
+                                                </th>
+                                                <th
+                                                    className="py-3 px-4"
+                                                    scope="col"
+                                                >
+                                                    Location
                                                 </th>
                                                 <th
                                                     className="py-3 px-4"
@@ -269,25 +280,34 @@ const Index = (props) => {
                                                             {item.id}
                                                         </th>
                                                         <td
-                                                            className="py-2 px-4 min-w-[300px]"
+                                                            className="py-2 px-4 max-w-[200px]"
                                                             scope="col"
                                                         >
                                                             {item.product.name}
                                                         </td>
                                                         <td
+                                                            className="py-2 px-4 max-w-[200px] break-words"
+                                                            scope="col"
+                                                        >
+                                                            {item.part_number}
+                                                        </td>
+                                                        <td
                                                             className="py-2 px-4"
                                                             scope="col"
                                                         >
-                                                            {item.serial_no}
+                                                            {item.unit && item.unit.name.toUpperCase()}
                                                         </td>
                                                         <td
-                                                            className="py-2 px-4 capitalize min-w-[120px]"
+                                                            className="py-2 px-4"
                                                             scope="col"
                                                         >
-                                                            {item.status.type.replace(
-                                                                /_/g,
-                                                                " "
-                                                            )}
+                                                            {item.quantity}
+                                                        </td>
+                                                        <td
+                                                            className="py-2 px-4"
+                                                            scope="col"
+                                                        >
+                                                            {item.location && `${item.location.product_location}, ${item.location.inventory_location}`}
                                                         </td>
                                                         <td
                                                             className="py-2 px-4 inline-flex space-x-2 items-center justify-start"
@@ -304,8 +324,7 @@ const Index = (props) => {
                                                                     View
                                                                 </a>
                                                             )}
-                                                            {props.can
-                                                                .update && (
+                                                            {props.can.update && (
                                                                 <a
                                                                     className="hover:underline cursor-pointer text-blue-600 font-semibold"
                                                                     href={route(

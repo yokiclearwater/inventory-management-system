@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import Button from "@/Components/Button";
 import Checkbox from "@/Components/Checkbox";
 import Guest from "@/Layouts/Guest";
@@ -13,6 +13,8 @@ export default function Login({ status, canResetPassword }) {
         password: "",
         remember: "",
     });
+
+    const [showPass, setShowPass] = useState(false);
 
     useEffect(() => {
         return () => {
@@ -70,14 +72,19 @@ export default function Login({ status, canResetPassword }) {
                     <div className="mt-4">
                         <Label forInput="password" value="Password" />
 
-                        <Input
-                            type="password"
-                            name="password"
-                            value={data.password}
-                            className="mt-1 block w-full"
-                            autoComplete="current-password"
-                            handleChange={onHandleChange}
-                        />
+                        <div className="relative">
+                            <Input
+                                type={showPass ? "text" : "password"}
+                                name="password"
+                                value={data.password}
+                                className="mt-1 block !w-full"
+                                autoComplete="current-password"
+                                handleChange={onHandleChange}
+                            />
+                            <span onClick={() => setShowPass(!showPass)} className="absolute inset-y-0 right-0 pr-3 flex items-center text-base cursor-pointer hover:text-gray-500">
+                                {showPass ? "Hide" : "Show"}
+                            </span>
+                        </div>
 
                         <InputError
                             message={errors.password}

@@ -16,6 +16,7 @@ class AuditLogController extends Controller
             $query->where("event", "LIKE", "$search");
         })->orderBy('created_at', 'desc')->paginate(10)->withQueryString();
 
+        // dd(Audit::distinct()->get(['user_id'])->toArray());
 
         $auditable_types = Audit::distinct()->get(['auditable_type']);
         $events = Audit::distinct()->get(['event']);

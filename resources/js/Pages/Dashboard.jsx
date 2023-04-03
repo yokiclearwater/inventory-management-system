@@ -19,7 +19,7 @@ export default function Dashboard(props) {
         <Main auth={props.auth} errors={props.errors}>
             <Head title="Dashboard"  />
 
-            <div className="p-4 flex flex-col gap-4">
+            <div className="p-2 flex flex-col gap-4">
                 <div className="bg-white rounded p-4 shadow">
                     <div className="md:text-4xl text-2xl">
                         Welcome Back,{" "}

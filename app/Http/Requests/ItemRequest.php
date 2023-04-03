@@ -27,16 +27,14 @@ class ItemRequest extends FormRequest
         $id = $this->route('item');
 
         return [
-            'product_id' => ['required'],
-            'serial_no' => ['required',  Rule::unique('items', 'serial_no')->ignore($id, 'id')],
-            'received_by' => ['required'],
-            'issued_by' => ['required'],
-            'installed_at' => ['date', 'nullable'],
+            'item_code' => ['string', 'nullable'],
+            'product_id' => ['required', 'integer', 'exists:products,id'],
+            'part_number' => ['string', 'nullable'],
+            'unit_id' => ['required', 'integer', 'exists:units,id'],
+            'received_by' => ['required', 'string'],
+            'issued_by' => ['required', 'string'],
             'in_stock_date' => ['required', 'date'],
-            'location' => ['required'],
-            'inventory_location' => ['required'],
-            'out_of_stock_date' => ['date', 'nullable'],
-            'status_id' => ['required'],
+            'location_id' => ['required', 'integer', 'exists:locations,id'],
         ];
     }
 
@@ -49,13 +47,10 @@ class ItemRequest extends FormRequest
     {
         return [
             'product_id' => 'product',
-            'serial_no' => 'serial number',
+            'unit_id' => 'unit',
             'received_by' => 'receiver',
             'issued_by' => 'issuer',
-            'installed_at' => 'installed date',
             'in_stock_date' => 'in stock date',
-            'out_of_stock_date' => 'out of stock date',
-            'status_id' => 'status',
         ];
     }
 }

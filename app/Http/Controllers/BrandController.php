@@ -32,7 +32,7 @@ class BrandController extends Controller
     {
         $brands = Brand::when($request->search, function ($query, $search) {
             $query->where('name', 'LIKE', "%$search%");
-       })->paginate(10)->withQueryString()->toArray();
+        })->paginate(10)->withQueryString()->toArray();
         $user = Auth::user();
 
 
@@ -71,7 +71,7 @@ class BrandController extends Controller
         $brand->description = $request->description;
         $brand->save();
 
-//        return Redirect::route('brands.index');
+        return Redirect::route('brands.index');
     }
 
     /**
@@ -136,7 +136,8 @@ class BrandController extends Controller
         return Redirect::route('brands.index');
     }
 
-    public function export($method = 'xlsx') {
+    public function export($method = 'xlsx')
+    {
         if ($method === "csv") {
             return Excel::download(new BrandsExport, 'brands.csv');
         }
@@ -144,7 +145,8 @@ class BrandController extends Controller
         return Excel::download(new BrandsExport, 'brands.xlsx');
     }
 
-    public function export_pdf() {
+    public function export_pdf()
+    {
         $brands = Brand::all();
         $mpdf = new Mpdf([
             'mode' => 'utf-8',
@@ -154,7 +156,8 @@ class BrandController extends Controller
         ]);
         $html = view("brands", compact('brands'));
         $mpdf->writeHTML($html);
-        $mpdf->Output('brands.pdf', 'D');
+        ob_clean();
+        $mpdf->Output('brands.pdf', 'I');
 
         return Redirect::route('brands.index');
     }

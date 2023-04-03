@@ -2,15 +2,12 @@
 
 namespace App\Exports;
 
-use App\Models\Brand;
 use App\Models\ProductModel;
 use Illuminate\Contracts\View\View;
-use Maatwebsite\Excel\Concerns\FromCollection;
 use Maatwebsite\Excel\Concerns\FromView;
 use Maatwebsite\Excel\Concerns\ShouldAutoSize;
 use Maatwebsite\Excel\Concerns\WithColumnWidths;
 use Maatwebsite\Excel\Concerns\WithDefaultStyles;
-use Maatwebsite\Excel\Concerns\WithHeadings;
 use PhpOffice\PhpSpreadsheet\Style\Alignment;
 use PhpOffice\PhpSpreadsheet\Style\Style;
 

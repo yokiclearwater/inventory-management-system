@@ -25,7 +25,7 @@ class ItemController extends Controller
     public function index(Request $request)
     {
         $items = Item::when($request->search, function ($query, $search) {
-            $query->where('serial_no', 'LIKE', "%$search%")->orWhereHas('product', function ($q) use ($search) {
+            $query->whereHas('product', function ($q) use ($search) {
                 $q->where('name', 'LIKE', "%$search%");
             });
         })->when($request->category, function ($query, $search) {
@@ -46,7 +46,7 @@ class ItemController extends Controller
                     $qc->where('name', 'LIKE', "%$search%");
                 });
             });
-        })->with('product')->with('status')->paginate(10)->withQueryString();
+        })->with('product')->with('unit')->with('location')->paginate(10)->withQueryString();
 
         return $items;
     }
@@ -75,7 +75,7 @@ class ItemController extends Controller
      */
     public function show($id)
     {
-        return Item::find($id);
+        return Item::with('product')->with('unit')->with('location')->find($id);
     }
 
     /**

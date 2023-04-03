@@ -9,12 +9,15 @@ use App\Models\Brand;
 use App\Models\Category;
 use App\Models\Item;
 use App\Models\ItemStatus;
+use App\Models\Location;
 use App\Models\Product;
 use App\Models\ProductModel;
+use App\Models\Unit;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Redirect;
+use Illuminate\Validation\ValidationException;
 use Inertia\Inertia;
 use Maatwebsite\Excel\Facades\Excel;
 use Mpdf\Mpdf;
@@ -37,9 +40,9 @@ class ItemController extends Controller
     public function index(Request $request)
     {
         $items = Item::when($request->search, function ($query, $search) {
-            $query->where('serial_no', 'LIKE', "%$search%")->orWhereHas('product', function ($q) use ($search) {
+            $query->whereHas('product', function ($q) use ($search) {
                 $q->where('name', 'LIKE', "%$search%");
-            });
+            })->orWhere('part_number', 'LIKE', "%$search%");
         })->when($request->category, function ($query, $search) {
             $query->whereHas('product', function ($q) use ($search) {
                 $q->whereHas('category', function ($qc) use ($search) {
@@ -58,8 +61,7 @@ class ItemController extends Controller
                     $qc->where('name', 'LIKE', "%$search%");
                 });
             });
-        })->with('product')->with('status')->paginate(10)->withQueryString();
-
+        })->with('product')->with('unit')->with('location')->paginate(10)->withQueryString();
 
         $user = Auth::user();
 
@@ -85,12 +87,10 @@ class ItemController extends Controller
     public function create()
     {
         $products = Product::all();
-        $statuses = ItemStatus::all();
+        $units = Unit::all();
+        $locations = Location::all();
 
-        return Inertia::render('Item/Create', [
-            'products' => $products,
-            'statuses' => $statuses,
-        ]);
+        return Inertia::render('Item/Create', compact('products', 'locations', 'units'));
     }
 
     /**
@@ -103,6 +103,8 @@ class ItemController extends Controller
     {
         $request->validated();
         Item::create($request->all());
+
+        return Redirect::route('items.index');
     }
 
     /**
@@ -113,7 +115,7 @@ class ItemController extends Controller
      */
     public function show($id)
     {
-        $item = Item::with('product')->with('status')->find($id);
+        $item = Item::with('product')->with('location')->with('unit')->find($id);
 
         return Inertia::render('Item/View', ['item' => $item]);
     }
@@ -128,11 +130,14 @@ class ItemController extends Controller
     {
         $item = Item::find($id);
         $products = Product::all();
-        $statuses = ItemStatus::all();
+        $locations = Location::all();
+        $units = Unit::all();
+
         return Inertia::render('Item/Edit', [
-            'statuses' => $statuses,
             'item' => $item,
             'products' => $products,
+            'locations' => $locations,
+            'units' => $units,
         ]);
     }
 
@@ -146,6 +151,7 @@ class ItemController extends Controller
     public function update(ItemRequest $request, $id)
     {
         $request->validated();
+        // dd($request->toArray());
         Item::find($id)->update($request->all());
 
         return Redirect::route('items.index');
@@ -159,9 +165,18 @@ class ItemController extends Controller
      */
     public function destroy($id)
     {
-        Item::destroy($id);
+        $item = Item::find($id);
 
-        return Redirect::route('items.index');
+        if(!$item->stock_out_reports->isEmpty()) {
+            throw ValidationException::withMessages([
+                'message' => 'You cannot delete an item with stock report on it',
+            ]);
+        } else {
+            $item->delete();
+            return Redirect::route('items.index');
+        }
+
+
     }
 
     public function export($method = "xlsx")
@@ -176,7 +191,7 @@ class ItemController extends Controller
 
     public function export_pdf()
     {
-        $items = Item::with('product')->with('status')->get();
+        $items = Item::with('product')->with('location')->get();
         $mpdf = new Mpdf([
             'mode' => 'utf-8',
             'orientation' => 'L',
@@ -185,7 +200,7 @@ class ItemController extends Controller
         ]);
         $html = view("items", compact('items'));
         $mpdf->writeHTML($html);
-        $mpdf->Output('items.pdf', 'D');
+        $mpdf->Output('items.pdf', 'I');
 
         return Redirect::route('items.index');
     }

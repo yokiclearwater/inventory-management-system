@@ -12,8 +12,12 @@ class Product extends Model implements Auditable
     use AuditingAuditable;
     use HasFactory;
 
+    public $timestamps = true;
     protected $fillable = ['name', 'description', 'category_id', 'model_id', 'brand_id'];
 
+    public function items() {
+        return $this->hasMany(Item::class);
+    }
 
     public function category()
     {

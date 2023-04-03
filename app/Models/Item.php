@@ -11,24 +11,32 @@ class Item extends Model implements Auditable
     use \OwenIt\Auditing\Auditable;
     use HasFactory;
 
+    public $timestamps = true;
     protected $fillable = [
+        'item_code',
         'product_id',
-        'serial_no',
+        'part_number',
+        'unit_id',
         'received_by',
         'issued_by',
-        'installed_date',
-        'location',
-        'inventory_location',
+        'quantity',
+        'location_id',
         'in_stock_date',
-        'out_of_stock_date',
-        'status_id',
     ];
 
     public function product() {
         return $this->belongsTo(Product::class, 'product_id', 'id');
     }
 
-    public function status() {
-        return $this->hasOne(ItemStatus::class, 'id', 'status_id');
+    public function location() {
+        return $this->hasOne(Location::class, 'id', 'location_id');
+    }
+
+    public function unit() {
+        return $this->hasOne(Unit::class, 'id', 'unit_id');
+    }
+
+    public function stock_out_reports() {
+        return $this->hasMany(StockOutReport::class, 'item_id', 'id');
     }
 }

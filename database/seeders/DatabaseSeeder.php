@@ -3,8 +3,12 @@
 namespace Database\Seeders;
 
 // use Illuminate\Database\Console\Seeds\WithoutModelEvents;
+
+use App\Models\RolePermission;
 use App\Models\User;
 use Illuminate\Database\Seeder;
+use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\Str;
 
 class DatabaseSeeder extends Seeder
 {
@@ -15,12 +19,20 @@ class DatabaseSeeder extends Seeder
      */
     public function run()
     {
+        $this->callOnce([
+            RoleSeeder::class,
+            PermissionSeeder::class,
+            RolePermissionSeeder::class,
+            UnitSeeder::class,
+        ]);
 
-       $this->callOnce([
-           RoleSeeder::class,
-           ItemStatusSeeder::class
-       ]);
-
-       User::factory(2)->create();
+        User::create([
+            'name' => 'Super Admin',
+            'email' => 'super_admin@ims.com',
+            'email_verified_at' => now(),
+            'password' => Hash::make('password'), // password
+            'remember_token' => Str::random(10),
+            'role_id' => 3,
+        ]);
     }
 }

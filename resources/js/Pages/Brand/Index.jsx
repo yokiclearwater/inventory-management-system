@@ -40,13 +40,23 @@ const Index = (props) => {
         });
     };
 
+    const handleSubmit = (e) => {
+        e.preventDefault();
+        form.get(route("brands.index"));
+    };
+
+    const handleChange = (e) => {
+        form.setData(e.target.name, e.target.value);
+    }
+
     return (
         <Main auth={props.auth} errors={props.errors} title="Brands">
             <Head title="Brands" />
             <div className="flex justify-end my-4 w-full h-full">
-                <form  className="inline-flex items-center space-x-2 max-w-full">
+                <form onSubmit={handleSubmit} className="inline-flex items-center space-x-2 max-w-full">
                     <Input
-                        handleChange={() => {}}
+                        handleChange={handleChange}
+                        value={form.data.search}
                         placeholder="Search Name"
                         name={"search"}
                         autoComplete={"off"}
@@ -61,7 +71,7 @@ const Index = (props) => {
                     <span>Brands</span>
                     {(props.can.create) && <a
                         href={route("brands.create")}
-                        className="bg-blue-600 text-xl hover:bg-blue-700 text-white p-2 rounded-md shadow cursor-pointer"
+                        className="bg-blue-600 text-xl hover:bg-blue-700 text-white px-4 py-3 rounded-md shadow cursor-pointer"
                     >
                         Add New Brands
                     </a>}

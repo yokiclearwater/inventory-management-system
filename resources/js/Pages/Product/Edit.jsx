@@ -67,7 +67,7 @@ const Edit = (props) => {
                         <FontAwesomeIcon icon={faBackward} /> Back
                     </a>
                 </div>
-                <div className="bg-white overflow-hidden shadow-sm sm:rounded-lg">
+                <div className="bg-white overflow-hidden shadow-sm rounded-lg">
                     <form
                         className="p-8 flex flex-col gap-4"
                         onSubmit={onHandleSubmit}
@@ -209,7 +209,7 @@ const Edit = (props) => {
                             />
                         </div>
                         <Button
-                            className="w-fit bg-orange-400 !text-base hover:bg-orange-500 shadow-lg"
+                            className="w-fit bg-orange-500 !text-base hover:bg-orange-600 shadow-lg"
                             processing={form.processing}
                         >
                             Update

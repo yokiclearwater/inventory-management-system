@@ -12,6 +12,7 @@ use Barryvdh\DomPDF\Facade\Pdf;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Redirect;
+use Illuminate\Validation\ValidationException;
 use Inertia\Inertia;
 use Maatwebsite\Excel\Facades\Excel;
 use Mpdf\Mpdf;
@@ -92,15 +93,16 @@ class ProductController extends Controller
     public function store(ProductRequest $request)
     {
         $request->validated();
-        $product = new Product();
-        $product->name = $request->name;
-        $product->description = $request->description;
-        $product->category_id = $request->category_id;
-        $product->brand_id = $request->brand_id;
-        $product->model_id = $request->model_id;
-        $product->save();
+        Product::create($request->all());
+        // $product = new Product();
+        // $product->name = $request->name;
+        // $product->description = $request->description;
+        // $product->category_id = $request->category_id;
+        // $product->brand_id = $request->brand_id;
+        // $product->model_id = $request->model_id;
+        // $product->save();
 
-//        return Redirect::route('products.index');
+       return Redirect::route('products.index');
     }
 
     /**
@@ -111,16 +113,12 @@ class ProductController extends Controller
      */
     public function show($id)
     {
-        $product = Product::findOrFail($id);
-        $category = $product->category;
-        $brand = $product->brand;
-        $model = $product->model;
+        $product = Product::with('model')->with('category')->with('brand')->findOrFail($id);
+
+        // dd($product->toArray());
 
         return Inertia::render('Product/View', [
             'product' => $product,
-            'category' => $category,
-            'brand' => $brand,
-            'model' => $model,
         ]);
     }
 
@@ -175,9 +173,15 @@ class ProductController extends Controller
     public function destroy($id)
     {
         $product = Product::find($id);
-        $product->delete();
 
-        return Redirect::route('products.index');
+        if(!$product->items->isEmpty()) {
+            throw ValidationException::withMessages([
+                'message' => 'You cannot delete an product relating to existing items',
+            ]);
+        } else {
+            $product->delete();
+            return Redirect::route('products.index');
+        }
     }
 
     public function export($method = "xlsx") {
@@ -189,10 +193,8 @@ class ProductController extends Controller
     }
 
 
-    /**
-     * @throws MpdfException
-     */
-    public function export_pdf() {
+    public function export_pdf()
+    {
         $products = Product::all();
         $mpdf = new Mpdf([
             'mode' => 'utf-8',
@@ -202,7 +204,7 @@ class ProductController extends Controller
         ]);
         $html = view("products", compact('products'));
         $mpdf->writeHTML($html);
-        $mpdf->Output('products.pdf', 'D');
+        $mpdf->Output('products.pdf', 'I');
 
         return Redirect::route('products.index');
     }

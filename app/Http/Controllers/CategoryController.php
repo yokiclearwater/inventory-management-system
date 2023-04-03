@@ -165,7 +165,7 @@ class CategoryController extends Controller
         ]);
         $html = view("categories", compact('categories'));
         $mpdf->writeHTML($html);
-        $mpdf->Output('categories.pdf', 'D');
+        $mpdf->Output('categories.pdf', 'I');
 
         return Redirect::route('categories.index');
     }

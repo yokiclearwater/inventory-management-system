@@ -1,12 +1,8 @@
 <?php
 
-use App\Http\Controllers\AuditLogController;
-use App\Http\Controllers\BrandController;
-use App\Http\Controllers\CategoryController;
-use App\Http\Controllers\ItemController;
-use App\Http\Controllers\ProductController;
-use App\Http\Controllers\ProductModelController;
+use App\Http\Controllers\EditProfileController;
 use App\Http\Controllers\RoleController;
+use App\Http\Controllers\StockOutReportController;
 use App\Models\Brand;
 use App\Models\Category;
 use App\Models\Item;
@@ -75,8 +71,6 @@ Route::get('/access-denied', function () {
     ]);
 })->name('access.denied');
 
-
-
 Route::middleware(['auth', 'verified'])->group(function () {
     require __DIR__ . '/web/categories.php';
     require __DIR__ . '/web/brands.php';
@@ -84,7 +78,12 @@ Route::middleware(['auth', 'verified'])->group(function () {
     require __DIR__ . '/web/logs.php';
     require __DIR__ . '/web/products.php';
     require __DIR__ . '/web/items.php';
+    require __DIR__ . '/web/locations.php';
+    require __DIR__ . '/web/user_profile.php';
 });
+
+Route::resource('stock-out-reports', StockOutReportController::class)->middleware(['auth', 'verified']);
+
 
 
 Route::get('/roles/edit-user-role', [RoleController::class, 'edit_user_role'])->middleware(['auth', 'verified', 'role:super_admin'])->name('roles.edit_user_role');

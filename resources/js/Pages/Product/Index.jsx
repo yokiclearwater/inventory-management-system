@@ -39,7 +39,7 @@ const Index = (props) => {
                         });
                         Swal.fire("Deleted Successfully", "", "success");
                     },
-                    onError: () => Swal.fire("Deleted Error", "", "error"),
+                    onError: () => Swal.fire("Deleted Error", props.errors.message, "error"),
                 });
             }
         });
@@ -208,7 +208,7 @@ const Index = (props) => {
                         {props.can.create && (
                             <a
                                 href={route("products.create")}
-                                className="bg-blue-600 text-xl hover:bg-blue-700 text-white p-2 rounded-md shadow cursor-pointer"
+                                className="bg-blue-600 text-xl hover:bg-blue-700 text-white px-4 py-3 rounded-md shadow cursor-pointer"
                             >
                                 Add New Products
                             </a>

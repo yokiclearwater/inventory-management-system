@@ -20,6 +20,11 @@ Migrate your database and seed it
 php artisan migrate && php artisan db:seed
 ```
 
+Build It And Run
+
+```
+npm run build && php artisan serve
+```
 
 
 

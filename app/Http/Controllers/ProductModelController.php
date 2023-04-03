@@ -73,7 +73,7 @@ class ProductModelController extends Controller
         $model->description = $request->description;
         $model->save();
 
-//        return Redirect::route('models.index');
+       return Redirect::route('models.index');
     }
 
     /**
@@ -156,7 +156,7 @@ class ProductModelController extends Controller
         ]);
         $html = view("models", compact('models'));
         $mpdf->writeHTML($html);
-        $mpdf->Output('models.pdf', 'D');
+        $mpdf->Output('models.pdf', 'I');
 
         return Redirect::route('models.index');
     }

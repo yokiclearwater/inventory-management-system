@@ -29,11 +29,11 @@ const View = (props) => {
                             <FontAwesomeIcon icon={faBackward} /> Back
                         </a>
                     </div>
-                    <div className="bg-white shadow-sm sm:rounded-lg p-4">
+                    <div className="bg-white shadow-sm rounded-lg p-4">
                         <div className="flex flex-col gap-4 p-4">
-                            <div className="flex flex-row flex-wrap justify-between text-blue-800 font-semibold text-3xl md:text-4xl border-b-2 py-4 border-gray-400">
+                            <div className="flex flex-row flex-wrap gap-2 justify-between text-blue-800 font-semibold text-3xl md:text-4xl border-b-2 py-4 border-gray-400">
                                 <div>Log Detail</div>
-                                <span className="bg-blue-500 text-white p-2 font-semibold capitalize rounded shadow text-2xl">
+                                <span className="bg-blue-500 text-white px-4 py-3 font-semibold capitalize rounded shadow text-2xl">
                                     {audit.event} Event
                                 </span>
                             </div>

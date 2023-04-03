@@ -7,19 +7,20 @@ import { faBackward } from "@fortawesome/free-solid-svg-icons";
 import FormInput from "@/Components/FormInput";
 import FormSelect from "@/Components/FormSelect";
 import Swal from "sweetalert2";
+import FormTextArea from "@/Components/FormTextArea";
 
 const Create = (props) => {
     const form = useForm({
+        item_code: "",
         product_id: "",
-        serial_no: "",
+        part_number: "",
+        unit_id: "",
+        quantity: "",
         received_by: "",
         issued_by: "",
-        installed_date: "",
-        location: "",
-        inventory_location: "",
+        location_id: "",
         in_stock_date: "",
-        out_of_stock_date: "",
-        status_id: "",
+        description: "",
     });
 
 
@@ -52,31 +53,36 @@ const Create = (props) => {
                         <FontAwesomeIcon icon={faBackward} /> Back
                     </a>
                 </div>
-                <div className="bg-white overflow-hidden shadow-sm sm:rounded-lg">
+                <div className="bg-white overflow-hidden shadow-sm rounded-lg">
                     <form
                         className="p-8 flex flex-col gap-4"
                         onSubmit={onHandleSubmit}
                     >
+                        <FormInput name={"item_code"} formDataValue={form.data.item_code} placeholder={"Item Code"} handleChange={onHandleChange} formErrorMessage={form.errors.item_code}  />
                         <FormSelect name={"product_id"} formDataValue={form.data.product_id} placeholder={"Product Name"} handleChange={onHandleChange} formErrorMessage={form.errors.product_id} className={"uppercase"}>
                             <option value={""} disabled>Select A Product</option>
                             {props.products.map((product) => (
                                 <option key={product.id} value={product.id}>{product.name}</option>
                             ))}
                         </FormSelect>
-                        <FormInput name={"serial_no"} formDataValue={form.data.serial_no} placeholder={"Serial Number"} handleChange={onHandleChange} formErrorMessage={form.errors.serial_no}  />
-                        <FormInput name={"received_by"} formDataValue={form.data.received_by} placeholder={"Received By"} handleChange={onHandleChange} formErrorMessage={form.errors.received_by}  />
-                        <FormInput name={"issued_by"} formDataValue={form.data.issued_by} placeholder={"Issued By"} handleChange={onHandleChange} formErrorMessage={form.errors.issued_by}  />
-                        <FormInput name={"installed_date"} type={"date"} formDataValue={form.data.installed_date} placeholder={"Installed At"} handleChange={onHandleChange} formErrorMessage={form.errors.installed_date} />
-                        <FormInput name={"location"} formDataValue={form.data.location} placeholder={"Location"} handleChange={onHandleChange} formErrorMessage={form.errors.location} />
-                        <FormInput name={"inventory_location"} type={"text"} formDataValue={form.data.inventory_location} placeholder={"Inventory Location"} handleChange={onHandleChange} formErrorMessage={form.errors.inventory_location}  />
-                        <FormInput name={"in_stock_date"} type={"date"} formDataValue={form.data.in_stock_date} placeholder={"In Stock Date"} handleChange={onHandleChange} formErrorMessage={form.errors.in_stock_date} />
-                        <FormInput name={"out_of_stock_date"} type={"date"} formDataValue={form.data.out_of_stock_date} placeholder={"Out Of Stock Date"} handleChange={onHandleChange} formErrorMessage={form.errors.out_of_stock_date}  />
-                        <FormSelect name={"status_id"} formDataValue={form.data.status_id} placeholder={"Statues"} handleChange={onHandleChange} formErrorMessage={form.errors.status_id} className={"uppercase"}>
-                            <option value={""} disabled>Select A Statuses</option>
-                            {props.statuses.map((status) => (
-                                <option key={status.id} value={status.id}>{status.type}</option>
+                        <FormSelect name={"unit_id"} formDataValue={form.data.unit_id} placeholder={"Unit"} handleChange={onHandleChange} formErrorMessage={form.errors.unit_id} className={"uppercase"}>
+                            <option value={""} disabled>Select A Unit</option>
+                            {props.units.map((unit) => (
+                                <option key={unit.id} value={unit.id}>{unit.name}</option>
                             ))}
                         </FormSelect>
+                        <FormInput name={"part_number"} formDataValue={form.data.part_number} placeholder={"Part Number"} handleChange={onHandleChange} formErrorMessage={form.errors.part_number}  />
+                        <FormInput type="number" name={"quantity"} formDataValue={form.data.quantity} placeholder={"Quantity"} handleInput={(e) => form.setData(e.target.name, Math.abs(Math.round(e.target.value)))} formErrorMessage={form.errors.quantity}  />
+                        <FormSelect name={"location_id"} formDataValue={form.data.location_id} placeholder={"Locations (Product Location, Inventory Location)"} handleChange={onHandleChange} formErrorMessage={form.errors.location_id} className={"uppercase"}>
+                            <option value={""} disabled>Select A Location</option>
+                            {props.locations.map((location) => (
+                                <option key={location.id} value={location.id}>{`${location.product_location}, ${location.inventory_location}`}</option>
+                            ))}
+                        </FormSelect>
+                        <FormInput name={"received_by"} formDataValue={form.data.received_by} placeholder={"Received By"} handleChange={onHandleChange} formErrorMessage={form.errors.received_by}  />
+                        <FormInput name={"issued_by"} formDataValue={form.data.issued_by} placeholder={"Issued By"} handleChange={onHandleChange} formErrorMessage={form.errors.issued_by}  />
+                        <FormInput name={"in_stock_date"} type={"date"} formDataValue={form.data.in_stock_date} placeholder={"In Stock Date"} handleChange={onHandleChange} formErrorMessage={form.errors.in_stock_date} />
+                        <FormTextArea formDataValue={form.data.description} formErrorMessage={form.errors.description} handleChange={onHandleChange} name={"description"} placeholder={"Item Description (Optional)"} processing={form.processing} />
                         <Button
                             className="w-fit bg-green-500 !text-base hover:bg-green-700 shadow-lg"
                             processing={form.processing}
