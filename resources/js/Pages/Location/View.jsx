@@ -38,7 +38,7 @@ const View = (props) => {
                                 Product Location: {location.product_location}
                             </div>
                             <div className="md:text-2xl text-xl border-b-2 border-r-2 border-blue-600 py-4 text-blue-600">
-                                Product Location: {location.inventory_location}
+                                Inventory Location: {location.inventory_location}
                             </div>
                             <div className="md:text-2xl text-xl border-b-2 border-r-2 border-blue-600 py-4 text-blue-600">
                                 Description:

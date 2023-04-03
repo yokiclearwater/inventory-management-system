@@ -39,7 +39,7 @@ const Index = (props) => {
                         });
                         Swal.fire("Deleted Successfully", "", "success");
                     },
-                    onError: () => Swal.fire("Deleted Error", "", "error"),
+                    onError: () => Swal.fire("Deleted Error", props.errors.message, "error"),
                 });
             }
         });

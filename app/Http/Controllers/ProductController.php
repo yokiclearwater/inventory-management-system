@@ -12,6 +12,7 @@ use Barryvdh\DomPDF\Facade\Pdf;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Redirect;
+use Illuminate\Validation\ValidationException;
 use Inertia\Inertia;
 use Maatwebsite\Excel\Facades\Excel;
 use Mpdf\Mpdf;
@@ -172,9 +173,15 @@ class ProductController extends Controller
     public function destroy($id)
     {
         $product = Product::find($id);
-        $product->delete();
 
-        return Redirect::route('products.index');
+        if(!$product->items->isEmpty()) {
+            throw ValidationException::withMessages([
+                'message' => 'You cannot delete an product relating to existing items',
+            ]);
+        } else {
+            $product->delete();
+            return Redirect::route('products.index');
+        }
     }
 
     public function export($method = "xlsx") {
@@ -186,10 +193,8 @@ class ProductController extends Controller
     }
 
 
-    /**
-     * @throws MpdfException
-     */
-    public function export_pdf() {
+    public function export_pdf()
+    {
         $products = Product::all();
         $mpdf = new Mpdf([
             'mode' => 'utf-8',

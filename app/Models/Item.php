@@ -28,10 +28,6 @@ class Item extends Model implements Auditable
         return $this->belongsTo(Product::class, 'product_id', 'id');
     }
 
-    public function status() {
-        return $this->hasOne(ItemStatus::class, 'id', 'status_id');
-    }
-
     public function location() {
         return $this->hasOne(Location::class, 'id', 'location_id');
     }
